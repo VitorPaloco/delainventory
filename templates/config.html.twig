@@ -1,0 +1,43 @@
+<form method="post">
+
+<div class="card shadow-sm">
+  <div class="card-header">
+    <h3 class="card-title">Tipos de Ativo</h3>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+
+      {% for item in assets %}
+      <div class="col-md-6 mb-3">
+        <label class="w-100">
+          <div class="card h-100">
+            <div class="card-body d-flex justify-content-between">
+
+              <div>
+                <strong>{{ item.label }}</strong><br>
+                <small class="text-muted">
+                  Aplicar configuração para {{ item.label|lower }}
+                </small>
+              </div>
+
+              <input type="checkbox"
+                     name="asset[{{ item.id }}]"
+                     value="1"
+                     {% if item.enabled %}checked{% endif %}>
+            </div>
+          </div>
+        </label>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+<button type="submit" name="update" class="btn btn-primary mt-3">
+Salvar
+</button>
+
+<input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+</form>
