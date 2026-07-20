@@ -57,7 +57,7 @@ SERIAL
 ABC123XYZ
 
 RESPONSÁVEL
-Simpress
+Matriz
 
 [ QR CODE ]
 ```
@@ -116,16 +116,17 @@ delainventory/
 
 ## 🚀 Instalação
 
-Clone o repositório:
+Acesse a pasta de plugins do seu GLPI e clone o repositório:
 
 ```bash
 git clone https://github.com/VitorPaloco/delainventory.git
 ```
 
-Copie o plugin para o diretório de plugins do GLPI:
+Instale as dependências:
 
 ```bash
-glpi/plugins/delainventory
+cd delainventory
+composer install --no-dev
 ```
 
 Ative o plugin pelo painel administrativo do GLPI:
@@ -138,20 +139,17 @@ Configurar → Plugins → Delainventory → Instalar → Ativar
 
 ### Aba de Inventário
 
-![Tela do Plugin](assets/preview1.png)
+![Aba de Inventário](assets/preview1.png)
 
 ### Aba do Ativo
 
-![Etiqueta Zebra](assets/preview2.png)
+![Aba do Ativo](assets/preview2.png)
 
 ## 📈 Próximas Evoluções
 
-- Leitura de QR Code via dispositivo móvel;
-- Inventário em lote;
-- Dashboard de auditoria;
-- Relatórios gerenciais;
-- Integração com coletores de dados;
-- Controle de localização dos ativos;
+- Interface para inserção do IP e porta da impressora
+- Interface para inserção do código ZPL
+- Inclusão de outros tipos de ativos
 - Exportação de histórico para Excel/PDF.
 
 ## 👨‍💻 Autor
