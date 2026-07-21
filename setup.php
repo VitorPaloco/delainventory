@@ -1,6 +1,6 @@
 <?php
 
-define('PLUGIN_DELAINVENTORY_VERSION', '1.0.0');
+define('PLUGIN_DELAINVENTORY_VERSION', '0.1.0');
 define('PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION', '11.0.0');
 define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '11.0.99');
 
@@ -32,7 +32,8 @@ function plugin_version_delainventory(): array
         'version'   => PLUGIN_DELAINVENTORY_VERSION,
         'author'    => 'Vitor Paloco',
         'license'   => 'MIT',
-        'homepage'  => 'https://github.com/VitorPaloco/Delainventory-GLPI',
+        'homepage'  => 'https://github.com/VitorPaloco/delainventory',
+        'logo'      => 'docs/logo.png',
         'requirements' => [
             'glpi' => [
                 'min' => PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION,

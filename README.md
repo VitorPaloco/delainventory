@@ -137,11 +137,11 @@ Setup → Plugins → Delainventory → Install → Enable
 
 ### Inventory Tab
 
-![Inventory Tab](docs/preview1.png)
+![Inventory Tab](docs/screenshots/preview1.png)
 
 ### Asset View
 
-![Asset View](docs/preview2.png)
+![Asset View](docs/screenshots/preview2.png)
 
 ## 📈 Roadmap
 
