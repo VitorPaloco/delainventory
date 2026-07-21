@@ -2,19 +2,18 @@
    <name>DelaInventory</name>
    <key>delainventory</key>
    <!-- stable, beta, development, alpha, ... -->
-   <state>stable</state>
-   <logo>https://raw.githubusercontent.com/pluginsGLPI/delainventory/main/delainventory.png</logo>
+   <state>alpha</state>
+   <logo>https://raw.githubusercontent.com/VitorPaloco/delainventory/main/docs/logo.png</logo>
    <description>
       <short>
          <!-- Add as many lang tag you want -->
          <en>DelaInventory GLPI plugin</en>
-         <fr>Plugin GLPI DelaInventory</fr>
       </short>
    </description>
-   <homepage>https://github.com/VitorPaloco/Delainventory-GLPI</homepage>
-   <download>https://github.com/VitorPaloco/Delainventory-GLPI/releases</download>
-   <issues>https://github.com/VitorPaloco/Delainventory-GLPI/issues</issues>
-   <readme>https://github.com/VitorPaloco/Delainventory-GLPI</readme>
+   <homepage>https://github.com/VitorPaloco/delainventory</homepage>
+   <download>https://github.com/VitorPaloco/delainventory/releases</download>
+   <issues>https://github.com/VitorPaloco/delainventory/issues</issues>
+   <readme>https://github.com/VitorPaloco/delainventory</readme>
    <authors>
       <!-- Add as many author tag you want -->
       <author>Vitor Paloco</author>
@@ -29,8 +28,7 @@
    </versions>
    <langs>
       <!-- Add as many lang tag you want -->
-      <lang>en_GB</lang>
-      <lang>fr_FR</lang>
+      <lang>pt_BR</lang>
    </langs>
    <license>MIT</license>
 </root>

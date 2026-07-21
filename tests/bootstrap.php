@@ -27,7 +27,7 @@
  * -------------------------------------------------------------------------
  * @copyright Copyright (C) 2026 by the DelaInventory plugin team.
  * @license   MIT https://opensource.org/licenses/mit-license.php
- * @link      https://github.com/pluginsGLPI/delainventory
+ * @link      https://github.com/VitorPaloco/delainventory
  * -------------------------------------------------------------------------
  */
 
