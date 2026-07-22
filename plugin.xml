@@ -33,6 +33,7 @@
    <download>https://github.com/VitorPaloco/delainventory/releases</download>
    <issues>https://github.com/VitorPaloco/delainventory/issues</issues>
    <readme>https://github.com/VitorPaloco/delainventory</readme>
+   <changelog>https://raw.githubusercontent.com/VitorPaloco/delainventory/main/CHANGELOG.md</changelog>
 
    <authors>
       <author>Vitor Paloco</author>
@@ -51,6 +52,24 @@
    </langs>
 
    <license>MIT</license>
+
+   <tags>
+      <en>
+         <tag>inventory</tag>
+         <tag>zpl</tag>
+         <tag>labels</tag>
+      </en>
+      <fr>
+         <tag>inventaire</tag>
+         <tag>zpl</tag>
+         <tag>etiquettes</tag>
+      </fr>
+      <pt_BR>
+         <tag>inventário</tag>
+         <tag>zpl</tag>
+         <tag>etiquetas</tag>
+      </pt_BR>
+   </tags>
 
    <screenshots>
       <screenshot>https://raw.githubusercontent.com/VitorPaloco/delainventory/main/docs/screenshots/preview1.png</screenshot>
