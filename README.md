@@ -64,25 +64,31 @@ Headquarters
 
 ```text
 delainventory/
+├── docs/
+│
 ├── front/
 │   ├── action.php
 │   ├── config.php
+│   ├── log.php
 │   └── print.php
 │
-├── inc/
-│   ├── config.class.php
-│   ├── log.class.php
-│   └── setup.php
+├── src/
+│   ├── Config.php
+│   └── Log.php
 │
 ├── templates/
-│   └── log.php
+│   └── config.html.twig
 │
-├── sql/
-│   └── install.sql
+├── tests/
+├── tools/
+├── vendor/
 │
 ├── hook.php
-└── setup.php
+├── setup.php
+└── plugin.xml
 ```
+
+The plugin follows the official GLPI plugin architecture, using modern PHP practices with Composer autoloading, Twig templates, and separated source classes for configuration and inventory logs.
 
 ## ⚙️ How It Works
 

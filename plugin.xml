@@ -1,34 +1,59 @@
 <root>
    <name>DelaInventory</name>
    <key>delainventory</key>
-   <!-- stable, beta, development, alpha, ... -->
    <state>beta</state>
    <logo>https://raw.githubusercontent.com/VitorPaloco/delainventory/main/docs/logo.png</logo>
+
    <description>
       <short>
-         <!-- Add as many lang tag you want -->
-         <en>DelaInventory GLPI plugin</en>
+         <en>Inventory traceability and Zebra label printing plugin for GLPI assets</en>
+         <fr>Plugin de traçabilité d'inventaire et d'impression d'étiquettes Zebra pour les actifs GLPI</fr>
+         <pt_BR>Plugin para rastreabilidade de inventário e impressão de etiquetas Zebra em ativos GLPI</pt_BR>
       </short>
+      <long>
+         <en>
+            DelaInventory improves asset identification and inventory auditing in GLPI.
+            It allows users to register inventory checks, maintain audit history and print
+            professional Zebra labels containing QR Codes linked to GLPI assets.
+         </en>
+         <fr>
+            DelaInventory améliore l'identification des actifs et le suivi des inventaires dans GLPI.
+            Le plugin permet l'enregistrement des contrôles d'inventaire, l'historique des audits
+            et l'impression d'étiquettes Zebra avec QR Codes.
+         </fr>
+         <pt_BR>
+            O DelaInventory melhora a identificação de ativos e o controle de inventário no GLPI.
+            O plugin permite registrar conferências de inventário, manter histórico de auditoria
+            e imprimir etiquetas Zebra com QR Code vinculado aos ativos.
+         </pt_BR>
+      </long>
    </description>
+
    <homepage>https://github.com/VitorPaloco/delainventory</homepage>
    <download>https://github.com/VitorPaloco/delainventory/releases</download>
    <issues>https://github.com/VitorPaloco/delainventory/issues</issues>
    <readme>https://github.com/VitorPaloco/delainventory</readme>
+
    <authors>
-      <!-- Add as many author tag you want -->
       <author>Vitor Paloco</author>
    </authors>
+
    <versions>
-      <!-- Add as many version tag you want -->
       <version>
          <num>0.1.0</num>
-         <!-- Add as many compatibility tag you want -->
          <compatibility>~11.0.0</compatibility>
+         <download_url>https://github.com/VitorPaloco/delainventory/releases/download/v0.1.0/delainventory-0.1.0.zip</download_url>
       </version>
    </versions>
+
    <langs>
-      <!-- Add as many lang tag you want -->
       <lang>pt_BR</lang>
    </langs>
+
    <license>MIT</license>
+
+   <screenshots>
+      <screenshot>https://raw.githubusercontent.com/VitorPaloco/delainventory/main/docs/screenshots/preview1.png</screenshot>
+      <screenshot>https://raw.githubusercontent.com/VitorPaloco/delainventory/main/docs/screenshots/preview2.png</screenshot>
+   </screenshots>
 </root>
