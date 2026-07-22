@@ -153,3 +153,5 @@ Setup → Plugins → Delainventory → Install → Enable
 ## 👨‍💻 Author
 
 Developed by **Vitor Paloco** to improve asset inventory management and traceability within GLPI.
+
+push funcionand?
