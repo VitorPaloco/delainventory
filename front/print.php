@@ -2,6 +2,8 @@
 
 include('../../../inc/includes.php');
 
+use GlpiPlugin\Delainventory\Setting;
+
 global $CFG_GLPI;
 global $DB;
 
@@ -27,7 +29,7 @@ if (!$item->getFromDB($input_id)) {
     die('Equipamento não encontrado');
 }
 
-$id = $item->fields['id'];
+$id      = $item->fields['id'];
 $full_id = str_pad($id, 5, '0', STR_PAD_LEFT);
 
 $nome   = mb_substr(trim($item->fields['name'] ?? ''), 0, 35);
@@ -54,21 +56,23 @@ if ($group_item) {
 
 $formPages = [
     Computer::class => 'computer.form.php',
-    Monitor::class => 'monitor.form.php',
-    Printer::class => 'printer.form.php',
-    Phone::class => 'phone.form.php'
+    Monitor::class  => 'monitor.form.php',
+    Printer::class  => 'printer.form.php',
+    Phone::class    => 'phone.form.php'
 ];
-
-// $asset_url = sprintf(
-//     '%s/front/%s?id=%d',
-//     rtrim($CFG_GLPI['root_doc'], '/'),
-//     $formPages[$itemtype],
-//     $id
-// );
 
 $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['SERVER_PORT'] ?? null) == 443) ? 'https' : 'http';
 $base_url = $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim($CFG_GLPI['root_doc'], '/');
 $asset_url = $base_url . '/front/' . $formPages[$itemtype] . '?id=' . $id;
+
+$setting = Setting::get();
+$ip      = $setting['ip'];
+$porta   = $setting['port'];
+
+if (empty($ip) || empty($porta)) {
+    http_response_code(500);
+    die('IP ou porta da impressora não configurados.');
+}
 
 $zpl = <<<ZPL
 ^XA
@@ -129,15 +133,14 @@ $zpl = <<<ZPL
 ^XZ
 ZPL;
 
-$ip = "192.168.20.71";
-$porta = 9100;
-
 $socket = fsockopen($ip, $porta, $errno, $errstr, 5);
 
 if (!$socket) {
     http_response_code(500);
     die("Erro ao conectar na impressora: {$errstr} ({$errno})");
 }
+
+stream_set_timeout($socket, 5);
 
 fwrite($socket, $zpl);
 fclose($socket);

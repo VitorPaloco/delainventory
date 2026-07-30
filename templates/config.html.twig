@@ -35,6 +35,28 @@
   </div>
 </div>
 
+<div class="row justify-content-center mt-3">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h3 class="card-title">Conexão</h3>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label" for="ip">Endereço IP</label>
+          <input type="text" class="form-control" id="ip" name="ip"
+                 value="{{ ip }}" placeholder="192.168.0.1">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="port">Porta</label>
+          <input type="number" class="form-control" id="port" name="port"
+                 value="{{ port }}" min="1" max="65535" placeholder="8080">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <button type="submit" name="update" class="btn btn-primary mt-3">
 Salvar
 </button>

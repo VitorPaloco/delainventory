@@ -3,6 +3,7 @@
 include('../../../inc/includes.php');
 
 use GlpiPlugin\Delainventory\Config;
+use GlpiPlugin\Delainventory\Setting;
 use Glpi\Application\View\TemplateRenderer;
 use Html;
 use Session;
@@ -20,6 +21,11 @@ if (isset($_POST['update'])) {
         ]);
     }
 
+    Setting::save(
+        trim($_POST['ip'] ?? ''),
+        (int) ($_POST['port'] ?? 0)
+    );
+
     Session::addMessageAfterRedirect('Configurações salvas com sucesso.', true, INFO);
 
     Html::redirect($CFG_GLPI['root_doc'] . '/plugins/delainventory/front/config.php');
@@ -27,6 +33,12 @@ if (isset($_POST['update'])) {
 
 Html::header(Config::getMenuName(), $_SERVER['PHP_SELF'], 'config', Config::class);
 
-TemplateRenderer::getInstance()->display('@delainventory/config.html.twig', ['assets' => $assets]);
+$setting = Setting::get();
+
+TemplateRenderer::getInstance()->display('@delainventory/config.html.twig', [
+    'assets' => $assets,
+    'ip'     => $setting['ip'] ?? '',
+    'port'   => $setting['port'] ?? '',
+]);
 
 Html::footer();
