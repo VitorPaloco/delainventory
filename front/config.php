@@ -14,6 +14,7 @@ $config = new Config();
 $assets = $config->find();
 
 if (isset($_POST['update'])) {
+    error_log('POST zpl = ' . var_export($_POST['zpl'] ?? 'NAO VEIO', true));
     foreach ($assets as $item) {
         $config->update([
             'id'      => $item['id'],
@@ -23,7 +24,8 @@ if (isset($_POST['update'])) {
 
     Setting::save(
         trim($_POST['ip'] ?? ''),
-        (int) ($_POST['port'] ?? 0)
+        (int) ($_POST['port'] ?? 0),
+        $_POST['zpl'] ?? ''
     );
 
     Session::addMessageAfterRedirect('Configurações salvas com sucesso.', true, INFO);
@@ -39,6 +41,7 @@ TemplateRenderer::getInstance()->display('@delainventory/config.html.twig', [
     'assets' => $assets,
     'ip'     => $setting['ip'] ?? '',
     'port'   => $setting['port'] ?? '',
+    'zpl'   => $setting['zpl'] ?? '',
 ]);
 
 Html::footer();

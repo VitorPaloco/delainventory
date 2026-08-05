@@ -68,70 +68,85 @@ $asset_url = $base_url . '/front/' . $formPages[$itemtype] . '?id=' . $id;
 $setting = Setting::get();
 $ip      = $setting['ip'];
 $porta   = $setting['port'];
+$zpl_template = $setting['zpl'] ?? '';
 
 if (empty($ip) || empty($porta)) {
     http_response_code(500);
     die('IP ou porta da impressora não configurados.');
 }
 
-$zpl = <<<ZPL
-^XA
-^CI28
+if (empty($zpl_template)) {
+    http_response_code(500);
+    die('Modelo ZPL não configurado.');
+}
 
-^PW480
-^LL240
 
-^FO40,20
-^A0N,15,15
-^FDID DO EQUIPAMENTO^FS
+$zpl = strtr($zpl_template, [
+    '{{ID}}'          => $full_id,
+    '{{NOME}}'        => $nome,
+    '{{SERIAL}}'      => $serial,
+    '{{RESPONSAVEL}}' => $group_name,
+    '{{URL}}'         => $asset_url,
+]);
 
-^FO40,35
-^A0N,20,20
-^FD{$full_id}^FS
+// $zpl = <<<ZPL
+// ^XA
+// ^CI28
 
-^FO40,75
-^A0N,15,15
-^FDDESCRICAO^FS
+// ^PW480
+// ^LL240
 
-^FO40,90
-^A0N,20,20
-^FD{$nome}^FS
+// ^FO40,20
+// ^A0N,15,15
+// ^FDID DO EQUIPAMENTO^FS
 
-^FO40,120
-^A0N,15,15
-^FDSERIAL^FS
+// ^FO40,35
+// ^A0N,20,20
+// ^FD{$full_id}^FS
 
-^FO40,135
-^A0N,20,20
-^FD{$serial}^FS
+// ^FO40,75
+// ^A0N,15,15
+// ^FDDESCRICAO^FS
 
-^FO40,165
-^A0N,15,15
-^FDRESPONSÁVEL^FS
+// ^FO40,90
+// ^A0N,20,20
+// ^FD{$nome}^FS
 
-^FO40,180
-^A0N,16,16
-^FD{$group_name}^FS
+// ^FO40,120
+// ^A0N,15,15
+// ^FDSERIAL^FS
 
-^FO300,20
-^BQN,2,5
-^FDLA,{$asset_url}^FS
+// ^FO40,135
+// ^A0N,20,20
+// ^FD{$serial}^FS
 
-^FO0,215
-^GB480,25,25,B,0^FS
+// ^FO40,165
+// ^A0N,15,15
+// ^FDRESPONSÁVEL^FS
 
-^FO40,223
-^A0N,14,14
-^FR
-^FDDELAFOODS^FS
+// ^FO40,180
+// ^A0N,16,16
+// ^FD{$group_name}^FS
 
-^FO310,223
-^A0N,14,14
-^FR
-^FDESCANEIE O QR CODE^FS
+// ^FO300,20
+// ^BQN,2,5
+// ^FDLA,{$asset_url}^FS
 
-^XZ
-ZPL;
+// ^FO0,215
+// ^GB480,25,25,B,0^FS
+
+// ^FO40,223
+// ^A0N,14,14
+// ^FR
+// ^FDDELAFOODS^FS
+
+// ^FO310,223
+// ^A0N,14,14
+// ^FR
+// ^FDESCANEIE O QR CODE^FS
+
+// ^XZ
+// ZPL;
 
 $socket = fsockopen($ip, $porta, $errno, $errstr, 5);
 
