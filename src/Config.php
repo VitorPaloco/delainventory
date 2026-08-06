@@ -15,8 +15,8 @@ class Config extends CommonDBTM
     {
         return [
             'title' => self::getMenuName(),
-            'page'  => '/plugins/delainventory/front/config.php',
-            'icon'  => 'fa-solid fa-layer-group'
+            'page' => '/plugins/delainventory/front/config.php',
+            'icon' => 'fa-solid fa-layer-group'
         ];
     }
 
@@ -24,7 +24,7 @@ class Config extends CommonDBTM
     {
         global $DB;
 
-        $default_charset   = DBConnection::getDefaultCharset();
+        $default_charset = DBConnection::getDefaultCharset();
         $default_collation = DBConnection::getDefaultCollation();
 
         $table = self::getTable();
@@ -48,9 +48,9 @@ class Config extends CommonDBTM
         if (countElementsInTable($table) === 0) {
             $defaults = [
                 ['itemtype' => 'Computer', 'label' => 'Computador', 'enabled' => 1],
-                ['itemtype' => 'Monitor',  'label' => 'Monitor',     'enabled' => 0],
-                ['itemtype' => 'Printer',  'label' => 'Impressora',  'enabled' => 0],
-                ['itemtype' => 'Phone',  'label' => 'Telefone',  'enabled' => 0],
+                ['itemtype' => 'Monitor', 'label' => 'Monitor', 'enabled' => 0],
+                ['itemtype' => 'Printer', 'label' => 'Impressora', 'enabled' => 0],
+                ['itemtype' => 'Phone', 'label' => 'Telefone', 'enabled' => 0],
             ];
 
             foreach ($defaults as $row) {
@@ -69,7 +69,7 @@ class Config extends CommonDBTM
             'FROM' => $table,
             'WHERE' => [
                 'itemtype' => $itemtype,
-                'enabled'  => 1
+                'enabled' => 1
             ],
             'LIMIT' => 1
         ]);
