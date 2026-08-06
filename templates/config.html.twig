@@ -57,11 +57,16 @@
       <div class="card-body">
         <div class="mb-3">
           <label class="form-label" for="zpl">Código ZPL</label>
-          <textarea class="form-control font-monospace" id="zpl" name="zpl"
-                    rows="12" placeholder="^XA&#10;...&#10;^XZ">{{ zpl }}</textarea>
-                    <small class="text-muted">
-                      Marcadores disponíveis: {{ '{{ID}}' }}, {{ '{{NOME}}' }}, {{ '{{SERIAL}}' }}, {{ '{{RESPONSAVEL}}' }}, {{ '{{URL}}' }}
-                    </small>
+          <textarea class="form-control font-monospace" id="zpl" name="zpl" rows="12" placeholder="^XA&#10;...&#10;^XZ">{{ zpl }}</textarea>
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <small class="text-muted"> Utilize marcadores para inserir informações do ativo. </small>
+
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#zplVariablesModal">
+                Visualizar tags disponíveis
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -71,4 +76,64 @@
 Salvar
 </button>
 <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+
+<div class="modal fade" id="zplVariablesModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    Tags disponíveis
+                </h3>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <p class="text-muted">
+                  Você pode utilizar qualquer uma destas tags no modelo ZPL. As tags são baseadas nos campos do 
+                  ativo <b>Computer</b> e seguem os nomes definidos no banco de dados. Alguns campos podem variar conforme o tipo de ativo utilizado.
+                </p>
+
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Tag</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for variable in variables %}
+                        <tr>
+                            <td>
+                                <code>{{ variable }}</code>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                    Fechar
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 </form>

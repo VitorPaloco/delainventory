@@ -4,7 +4,7 @@ namespace GlpiPlugin\Delainventory;
 use DBConnection;
 use CommonDBTM;
 
-class Setting extends CommonDBTM
+class Printer extends CommonDBTM
 {
     public static function install()
     {
@@ -30,12 +30,8 @@ class Setting extends CommonDBTM
             $DB->doQuery($query);
         }
 
-        if (!$DB->fieldExists($table, 'zpl')) {
-            $DB->doQuery("ALTER TABLE `$table` ADD COLUMN `zpl` TEXT DEFAULT NULL");
-        }
-
         if (countElementsInTable($table) === 0) {
-            $item->add(['ip' => null, 'port' => null]);
+            $item->add(['ip' => null, 'port' => null, 'zpl' => null]);
         }
     }
 
@@ -47,7 +43,7 @@ class Setting extends CommonDBTM
             return $row;
         }
 
-        return ['id' => 0, 'ip' => '', 'port' => ''];
+        return ['id' => 0, 'ip' => '', 'port' => '', 'zpl' => ''];
     }
 
     public static function save(string $ip, int $port, string $zpl): void

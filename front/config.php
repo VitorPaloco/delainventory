@@ -3,7 +3,8 @@
 include('../../../inc/includes.php');
 
 use GlpiPlugin\Delainventory\Config;
-use GlpiPlugin\Delainventory\Setting;
+use GlpiPlugin\Delainventory\Printer;
+use GlpiPlugin\Delainventory\ZplVars;
 use Glpi\Application\View\TemplateRenderer;
 use Html;
 use Session;
@@ -22,7 +23,7 @@ if (isset($_POST['update'])) {
         ]);
     }
 
-    Setting::save(
+    Printer::save(
         trim($_POST['ip'] ?? ''),
         (int) ($_POST['port'] ?? 0),
         $_POST['zpl'] ?? ''
@@ -35,13 +36,16 @@ if (isset($_POST['update'])) {
 
 Html::header(Config::getMenuName(), $_SERVER['PHP_SELF'], 'config', Config::class);
 
-$setting = Setting::get();
+$printer = Printer::get();
+$computer = new Computer();
+$computer->getEmpty();
 
 TemplateRenderer::getInstance()->display('@delainventory/config.html.twig', [
-    'assets' => $assets,
-    'ip'     => $setting['ip'] ?? '',
-    'port'   => $setting['port'] ?? '',
-    'zpl'   => $setting['zpl'] ?? '',
+    'assets'    => $assets,
+    'ip'        => $printer['ip'] ?? '',
+    'port'      => $printer['port'] ?? '',
+    'zpl'       => $printer['zpl'] ?? '',
+    'variables' => ZplVars::available($computer)
 ]);
 
 Html::footer();

@@ -1,8 +1,8 @@
 <?php
 
-define('PLUGIN_DELAINVENTORY_VERSION', '0.1.0');
+define('PLUGIN_DELAINVENTORY_VERSION', '0.2.0');
 define('PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION', '11.0.0');
-define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '11.0.99');
+define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '11.99.99');
 
 use GlpiPlugin\Delainventory\Config;
 use GlpiPlugin\Delainventory\Log;
