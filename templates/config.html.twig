@@ -1,8 +1,9 @@
 <form method="post">
 <div class="card shadow-sm">
   <div class="card-header">
-    <h3 class="card-title">Tipos de Ativo</h3>
+    <h3 class="card-title">{{ __('Asset Types', 'delainventory') }}</h3>
   </div>
+
   <div class="card-body">
     <div class="row">
       {% for item in assets %}
@@ -12,14 +13,18 @@
             <div class="card-body d-flex justify-content-between">
               <div>
                 <strong>{{ item.label }}</strong><br>
+
                 <small class="text-muted">
-                  Aplicar configuração para {{ item.label|lower }}
+                  {{ __('Apply configuration for %s', 'delainventory')|format(item.label|lower) }}
                 </small>
               </div>
-              <input type="checkbox"
-                     name="asset[{{ item.id }}]"
-                     value="1"
-                     {% if item.enabled %}checked{% endif %}>
+
+              <input
+                type="checkbox"
+                name="asset[{{ item.id }}]"
+                value="1"
+                {% if item.enabled %}checked{% endif %}
+              >
             </div>
           </div>
         </label>
@@ -28,112 +33,333 @@
     </div>
   </div>
 </div>
+
 <div class="row justify-content-center mt-3">
+
+  {# Connection #}
   <div class="col-md-6">
     <div class="card shadow-sm h-100">
+
       <div class="card-header">
-        <h3 class="card-title">Conexão</h3>
+        <h3 class="card-title">
+          {{ __('Connection', 'delainventory') }}
+        </h3>
       </div>
+
       <div class="card-body">
+
         <div class="mb-3">
-          <label class="form-label" for="ip">Endereço IP</label>
-          <input type="text" class="form-control" id="ip" name="ip"
-                 value="{{ ip }}" placeholder="192.168.0.1">
+          <label class="form-label" for="ip">
+            {{ __('IP Address', 'delainventory') }}
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            id="ip"
+            name="ip"
+            value="{{ ip }}"
+            placeholder="192.168.0.1"
+          >
         </div>
+
+
         <div class="mb-3">
-          <label class="form-label" for="port">Porta</label>
-          <input type="number" class="form-control" id="port" name="port"
-                 value="{{ port }}" min="1" max="65535" placeholder="8080">
+          <label class="form-label" for="port">
+            {{ __('Port', 'delainventory') }}
+          </label>
+
+          <input
+            type="number"
+            class="form-control"
+            id="port"
+            name="port"
+            value="{{ port }}"
+            min="1"
+            max="65535"
+            placeholder="8080"
+          >
         </div>
+
+
+        <div class="d-flex align-items-center gap-2">
+
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            id="testPrinterConnection"
+          >
+            <i class="ti ti-plug"></i>
+            {{ __('Test connection', 'delainventory') }}
+          </button>
+
+          <span id="connectionResult"></span>
+
+        </div>
+
       </div>
     </div>
   </div>
 
+  {# ZPL Template #}
   <div class="col-md-6">
     <div class="card shadow-sm h-100">
+
       <div class="card-header">
-        <h3 class="card-title">Modelo ZPL</h3>
+        <h3 class="card-title">
+          {{ __('ZPL Template', 'delainventory') }}
+        </h3>
       </div>
+
       <div class="card-body">
+
         <div class="mb-3">
-          <label class="form-label" for="zpl">Código ZPL</label>
-          <textarea class="form-control font-monospace" id="zpl" name="zpl" rows="12" placeholder="^XA&#10;...&#10;^XZ">{{ zpl }}</textarea>
+
+          <label class="form-label" for="zpl">
+            {{ __('ZPL Code', 'delainventory') }}
+          </label>
+
+          <textarea
+            class="form-control font-monospace"
+            id="zpl"
+            name="zpl"
+            rows="12"
+            placeholder="^XA&#10;...&#10;^XZ"
+          >{{ zpl }}</textarea>
+
+
           <div class="d-flex justify-content-between align-items-center mt-2">
-            <small class="text-muted"> Utilize marcadores para inserir informações do ativo. </small>
 
-            <button type="button" class="btn btn-sm btn-outline-secondary"
+            <small class="text-muted">
+              {{ __('Use placeholders to insert asset information.', 'delainventory') }}
+            </small>
+
+
+            <div class="d-flex gap-2">
+
+              <a
+                href="https://labelary.com/viewer.html"
+                target="_blank"
+                class="btn btn-sm btn-outline-primary"
+              >
+                <i class="ti ti-eye"></i>
+                {{ __('Preview ZPL', 'delainventory') }}
+              </a>
+
+
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
                 data-bs-toggle="modal"
-                data-bs-target="#zplVariablesModal">
-                Visualizar tags disponíveis
-            </button>
+                data-bs-target="#zplVariablesModal"
+              >
+                {{ __('View available tags', 'delainventory') }}
+              </button>
+
+            </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
 </div>
-<button type="submit" name="update" class="btn btn-primary mt-3">
-Salvar
+
+<button
+  type="submit"
+  name="update"
+  class="btn btn-primary mt-3"
+>
+  {{ __('Save', 'delainventory') }}
 </button>
-<input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
 
-<div class="modal fade" id="zplVariablesModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
 
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    Tags disponíveis
-                </h3>
+<input
+  type="hidden"
+  name="_glpi_csrf_token"
+  value="{{ csrf_token() }}"
+>
 
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal">
-                </button>
-            </div>
 
-            <div class="modal-body">
+{# ZPL Variables Modal #}
+<div
+  class="modal fade"
+  id="zplVariablesModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
 
-                <p class="text-muted">
-                  Você pode utilizar qualquer uma destas tags no modelo ZPL. As tags são baseadas nos campos do 
-                  ativo <b>Computer</b> e seguem os nomes definidos no banco de dados. Alguns campos podem variar conforme o tipo de ativo utilizado.
-                </p>
+    <div class="modal-content">
 
-                <table class="table table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th>Tag</th>
-                        </tr>
-                    </thead>
+      <div class="modal-header">
 
-                    <tbody>
+        <h3 class="modal-title">
+          {{ __('Available tags', 'delainventory') }}
+        </h3>
 
-                    {% for variable in variables %}
-                        <tr>
-                            <td>
-                                <code>{{ variable }}</code>
-                            </td>
-                        </tr>
-                    {% endfor %}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
 
-                    </tbody>
-                </table>
+      </div>
 
-            </div>
 
-            <div class="modal-footer">
+      <div class="modal-body">
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal">
-                    Fechar
-                </button>
+        <p class="text-muted">
+          {{ __('You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used.', 'delainventory') }}
+        </p>
 
-            </div>
 
-        </div>
+        <table class="table table-hover table-sm">
+
+          <thead>
+            <tr>
+              <th>
+                {{ __('Tag', 'delainventory') }}
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            {% for variable in variables %}
+
+              <tr>
+                <td>
+                  <code>{{ variable }}</code>
+                </td>
+              </tr>
+
+            {% endfor %}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          {{ __('Close', 'delainventory') }}
+        </button>
+
+      </div>
+
     </div>
+  </div>
 </div>
+
 </form>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const button = document.getElementById('testPrinterConnection');
+    const result = document.getElementById('connectionResult');
+
+    button.addEventListener('click', async function () {
+
+        const ip = document.getElementById('ip').value.trim();
+        const port = document.getElementById('port').value;
+
+        if (!ip || !port) {
+
+            result.innerHTML = `
+                <span class="text-danger">
+                    {{ __('Enter the IP address and port.', 'delainventory') }}
+                </span>
+            `;
+
+            return;
+        }
+
+
+        button.disabled = true;
+
+        button.innerHTML = `
+            <span class="spinner-border spinner-border-sm me-1"></span>
+            {{ __('Testing...', 'delainventory') }}
+        `;
+
+
+        result.innerHTML = '';
+
+
+        try {
+
+            const formData = new FormData();
+
+            formData.append('test_connection', '1');
+            formData.append('ip', ip);
+            formData.append('port', port);
+
+
+            const csrfToken = document
+                .querySelector('meta[property="glpi:csrf_token"]')
+                ?.getAttribute('content');
+
+            formData.append('_glpi_csrf_token', csrfToken);
+
+
+            const response = await fetch(window.location.href, {
+                method: 'POST',
+                body: formData
+            });
+
+
+            const data = await response.json();
+
+
+            if (data.success) {
+
+                result.innerHTML = `
+                    <span class="text-success">
+                        <i class="ti ti-circle-check"></i>
+                        ${data.message}
+                    </span>
+                `;
+
+            } else {
+
+                result.innerHTML = `
+                    <span class="text-danger">
+                        <i class="ti ti-circle-x"></i>
+                        ${data.message}
+                    </span>
+                `;
+            }
+
+        } catch (error) {
+
+            result.innerHTML = `
+                <span class="text-danger">
+                    {{ __('Error testing connection.', 'delainventory') }}
+                </span>
+            `;
+
+            console.error(error);
+
+        } finally {
+
+            button.disabled = false;
+
+            button.innerHTML = `
+                <i class="ti ti-plug"></i>
+                {{ __('Test connection', 'delainventory') }}
+            `;
+        }
+    });
+});
+</script>

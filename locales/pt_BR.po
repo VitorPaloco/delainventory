@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Delainventory\n"
+"Language: pt_BR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Asset Types"
+msgstr "Tipos de Ativos"
+
+msgid "Apply configuration for %s"
+msgstr "Aplicar configuração para %s"
+
+msgid "Connection"
+msgstr "Conexão"
+
+msgid "IP Address"
+msgstr "Endereço IP"
+
+msgid "Port"
+msgstr "Porta"
+
+msgid "Test connection"
+msgstr "Testar conexão"
+
+msgid "Testing..."
+msgstr "Testando..."
+
+msgid "Enter the IP address and port."
+msgstr "Informe o IP e a porta."
+
+msgid "Connection test failed."
+msgstr "Erro ao testar a conexão."
+
+msgid "ZPL Template"
+msgstr "Modelo ZPL"
+
+msgid "ZPL Code"
+msgstr "Código ZPL"
+
+msgid "Use placeholders to insert asset information."
+msgstr "Utilize marcadores para inserir informações do ativo."
+
+msgid "Preview ZPL"
+msgstr "Pré-Visualizar ZPL"
+
+msgid "View available tags"
+msgstr "Visualizar tags disponíveis"
+
+msgid "Available tags"
+msgstr "Tags disponíveis"
+
+msgid "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
+msgstr "Você pode utilizar qualquer uma destas tags no modelo ZPL. As tags são baseadas nos campos do ativo Computer e seguem os nomes definidos no banco de dados. Alguns campos podem variar conforme o tipo de ativo utilizado."
+
+msgid "Tag"
+msgstr "Tag"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Connection successful."
+msgstr "Conexão realizada com sucesso."
+
+msgid "Connection failed."
+msgstr "Falha na conexão."
+
+msgid "Error testing connection."
+msgstr "Erro ao testar a conexão."
+
+msgid "Computer"
+msgstr "Computador"
