@@ -73,3 +73,45 @@ msgstr "Erro ao testar a conexão."
 
 msgid "Computer"
 msgstr "Computador"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Impressora"
+
+msgid "Phone"
+msgstr "Telefone"
+
+msgid "Printer IP address or port not configured."
+msgstr "IP ou porta da impressora não configurados."
+
+msgid "Could not connect to printer %s:%s. %s (%s)"
+msgstr "Não foi possível conectar à impressora %s:%s. %s (%s)"
+
+msgid "Settings saved successfully."
+msgstr "Configurações salvas com sucesso."
+
+msgid "+ Inventory record"
+msgstr "+ Registrar inventário"
+
+msgid "Print label"
+msgstr "Imprimir etiqueta"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Action"
+msgstr "Ação"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "User"
+msgstr "Usuário"
+
+msgid "Enter the message"
+msgstr "Insira a mensagem"
+
+msgid "Printing error"
+msgstr "Erro ao imprimir"

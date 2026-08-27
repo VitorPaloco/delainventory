@@ -47,10 +47,10 @@ class Config extends CommonDBTM
 
         if (countElementsInTable($table) === 0) {
             $defaults = [
-                ['itemtype' => 'Computer', 'label' => 'Computador', 'enabled' => 1],
+                ['itemtype' => 'Computer', 'label' => 'Computer', 'enabled' => 1],
                 ['itemtype' => 'Monitor', 'label' => 'Monitor', 'enabled' => 0],
-                ['itemtype' => 'Printer', 'label' => 'Impressora', 'enabled' => 0],
-                ['itemtype' => 'Phone', 'label' => 'Telefone', 'enabled' => 0],
+                ['itemtype' => 'Printer', 'label' => 'Printer', 'enabled' => 0],
+                ['itemtype' => 'Phone', 'label' => 'Phone', 'enabled' => 0],
             ];
 
             foreach ($defaults as $row) {

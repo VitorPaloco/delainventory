@@ -73,3 +73,45 @@ msgstr "Error testing connection."
 
 msgid "Computer"
 msgstr "Computer"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Printer IP address or port not configured."
+msgstr "Printer IP address or port not configured."
+
+msgid "Could not connect to printer %s:%s. %s (%s)"
+msgstr "Could not connect to printer %s:%s. %s (%s)"
+
+msgid "Settings saved successfully."
+msgstr "Settings saved successfully."
+
+msgid "+ Inventory record"
+msgstr "+ Inventory record"
+
+msgid "Print label"
+msgstr "Print label"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "User"
+msgstr "User"
+
+msgid "Enter the message"
+msgstr "Enter the message"
+
+msgid "Printing error"
+msgstr "Printing error"

@@ -23,7 +23,7 @@ if (isset($_POST['test_connection'])) {
 
     if (empty($ip) || empty($port)) {
         http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'IP ou porta da impressora não configurados.']);
+        echo json_encode(['success' => false, 'message' => __('Printer IP address or port not configured.', 'delainventory')]);
 
         exit;
     }
@@ -32,68 +32,13 @@ if (isset($_POST['test_connection'])) {
 
     if ($socket) {
         fclose($socket);
-        echo json_encode(['success' => true, 'message' => "Conexão realizada com sucesso."]);
+        echo json_encode(['success' => true, 'message' => __('Connection successful.', 'delainventory')]);
 
         exit;
     }
 
     http_response_code(500);
-    echo json_encode(['success' => false,'message' => "Não foi possível conectar à impressora {$ip}:{$port}. {$errstr} ({$errno})"]);
-
-    exit;
-}
-
-if (isset($_POST['preview_zpl'])) {
-
-    $zpl = $_POST['zpl'] ?? '';
-
-    if (trim($zpl) === '') {
-
-        http_response_code(400);
-        header('Content-Type: application/json');
-
-        echo json_encode([
-            'success' => false,
-            'message' => 'Nenhum código ZPL informado.'
-        ]);
-
-        exit;
-    }
-
-    $url = 'https://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/';
-    $curl = curl_init($url);
-
-    curl_setopt_array($curl, [
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $zpl,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => [
-            'Content-Type: application/x-www-form-urlencoded',
-            'Accept: image/png'
-        ],
-        CURLOPT_TIMEOUT => 15,
-    ]);
-
-    $result = curl_exec($curl);
-    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-    $curlError = curl_error($curl);
-    curl_close($curl);
-
-    if ($result === false || $httpCode !== 200) {
-
-        http_response_code(500);
-        header('Content-Type: application/json');
-
-        echo json_encode([
-            'success' => false,
-            'message' => $curlError ?: 'Erro ao gerar a pré-visualização do ZPL.'
-        ]);
-
-        exit;
-    }
-
-    header('Content-Type: image/png');
-    echo $result;
+    echo json_encode(['success' => false, 'message' => sprintf(__('Could not connect to printer %s:%s. %s (%s)', 'delainventory'), $ip, $port, $errstr, $errno)]);
 
     exit;
 }
@@ -113,7 +58,7 @@ if (isset($_POST['update'])) {
         $_POST['zpl'] ?? ''
     );
 
-    Session::addMessageAfterRedirect('Configurações salvas com sucesso.', true, INFO);
+    Session::addMessageAfterRedirect(__('Settings saved successfully.', 'delainventory'), true, INFO);
 
     Html::redirect($CFG_GLPI['root_doc'] . '/plugins/delainventory/front/config.php');
 }

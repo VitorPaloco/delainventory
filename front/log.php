@@ -23,13 +23,13 @@ $logs = Log::getLogs($itemtype, $item_id);
             <button type="button"
                     class="btn btn-primary btn-sm py-2 px-2"
                     onclick="registrarInventario()">
-                + Registrar inventário
+                <?=__('+ Inventory record', 'delainventory') ?>
             </button>
         </form>
 
         <button class="btn btn-secondary btn-sm px-2 py-2 ms-2"
                 onclick="imprimirEtiqueta(<?= (int) $item_id ?>, '<?= htmlspecialchars($itemtype) ?>')">
-            Imprimir etiqueta
+            <?=__('Print label', 'delainventory') ?>
         </button>
     </div>
 
@@ -38,10 +38,10 @@ $logs = Log::getLogs($itemtype, $item_id);
 
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Ação</th>
-                    <th>Data</th>
-                    <th>Usuário</th>
+                    <th><?=__('ID', 'delainventory') ?></th>
+                    <th><?=__('Action', 'delainventory') ?></th>
+                    <th><?=__('Date', 'delainventory') ?></th>
+                    <th><?=__('User', 'delainventory') ?></th>
                 </tr>
             </thead>
 
@@ -69,7 +69,7 @@ $logs = Log::getLogs($itemtype, $item_id);
 
 <script>
     function registrarInventario() {
-        const comment = prompt("Insira a mensagem:");
+        const comment = prompt(__('Enter the message', 'delainventory'));
 
         if (comment === null) return;
 
@@ -81,7 +81,7 @@ $logs = Log::getLogs($itemtype, $item_id);
         fetch('/plugins/delainventory/front/print.php?itemtype=' + encodeURIComponent(itemtype) + '&id=' + id)
         .then(response => response.text())
         .then(msg => alert(msg)).catch(err => {
-            alert('Erro ao imprimir');
+            alert(__('Printing error', 'delainventory'));
             console.error(err);
         });
     }

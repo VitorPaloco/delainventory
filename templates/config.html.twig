@@ -12,10 +12,10 @@
           <div class="card h-100">
             <div class="card-body d-flex justify-content-between">
               <div>
-                <strong>{{ item.label }}</strong><br>
+                <strong>{{ __(item.label, 'delainventory') }}</strong><br>
 
                 <small class="text-muted">
-                  {{ __('Apply configuration for %s', 'delainventory')|format(item.label|lower) }}
+                  {{ __('Apply configuration for %s', 'delainventory')|format(__(item.label, 'delainventory')|lower) }}
                 </small>
               </div>
 
