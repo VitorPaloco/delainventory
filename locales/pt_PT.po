@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Delainventory\n"
+"Language: pt_PT\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Asset Types"
+msgstr "Tipos de Ativos"
+
+msgid "Apply configuration for %s"
+msgstr "Aplicar configuração para %s"
+
+msgid "Connection"
+msgstr "Ligação"
+
+msgid "IP Address"
+msgstr "Endereço IP"
+
+msgid "Port"
+msgstr "Porta"
+
+msgid "Test connection"
+msgstr "Testar ligação"
+
+msgid "Testing..."
+msgstr "A testar..."
+
+msgid "Enter the IP address and port."
+msgstr "Introduza o endereço IP e a porta."
+
+msgid "Connection test failed."
+msgstr "Falha ao testar a ligação."
+
+msgid "ZPL Template"
+msgstr "Modelo ZPL"
+
+msgid "ZPL Code"
+msgstr "Código ZPL"
+
+msgid "Use placeholders to insert asset information."
+msgstr "Utilize marcadores para inserir informações do ativo."
+
+msgid "Preview ZPL"
+msgstr "Pré-visualizar ZPL"
+
+msgid "View available tags"
+msgstr "Ver etiquetas disponíveis"
+
+msgid "Available tags"
+msgstr "Etiquetas disponíveis"
+
+msgid "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
+msgstr "Pode utilizar qualquer uma destas etiquetas no modelo ZPL. As etiquetas são baseadas nos campos do ativo Computer e seguem os nomes definidos na base de dados. Alguns campos podem variar consoante o tipo de ativo utilizado."
+
+msgid "Tag"
+msgstr "Etiqueta"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Connection successful."
+msgstr "Ligação efetuada com sucesso."
+
+msgid "Connection failed."
+msgstr "Falha na ligação."
+
+msgid "Error testing connection."
+msgstr "Erro ao testar a ligação."
+
+msgid "Computer"
+msgstr "Computador"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Impressora"
+
+msgid "Phone"
+msgstr "Telefone"
+
+msgid "Printer IP address or port not configured."
+msgstr "Endereço IP ou porta da impressora não configurados."
+
+msgid "Could not connect to printer %s:%s. %s (%s)"
+msgstr "Não foi possível ligar à impressora %s:%s. %s (%s)"
+
+msgid "Settings saved successfully."
+msgstr "Definições guardadas com sucesso."
+
+msgid "+ Inventory record"
+msgstr "+ Registar inventário"
+
+msgid "Print label"
+msgstr "Imprimir etiqueta"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Action"
+msgstr "Ação"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "User"
+msgstr "Utilizador"
+
+msgid "Enter the message"
+msgstr "Introduza a mensagem"
+
+msgid "Printing error"
+msgstr "Erro ao imprimir"
+
+msgid "Invalid type"
+msgstr "Tipo inválido"
+
+msgid "Asset not found"
+msgstr "Ativo não encontrado"
+
+msgid "ZPL model not configured."
+msgstr "Modelo ZPL não configurado."
+
+msgid "Label sent to print."
+msgstr "Etiqueta enviada para impressão."
+
+msgid "Log added successfully!"
+msgstr "Registo adicionado com sucesso!"

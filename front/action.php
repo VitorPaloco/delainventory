@@ -15,6 +15,6 @@ $item_id  = (int) $_POST['item_id'];
 $comment  = trim($_POST['comment'] ?? '');
 
 Log::addNewLog($itemtype, $item_id, $comment);
-Session::addMessageAfterRedirect("Log adicionado com sucesso!", true, INFO);
+Session::addMessageAfterRedirect(__('Log added successfully!', 'delainventory'), true, INFO);
 
 Html::redirect($_SERVER['HTTP_REFERER'] ?? '');

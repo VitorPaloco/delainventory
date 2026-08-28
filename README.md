@@ -47,38 +47,6 @@ The label can include:
 
 ![Tags View](docs/screenshots/preview2.png)
 
-## 📂 Project Structure
-
-```text
-delainventory/
-├── docs/
-│
-├── front/
-│   ├── action.php
-│   ├── config.php
-│   ├── log.php
-│   └── print.php
-│
-├── src/
-│   ├── Config.php
-│   ├── Log.php
-│   ├── Printer.php
-│   └── ZplVars.php
-│
-├── templates/
-│   └── config.html.twig
-│
-├── tests/
-├── tools/
-├── vendor/
-│
-├── hook.php
-├── setup.php
-└── plugin.xml
-```
-
-The plugin follows the official GLPI plugin architecture, using modern PHP practices with Composer autoloading, Twig templates, and separated source classes for configuration and inventory logs.
-
 ## ⚙️ How It Works
 
 ### Inventory Registration
@@ -100,7 +68,7 @@ The plugin follows the official GLPI plugin architecture, using modern PHP pract
 
 ## 🔧 Requirements
 
-- GLPI
+- GLPI 11
 - PHP 8+
 - MySQL or MariaDB
 - Zebra printer compatible with ZPL
@@ -139,19 +107,28 @@ Setup → Plugins → DelaInventory → Install → Enable
 
 ## 📈 Roadmap
 
-Future improvements being evaluated:
-
-- Printer connection validation button
-- Label preview before printing
-
-- Multiple ZPL template management
-  - Store multiple label templates.
-  - Define a default template.
-  - Assign different templates according to GLPI entities or organizational needs.
+Upcoming improvements planned for future releases:
 
 - Reports and dashboards
-- Additional GLPI asset types support
-- Performance and security improvements
+  - Provide inventory and printing statistics.
+  - Add visual dashboards for monitoring and analysis.
+
+- Configuration access control
+  - Add a dedicated permissions page.
+  - Restrict access to plugin configuration to authorized users.
+  - Prevent regular users from accessing administrative configuration screens.
+
+- Additional translations
+  - Expand internationalization support.
+  - French (`fr_FR`) planned as the next supported language.
+
+- Additional GLPI asset types
+  - Expand the range of GLPI asset types supported by the plugin.
+
+- Security and performance improvements
+  - Strengthen plugin security.
+  - Improve performance and resource usage.
+  - Continue reviewing and improving the plugin architecture.
 
 ## 👨‍💻 Author
 
