@@ -20,14 +20,14 @@ $allowed = [
 
 if (!in_array($itemtype, $allowed, true)) {
     http_response_code(400);
-    die('Tipo inválido');
+    die(__('Invalid type', 'delainventory'));
 }
 
 $item = new $itemtype();
 
 if (!$item->getFromDB($input_id)) {
     http_response_code(404);
-    die('Equipamento não encontrado');
+    die(__('Asset not found', 'delainventory'));
 }
 
 $formPages = [
@@ -49,12 +49,12 @@ $zpl_template = $printer['zpl'] ?? '';
 
 if (empty($ip) || empty($port)) {
     http_response_code(500);
-    die('IP ou porta da impressora não configurados.');
+    die(__('Printer IP address or port not configured.', 'delainventory'));
 }
 
 if (empty($zpl_template)) {
     http_response_code(500);
-    die('Modelo ZPL não configurado.');
+    die(__('ZPL model not configured.', 'delainventory'));
 }
 
 $vars = ZplVars::resolve(
@@ -72,7 +72,7 @@ $socket = fsockopen($ip, $port, $errno, $errstr, 5);
 
 if (!$socket) {
     http_response_code(500);
-    die("Erro ao conectar na impressora: {$errstr} ({$errno})");
+    die(sprintf(__('Could not connect to printer %s:%s. %s (%s)', 'delainventory'), $ip, $port, $errstr, $errno));
 }
 
 stream_set_timeout($socket, 5);
@@ -80,4 +80,4 @@ stream_set_timeout($socket, 5);
 fwrite($socket, $zpl);
 fclose($socket);
 
-echo "Etiqueta enviada para impressão";
+echo __('Label sent to print.', 'delainventory');

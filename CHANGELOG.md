@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-31-06
+
+### Added
+
+- Printer connection test through the plugin configuration interface, allowing users to verify connectivity to the configured Zebra printer.
+- ZPL label preview through Labelary, providing a quick way to preview the generated label before printing.
+- Internationalization (i18n) structure using `.po` and `.mo` translation files.
+- Added Portuguese translations for Brazil (`pt_BR`) and Portugal (`pt_PT`).
+- Added English translations for the United States (`en_US`) and United Kingdom (`en_GB`).
+
 ## [0.2.0] - 2026-08-06
 
 ### Added

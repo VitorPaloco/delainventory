@@ -41,6 +41,11 @@
 
    <versions>
       <version>
+         <num>0.3.0</num>
+         <compatibility>~11.0.0</compatibility>
+         <download_url>https://github.com/VitorPaloco/delainventory/releases/download/v0.3.0/delainventory-0.3.0.zip</download_url>
+      </version>
+      <version>
          <num>0.2.0</num>
          <compatibility>~11.0.0</compatibility>
          <download_url>https://github.com/VitorPaloco/delainventory/releases/download/v0.2.0/delainventory-0.2.0.zip</download_url>
@@ -53,7 +58,10 @@
    </versions>
 
    <langs>
+      <lang>en_GB</lang>
+      <lang>en_US</lang>
       <lang>pt_BR</lang>
+      <lang>pt_PT</lang>
    </langs>
 
    <license>MIT</license>

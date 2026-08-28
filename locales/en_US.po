@@ -1,132 +1,132 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Delainventory\n"
-"Language: pt_BR\n"
+"Language: en_US\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Asset Types"
-msgstr "Tipos de Ativos"
+msgstr "Asset Types"
 
 msgid "Apply configuration for %s"
-msgstr "Aplicar configuração para %s"
+msgstr "Apply configuration for %s"
 
 msgid "Connection"
-msgstr "Conexão"
+msgstr "Connection"
 
 msgid "IP Address"
-msgstr "Endereço IP"
+msgstr "IP Address"
 
 msgid "Port"
-msgstr "Porta"
+msgstr "Port"
 
 msgid "Test connection"
-msgstr "Testar conexão"
+msgstr "Test connection"
 
 msgid "Testing..."
-msgstr "Testando..."
+msgstr "Testing..."
 
 msgid "Enter the IP address and port."
-msgstr "Informe o IP e a porta."
+msgstr "Enter the IP address and port."
 
 msgid "Connection test failed."
-msgstr "Erro ao testar a conexão."
+msgstr "Connection test failed."
 
 msgid "ZPL Template"
-msgstr "Modelo ZPL"
+msgstr "ZPL Template"
 
 msgid "ZPL Code"
-msgstr "Código ZPL"
+msgstr "ZPL Code"
 
 msgid "Use placeholders to insert asset information."
-msgstr "Utilize marcadores para inserir informações do ativo."
+msgstr "Use placeholders to insert asset information."
 
 msgid "Preview ZPL"
-msgstr "Pré-Visualizar ZPL"
+msgstr "Preview ZPL"
 
 msgid "View available tags"
-msgstr "Visualizar tags disponíveis"
+msgstr "View available tags"
 
 msgid "Available tags"
-msgstr "Tags disponíveis"
+msgstr "Available tags"
 
 msgid "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
-msgstr "Você pode utilizar qualquer uma destas tags no modelo ZPL. As tags são baseadas nos campos do ativo Computer e seguem os nomes definidos no banco de dados. Alguns campos podem variar conforme o tipo de ativo utilizado."
+msgstr "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
 
 msgid "Tag"
 msgstr "Tag"
 
 msgid "Close"
-msgstr "Fechar"
+msgstr "Close"
 
 msgid "Save"
-msgstr "Salvar"
+msgstr "Save"
 
 msgid "Connection successful."
-msgstr "Conexão realizada com sucesso."
+msgstr "Connection successful."
 
 msgid "Connection failed."
-msgstr "Falha na conexão."
+msgstr "Connection failed."
 
 msgid "Error testing connection."
-msgstr "Erro ao testar a conexão."
+msgstr "Error testing connection."
 
 msgid "Computer"
-msgstr "Computador"
+msgstr "Computer"
 
 msgid "Monitor"
 msgstr "Monitor"
 
 msgid "Printer"
-msgstr "Impressora"
+msgstr "Printer"
 
 msgid "Phone"
-msgstr "Telefone"
+msgstr "Phone"
 
 msgid "Printer IP address or port not configured."
-msgstr "IP ou porta da impressora não configurados."
+msgstr "Printer IP address or port not configured."
 
 msgid "Could not connect to printer %s:%s. %s (%s)"
-msgstr "Não foi possível conectar à impressora %s:%s. %s (%s)"
+msgstr "Could not connect to printer %s:%s. %s (%s)"
 
 msgid "Settings saved successfully."
-msgstr "Configurações salvas com sucesso."
+msgstr "Settings saved successfully."
 
 msgid "+ Inventory record"
-msgstr "+ Registrar inventário"
+msgstr "+ Inventory record"
 
 msgid "Print label"
-msgstr "Imprimir etiqueta"
+msgstr "Print label"
 
 msgid "ID"
 msgstr "ID"
 
 msgid "Action"
-msgstr "Ação"
+msgstr "Action"
 
 msgid "Date"
-msgstr "Data"
+msgstr "Date"
 
 msgid "User"
-msgstr "Usuário"
+msgstr "User"
 
 msgid "Enter the message"
-msgstr "Insira a mensagem"
+msgstr "Enter the message"
 
 msgid "Printing error"
-msgstr "Erro ao imprimir"
+msgstr "Printing error"
 
 msgid "Invalid type"
-msgstr "Tipo inválido"
+msgstr "Invalid type"
 
 msgid "Asset not found"
-msgstr "Equipamento não encontrado"
+msgstr "Asset not found"
 
 msgid "ZPL model not configured."
-msgstr "Modelo ZPL não configurado."
+msgstr "ZPL model not configured."
 
 msgid "Label sent to print."
-msgstr "Etiqueta enviada para impressão."
+msgstr "Label sent to print."
 
 msgid "Log added successfully!"
-msgstr "Log adicionado com sucesso!"
+msgstr "Log added successfully!"

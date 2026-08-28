@@ -69,7 +69,7 @@ $logs = Log::getLogs($itemtype, $item_id);
 
 <script>
     function registrarInventario() {
-        const comment = prompt(__('Enter the message', 'delainventory'));
+        const comment = prompt('<?= htmlspecialchars(__('Enter the message', 'delainventory'), ENT_QUOTES, 'UTF-8') ?>');
 
         if (comment === null) return;
 
@@ -81,7 +81,7 @@ $logs = Log::getLogs($itemtype, $item_id);
         fetch('/plugins/delainventory/front/print.php?itemtype=' + encodeURIComponent(itemtype) + '&id=' + id)
         .then(response => response.text())
         .then(msg => alert(msg)).catch(err => {
-            alert(__('Printing error', 'delainventory'));
+            alert('<?= htmlspecialchars(__('Printing error', 'delainventory'), ENT_QUOTES, 'UTF-8') ?>');
             console.error(err);
         });
     }

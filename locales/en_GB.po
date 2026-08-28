@@ -115,3 +115,18 @@ msgstr "Enter the message"
 
 msgid "Printing error"
 msgstr "Printing error"
+
+msgid "Invalid type"
+msgstr "Invalid type"
+
+msgid "Asset not found"
+msgstr "Asset not found"
+
+msgid "ZPL model not configured."
+msgstr "ZPL model not configured."
+
+msgid "Label sent to print."
+msgstr "Label sent to print."
+
+msgid "Log added successfully!"
+msgstr "Log added successfully!"
