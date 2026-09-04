@@ -1,0 +1,85 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-end">
+    <form method="post" action="{{ path('/plugins/delainventory/front/log.form.php') }}" id="inventory-form">
+      <input type="hidden" name="action" value="add_log">
+      <input type="hidden" name="item_id" value="{{ item_id }}">
+      <input type="hidden" name="itemtype" value="{{ itemtype }}">
+      <input type="hidden" name="comment" id="comment">
+      <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+
+      <button type="button" class="btn btn-primary btn-sm py-2 px-2" onclick="registrarInventario()">
+        {{ __('+ Inventory record', 'delainventory') }}
+      </button>
+    </form>
+
+    <button type="button" class="btn btn-secondary btn-sm px-2 py-2 ms-2" onclick="imprimirEtiqueta({{ item_id }}, '{{ itemtype|e('js') }}')">
+      {{ __('Print label', 'delainventory') }}
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>{{ __('ID', 'delainventory') }}</th>
+          <th>{{ __('Action', 'delainventory') }}</th>
+          <th>{{ __('Date', 'delainventory') }}</th>
+          <th>{{ __('User', 'delainventory') }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for row in logs %}
+          <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.comment }}</td>
+            <td>{{ row.date_creation }}</td>
+            <td>{{ row.username }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="4" class="text-center text-muted py-3"> {{ __('No inventory records found.', 'delainventory') }} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function registrarInventario() {
+    const comment = prompt('{{ __("Enter the message", "delainventory")|e("js") }}');
+
+    if (comment === null) {
+      return;
+    }
+
+    document.getElementById('comment').value = comment;
+    document.getElementById('inventory-form').submit();
+  }
+
+  function imprimirEtiqueta(id, itemtype) {
+    const formData = new FormData();
+
+    formData.append('action', 'print');
+    formData.append('item_id', id);
+    formData.append('itemtype', itemtype);
+
+    const csrfToken = document.querySelector('meta[property="glpi:csrf_token"]')?.getAttribute('content');
+
+    fetch('{{ path('/plugins/delainventory/front/log.form.php') }}', {
+      method: 'POST',
+      headers: {
+        'X-Glpi-Csrf-Token': csrfToken,
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: formData
+    })
+    .then(response => response.text())
+    .then(msg => alert(msg))
+    .catch(error => {
+      alert('{{ __("Printing error", "delainventory")|e("js") }}');
+      console.error(error);
+    });
+  }
+</script>
