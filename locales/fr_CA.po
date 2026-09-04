@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Delainventory\n"
+"Language: fr_CA\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Asset Types"
+msgstr "Types d'actifs"
+
+msgid "Apply configuration for %s"
+msgstr "Appliquer la configuration pour %s"
+
+msgid "Connection"
+msgstr "Connexion"
+
+msgid "IP Address"
+msgstr "Adresse IP"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Test connection"
+msgstr "Tester la connexion"
+
+msgid "Testing..."
+msgstr "Test en cours..."
+
+msgid "Enter the IP address and port."
+msgstr "Entrez l'adresse IP et le port."
+
+msgid "Connection test failed."
+msgstr "Le test de connexion a échoué."
+
+msgid "ZPL Template"
+msgstr "Modèle ZPL"
+
+msgid "ZPL Code"
+msgstr "Code ZPL"
+
+msgid "Use placeholders to insert asset information."
+msgstr "Utilisez des espaces réservés pour insérer les informations de l'actif."
+
+msgid "Preview ZPL"
+msgstr "Prévisualiser le ZPL"
+
+msgid "View available tags"
+msgstr "Voir les balises disponibles"
+
+msgid "Available tags"
+msgstr "Balises disponibles"
+
+msgid "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
+msgstr "Vous pouvez utiliser n'importe laquelle de ces balises dans le modèle ZPL. Les balises sont basées sur les champs de l'actif de type ordinateur et suivent les noms définis dans la base de données. Certains champs peuvent varier selon le type d'actif utilisé."
+
+msgid "Tag"
+msgstr "Balise"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Connection successful."
+msgstr "Connexion réussie."
+
+msgid "Connection failed."
+msgstr "La connexion a échoué."
+
+msgid "Error testing connection."
+msgstr "Erreur lors du test de connexion."
+
+msgid "Computer"
+msgstr "Ordinateur"
+
+msgid "Monitor"
+msgstr "Moniteur"
+
+msgid "Printer"
+msgstr "Imprimante"
+
+msgid "Phone"
+msgstr "Téléphone"
+
+msgid "Printer IP address or port not configured."
+msgstr "L'adresse IP ou le port de l'imprimante n'est pas configuré."
+
+msgid "Could not connect to printer %s:%s. %s (%s)"
+msgstr "Impossible de se connecter à l'imprimante %s:%s. %s (%s)"
+
+msgid "Settings saved successfully."
+msgstr "Paramètres enregistrés avec succès."
+
+msgid "+ Inventory record"
+msgstr "+ Enregistrer l'inventaire"
+
+msgid "Print label"
+msgstr "Imprimer l'étiquette"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "User"
+msgstr "Utilisateur"
+
+msgid "Enter the message"
+msgstr "Entrez le message"
+
+msgid "Printing error"
+msgstr "Erreur d'impression"
+
+msgid "Invalid type"
+msgstr "Type invalide"
+
+msgid "Asset not found"
+msgstr "Actif introuvable"
+
+msgid "ZPL model not configured."
+msgstr "Le modèle ZPL n'est pas configuré."
+
+msgid "Label sent to print."
+msgstr "Étiquette envoyée à l'impression."
+
+msgid "Log added successfully!"
+msgstr "Journal ajouté avec succès !"
+
+msgid "No inventory records found."
+msgstr "Aucun enregistrement d'inventaire trouvé."
+
+msgid "The comment cannot be empty."
+msgstr "Le commentaire ne peut pas être vide."

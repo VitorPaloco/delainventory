@@ -1,0 +1,45 @@
+<div class="card">
+    <form method="post" action="{{ path('/plugins/delainventory/front/profile.form.php') }}">
+        <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="profile_id" value="{{ profile.getID() }}">
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead>
+                    <tr>
+                        <th> </th>
+                        <th class="text-center"> {{ __('View all') }} </th>
+                        <th class="text-center"> {{ __('Update all') }} </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td> DelaInventory </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="form-check-input" id="delainventory_read" name="delainventory_read" value="1"
+                                {% if can_read %}checked{% endif %}
+                                {% if not can_edit %}disabled{% endif %}
+                            >
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="form-check-input" id="delainventory_update" name="delainventory_update" value="1"
+                                {% if can_update %}checked{% endif %}
+                                {% if not can_edit %}disabled{% endif %}
+                            >
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        {% if can_edit %}
+            <div class="card-footer text-end">
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="ti ti-device-floppy me-1"></i> {{ __('Save', 'delainventory') }}
+                </button>
+            </div>
+        {% endif %}
+    </form>
+</div>

@@ -67,6 +67,9 @@
       <lang>en_US</lang>
       <lang>pt_BR</lang>
       <lang>pt_PT</lang>
+      <lang>fr_FR</lang>
+      <lang>fr_CA</lang>
+      <lang>fr_BE</lang>
    </langs>
 
    <license>MIT</license>
@@ -82,11 +85,11 @@
          <tag>zpl</tag>
          <tag>etiquettes</tag>
       </fr>
-      <pt_BR>
+      <pt>
          <tag>inventário</tag>
          <tag>zpl</tag>
          <tag>etiquetas</tag>
-      </pt_BR>
+      </pt>
    </tags>
 
    <screenshots>

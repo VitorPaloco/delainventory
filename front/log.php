@@ -5,7 +5,6 @@ include('../../../inc/includes.php');
 use Glpi\Application\View\TemplateRenderer;
 use GlpiPlugin\Delainventory\Log;
 use GlpiPlugin\Delainventory\Profile;
-// use User;
 
 Session::checkLoginUser();
 Session::checkRight(Profile::$rightname, READ);

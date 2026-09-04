@@ -7,7 +7,7 @@ define("PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION", "11.0.99");
 use GlpiPlugin\Delainventory\Setting;
 use GlpiPlugin\Delainventory\Profile;
 use GlpiPlugin\Delainventory\Log;
-use Session;
+use Profile as GLPI_Profile;
 
 function plugin_init_delainventory(): void 
 {
@@ -28,6 +28,8 @@ function plugin_init_delainventory(): void
             'Phone'
         ]
     ]);
+
+    Plugin::registerClass(Profile::class, ['addtabon' => GLPI_Profile::class]);
 }
 
 function plugin_version_delainventory(): array

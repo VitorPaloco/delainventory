@@ -7,7 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.0] - 2026-31-08
+## [0.4.0] - 2026-09-11
+
+### Added
+
+- Added French translations for France (`fr_FR`), Canada (`fr_CA`), and Belgium (`fr_BE`).
+- Added a dedicated permissions tab to GLPI profiles, allowing administrators to manage DelaInventory access.
+- Added `READ` and `UPDATE` permissions for DelaInventory, with `UPDATE` controlling inventory records and label printing.
+
+### Changed
+
+- Fixed the printer connection test token expiration issue that caused subsequent requests to fail.
+- Refactored the plugin structure to better follow GLPI plugin development best practices.
+- Renamed and reorganized plugin classes to improve separation of responsibilities and maintainability.
+- Separated frontend rendering files from form request handlers.
+- Reorganized the `src/` classes, moving functionality previously concentrated in `Config.php` into dedicated classes.
+
+## [0.3.0] - 2026-08-31
 
 ### Added
 
