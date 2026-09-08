@@ -18,12 +18,18 @@ class Profile extends CommonDBTM
 
     public static function install()
     {
+        $exists = countElementsInTable(ProfileRight::getTable(), ['name' => self::$rightname]) > 0;
+
+        if ($exists) {
+            return;
+        }
+
         ProfileRight::addProfileRights([self::$rightname]);
         $profileRight = new ProfileRight();
 
         if ($profileRight->getFromDBByCrit(['profiles_id' => 4, 'name' => self::$rightname])) {
             $profileRight->update([
-                'id' => $profileRight->getID(), 
+                'id'     => $profileRight->getID(),
                 'rights' => READ | UPDATE,
             ]);
         }
