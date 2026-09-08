@@ -16,6 +16,18 @@ $item_id  = (int) ($_POST['item_id'] ?? 0);
 $action = $_POST['action'] ?? '';
 
 if ($action === 'add_log') {
+    if (!Log::isAllowed($itemtype)) {
+        http_response_code(400);
+        die(__('Invalid type', 'delainventory'));
+    }
+
+    $item = new $itemtype();
+
+    if (!$item->getFromDB($item_id)) {
+        http_response_code(404);
+        die(__('Asset not found', 'delainventory'));
+    }
+
     $comment = trim($_POST['comment'] ?? '');
 
     if ($comment === '') {
@@ -32,14 +44,7 @@ if ($action === 'add_log') {
 if ($action === 'print') {
     global $CFG_GLPI;
 
-    $allowed = [
-        Computer::class,
-        Monitor::class,
-        Printer::class,
-        Phone::class
-    ];
-
-    if (!in_array($itemtype, $allowed, true)) {
+    if (!Log::isAllowed($itemtype)) {
         http_response_code(400);
         die(__('Invalid type', 'delainventory'));
     }

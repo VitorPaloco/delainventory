@@ -7,6 +7,10 @@ use DBConnection;
 use CommonDBTM;
 use CommonGLPI;
 use Session;
+use Computer;
+use Monitor;
+use Printer;
+use Phone;
 
 class Log extends CommonDBTM
 {
@@ -59,6 +63,16 @@ class Log extends CommonDBTM
         ]);
 
         return count($iterator) > 0;
+    }
+
+    public static function isAllowed(string $itemtype): bool
+    {
+        return in_array($itemtype, [
+            Computer::class,
+            Monitor::class,
+            Printer::class,
+            Phone::class,
+        ], true);
     }
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
