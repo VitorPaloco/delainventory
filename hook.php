@@ -29,7 +29,7 @@ function plugin_delainventory_install(): bool
 
     $migration->executeMigration();
 
-    // AssetType::install();
+    AssetType::install();
     PrinterConfig::install();
     Profile::install();
     Log::install();
