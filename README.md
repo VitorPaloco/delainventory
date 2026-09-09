@@ -1,4 +1,4 @@
-# 📦 DelaInventory - Inventory Control and Label Printing for GLPI
+# 📦 DelaInventory
 
 DelaInventory is a GLPI plugin designed to improve inventory traceability, audit history, and asset identification through automatic Zebra label printing.
 
