@@ -17,11 +17,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Fixed the printer connection test token expiration issue that caused subsequent requests to fail.
 - Refactored the plugin structure to better follow GLPI plugin development best practices.
 - Renamed and reorganized plugin classes to improve separation of responsibilities and maintainability.
 - Separated frontend rendering files from form request handlers.
 - Reorganized the `src/` classes, moving functionality previously concentrated in `Config.php` into dedicated classes.
+- Added database migration support for upgrading from version 0.3.0, preserving existing configuration and log data.
+
+### Fixed
+
+- Fixed the printer connection test token expiration issue that caused subsequent requests to fail.
+- Fixed unauthorized access to plugin configuration and inventory operations.
+- Fixed unauthorized access to assets belonging to entities the current user cannot access.
+- Fixed the ability to trigger label printing without the required plugin permissions.
 
 ## [0.3.0] - 2026-08-31
 

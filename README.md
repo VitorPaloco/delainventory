@@ -2,81 +2,63 @@
 
 DelaInventory is a GLPI plugin designed to improve inventory traceability, audit history, and asset identification through automatic Zebra label printing.
 
-The plugin adds a dedicated tab to GLPI assets, allowing users to register inventory checks, keep a complete audit history, and print asset labels containing QR Codes for quick access to equipment information.
-
-> Built using the official GLPI plugin architecture, DelaInventory integrates seamlessly with GLPI assets and uses ZPL (Zebra Programming Language) to print professional asset labels directly to Zebra printers.
-
-<br>
-
-<img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"/> <img src="https://img.shields.io/badge/GLPI-2C6BED?style=for-the-badge"/> <img src="https://img.shields.io/badge/Zebra_ZPL-000000?style=for-the-badge"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
-
-<br>
+The plugin adds a dedicated tab to GLPI assets, allowing users to register inventory checks, keep a complete audit history, and print custom asset labels for quick access to equipment information.
 
 ![Banner](docs/banner_en.png)
 
+> Built using the official GLPI plugin architecture, DelaInventory integrates seamlessly with GLPI assets and uses ZPL (Zebra Programming Language) to print professional asset labels directly to Zebra printers.
+
 ## ✨ Features
 
-- Manual inventory registration by users
-- Complete inventory history for each asset
-- Audit trail with user identification
-- Support for multiple GLPI asset types
-- Automatic asset label generation
-- QR Code linking directly to the asset page in GLPI
-- Direct ZPL printing to Zebra printers over TCP/IP
-- Native integration with the GLPI interface
+- Manual inventory registration and asset history.
+- Configurable support for multiple GLPI asset types.
+- Customizable ZPL labels with dynamic asset variables and QR Codes.
+- Direct ZPL printing to Zebra printers over TCP/IP.
+- Printer connection testing and ZPL preview through Labelary.
 
-## 🖥️ Supported Assets
-
-Currently supported asset types:
-
-- Computers
-- Monitors
-- Printers
-- Phones
-
-The plugin architecture is designed to support additional GLPI asset types in future releases.
+> **Supported assets:** Computers, Monitors, Printers, and Phones.
 
 ## 🏷️ Generated Label
 
-DelaInventory allows users to create fully customizable asset labels using ZPL templates configured directly through the plugin interface. The user defines the ZPL template and uses the available asset variables to dynamically generate labels according to their organization's needs.
+DelaInventory allows users to create fully customizable asset labels using ZPL templates configured directly through the plugin interface.
 
-The label can include:
-
-- Asset ID
-- Asset description
-- Serial number
-- Assigned location or responsible entity
-- QR Code for quick access to the asset in GLPI
-- Any other information available through the supported variables
+Users can define their own ZPL templates and use the available asset variables to dynamically generate labels according to their organization's needs.
 
 ![Tags View](docs/screenshots/preview2.png)
 
+> The label can include any information available through the supported variables
+
 ## ⚙️ How It Works
+
+### Configuration
+
+1. Access the DelaInventory configuration page.
+2. Select which GLPI asset types should be tracked.
+3. Define the printer IP address and TCP port.
+4. Create or paste a custom ZPL template.
+5. Use the available DelaInventory variables to dynamically insert asset information.
+6. Save the configuration.
+
+![Config Page](docs/screenshots/preview1.png)
 
 ### Inventory Registration
 
-1. Access the DelaInventory configuration page.
-2. Define the printer IP address and TCP port.
-3. Create or paste a custom ZPL template.
-4. Use the available DelaInventory variables to dynamically insert asset information.
-5. Save the configuration.
+1. Open a supported asset in GLPI.
+2. Open the **DelaInventory** tab.
+3. Enter a comment describing the inventory check.
+4. Save the inventory record.
+5. The record is stored in the asset's inventory history together with the user and creation date.
 
 ### Label Printing
 
-1. Open an asset in GLPI.
+1. Open a supported asset in GLPI.
 2. Click **Print Label**.
-3. The plugin retrieves the asset information.
-4. A ZPL label is generated dynamically.
-5. The ZPL is sent directly to a Zebra printer via TCP/IP (port 9100).
+3. The plugin retrieves and validates the asset information.
+4. The ZPL label is generated dynamically using the configured template and asset variables.
+5. The ZPL is sent directly to the configured Zebra printer via TCP/IP.
 6. The label is printed automatically.
 
-## 🔧 Requirements
-
-- GLPI 11
-- PHP 8+
-- MySQL or MariaDB
-- Zebra printer compatible with ZPL
-- Network connectivity between the GLPI server and the printer
+![Log Page](docs/screenshots/preview3.png)
 
 ## 🚀 Installation
 
@@ -99,32 +81,20 @@ Enable the plugin through the GLPI administration panel:
 Setup → Plugins → DelaInventory → Install → Enable
 ```
 
-## 📸 Screenshots
-
-### Inventory Tab
-
-![Inventory Tab](docs/screenshots/preview1.png)
-
-### Asset View
-
-![Asset View](docs/screenshots/preview3.png)
-
 ## 📈 Roadmap
 
 Upcoming improvements planned for future releases:
 
+- Additional translations
+
+- Additional asset types
+
 - Reports and dashboards
   - Provide inventory and printing statistics.
   - Add visual dashboards for monitoring and analysis.
-
-- Additional translations
-  - Expand internationalization support.
-  - French (`fr_FR`) planned as the next supported language.
-
+  
 - Security and performance improvements
-  - Strengthen plugin security.
-  - Improve performance and resource usage.
-  - Continue reviewing and improving the plugin architecture.
+  - Further improve security, performance, and plugin architecture.
 
 ## 👨‍💻 Author
 
