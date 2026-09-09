@@ -47,7 +47,7 @@ class Log extends CommonDBTM
         }
     }
 
-    private static function isEnabled(string $itemtype): bool
+    public static function isEnabled(string $itemtype): bool
     {
         global $DB;
 

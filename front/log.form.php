@@ -21,6 +21,11 @@ if ($action === 'add_log') {
         die(__('Invalid type', 'delainventory'));
     }
 
+    if (!Log::isEnabled($itemtype)) {
+        http_response_code(400);
+        die(__('Invalid type', 'delainventory'));
+    }
+
     $item = new $itemtype();
 
     if (!$item->getFromDB($item_id)) {
