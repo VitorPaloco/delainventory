@@ -47,7 +47,7 @@ class Log extends CommonDBTM
         }
     }
 
-    public static function isEnabled(string $itemtype): bool
+    private static function isEnabled(string $itemtype): bool
     {
         global $DB;
 
@@ -65,7 +65,7 @@ class Log extends CommonDBTM
         return count($iterator) > 0;
     }
 
-    public static function isAllowed(string $itemtype): bool
+    private static function isAllowed(string $itemtype): bool
     {
         return in_array($itemtype, [
             Computer::class,
@@ -73,6 +73,38 @@ class Log extends CommonDBTM
             Printer::class,
             Phone::class,
         ], true);
+    }
+
+    private static function canAccessItem(CommonDBTM $item): bool
+    {
+        return Session::haveAccessToEntity($item->getEntityID());
+    }
+
+    public static function getValidatedItem(string $itemtype, int $item_id): CommonDBTM
+    {
+        if (!self::isAllowed($itemtype)) {
+            http_response_code(400);
+            die(__('Invalid type', 'delainventory'));
+        }
+
+        if (!self::isEnabled($itemtype)) {
+            http_response_code(400);
+            die(__('Invalid type', 'delainventory'));
+        }
+
+        $item = new $itemtype();
+
+        if (!$item->getFromDB($item_id)) {
+            http_response_code(404);
+            die(__('Asset not found', 'delainventory'));
+        }
+
+        if (!self::canAccessItem($item)) {
+            http_response_code(403);
+            die(__('You do not have access to this entity.', 'delainventory'));
+        }
+
+        return $item;
     }
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)

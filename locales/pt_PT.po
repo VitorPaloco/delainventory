@@ -136,3 +136,6 @@ msgstr "Não foram encontrados registos de inventário."
 
 msgid "The comment cannot be empty."
 msgstr "O comentário não pode estar vazio."
+
+msgid "You do not have access to this entity."
+msgstr "Não tem acesso a esta entidade."

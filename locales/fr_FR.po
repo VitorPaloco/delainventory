@@ -136,3 +136,6 @@ msgstr "Aucun enregistrement d'inventaire trouvé."
 
 msgid "The comment cannot be empty."
 msgstr "Le commentaire ne peut pas être vide."
+
+msgid "You do not have access to this entity."
+msgstr "Vous n'avez pas accès à cette entité."

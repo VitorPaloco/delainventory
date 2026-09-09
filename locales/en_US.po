@@ -136,3 +136,6 @@ msgstr "No inventory records found."
 
 msgid "The comment cannot be empty."
 msgstr "The comment cannot be empty."
+
+msgid "You do not have access to this entity."
+msgstr "You do not have access to this entity."

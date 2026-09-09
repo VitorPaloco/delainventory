@@ -16,23 +16,8 @@ $item_id  = (int) ($_POST['item_id'] ?? 0);
 $action = $_POST['action'] ?? '';
 
 if ($action === 'add_log') {
-    if (!Log::isAllowed($itemtype)) {
-        http_response_code(400);
-        die(__('Invalid type', 'delainventory'));
-    }
-
-    if (!Log::isEnabled($itemtype)) {
-        http_response_code(400);
-        die(__('Invalid type', 'delainventory'));
-    }
-
-    $item = new $itemtype();
-
-    if (!$item->getFromDB($item_id)) {
-        http_response_code(404);
-        die(__('Asset not found', 'delainventory'));
-    }
-
+    Log::getValidatedItem($itemtype, $item_id);
+    
     $comment = trim($_POST['comment'] ?? '');
 
     if ($comment === '') {
@@ -49,17 +34,7 @@ if ($action === 'add_log') {
 if ($action === 'print') {
     global $CFG_GLPI;
 
-    if (!Log::isAllowed($itemtype)) {
-        http_response_code(400);
-        die(__('Invalid type', 'delainventory'));
-    }
-
-    $item = new $itemtype();
-
-    if (!$item->getFromDB($item_id)) {
-        http_response_code(404);
-        die(__('Asset not found', 'delainventory'));
-    }
+    $item = Log::getValidatedItem($itemtype, $item_id);
 
     $formPages = [
         Computer::class => 'computer.form.php',
