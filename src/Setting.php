@@ -2,8 +2,7 @@
 
 namespace GlpiPlugin\Delainventory;
 
-use DBConnection;
-use CommonDBTM;
+use Plugin;
 
 class Setting
 {
@@ -14,10 +13,18 @@ class Setting
 
     public static function getMenuContent(): array
     {
+        $dashboard = Plugin::getWebDir('delainventory') . '/front/dashboard.php';
+        $settings  = Plugin::getWebDir('delainventory') . '/front/settings.php';
+
         return [
             'title' => self::getMenuName(),
-            'page'  => '/plugins/delainventory/front/settings.php',
+            'page'  => $dashboard,
             'icon'  => 'fa-solid fa-layer-group',
+
+            'options' => [
+                'dashboard' => ['title' => 'Dashboard', 'page'  => $dashboard],
+                'settings' => ['title' => __('Setup'), 'page'  => $settings]
+            ]
         ];
     }
 }

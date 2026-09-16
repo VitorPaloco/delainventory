@@ -1,0 +1,305 @@
+<div class="mb-3">
+    <div class="nav nav-tabs">
+        <a href="{{ path('/plugins/delainventory/front/dashboard.php') }}" class="nav-link active">
+            <i class="ti ti-dashboard me-1"></i>
+            Dashboard
+        </a>
+
+        <a href="{{ path('/plugins/delainventory/front/settings.php') }}" class="nav-link">
+            <i class="ti ti-settings me-1"></i>
+            {{ __('Setup') }}
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title"> Dashboard </h3>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+
+            {# Total inventories #}
+            <div class="col-md-6 col-xl-3 mb-3">
+                <div class="card h-100 delainventory-stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <div class="text-muted">
+                                    {{ __('Total inventories', 'delainventory') }}
+                                </div>
+
+                                <div class="h1 mb-0">
+                                    {{ total_inventories }}
+                                </div>
+                            </div>
+
+                            <div class="ms-auto">
+                                <i class="ti ti-clipboard-check fs-1 delainventory-primary-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Today's inventories #}
+            <div class="col-md-6 col-xl-3 mb-3">
+                <div class="card h-100 delainventory-stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <div class="text-muted">
+                                    {{ __('Inventories today', 'delainventory') }}
+                                </div>
+
+                                <div class="h1 mb-0">
+                                    {{ today_inventories }}
+                                </div>
+                            </div>
+
+                            <div class="ms-auto">
+                                <i class="ti ti-calendar-check fs-1 delainventory-primary-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Inventoried assets #}
+            <div class="col-md-6 col-xl-3 mb-3">
+                <div class="card h-100 delainventory-stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <div class="text-muted">
+                                    {{ __('Inventoried assets', 'delainventory') }}
+                                </div>
+
+                                <div class="h1 mb-0">
+                                    {{ inventoried_assets }}
+                                </div>
+                            </div>
+
+                            <div class="ms-auto">
+                                <i class="ti ti-devices fs-1 delainventory-primary-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Last inventory #}
+            <div class="col-md-6 col-xl-3 mb-3">
+                <div class="card h-100 delainventory-stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <div class="text-muted">
+                                    {{ __('Last inventory', 'delainventory') }}
+                                </div>
+
+                                {% if last_inventory %}
+                                    <div class="h3 mb-1">
+                                        {{ last_inventory.date_creation }}
+                                    </div>
+
+                                    <small class="text-muted">
+                                        {{ last_inventory.itemtype }}
+                                        #{{ last_inventory.item_id }}
+                                    </small>
+                                {% else %}
+                                    <div class="h3 mb-0">
+                                        {{ __('No inventories yet', 'delainventory') }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="ms-auto">
+                                <i class="ti ti-clock fs-1 delainventory-primary-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {# Inventory by date #}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"> {{ __('Inventories over time', 'delainventory') }} </h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="inventories-over-time-chart" style="height: 350px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Inventory by asset type #}
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            {{ __('Inventories by asset type', 'delainventory') }}
+                        </h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="inventories-by-asset-type-chart" style="height: 350px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Latest inventories #}
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"> {{ __('Latest inventories', 'delainventory') }} </h3>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-vcenter card-table">
+                            <thead>
+                                <tr>
+                                    <th>{{ __('Date', 'delainventory') }}</th>
+                                    <th>{{ __('Asset', 'delainventory') }}</th>
+                                    <th>{{ __('Type', 'delainventory') }}</th>
+                                    <th>{{ __('User ID', 'delainventory') }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% if latest_inventories %}
+                                    {% for inventory in latest_inventories %}
+                                        <tr>
+                                            <td>
+                                                {{ inventory.date_creation }}
+                                            </td>
+
+                                            <td>
+                                                #{{ inventory.item_id }}
+                                            </td>
+
+                                            <td>
+                                                {{ inventory.itemtype }}
+                                            </td>
+
+                                            <td>
+                                                {{ inventory.users_id }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-4">
+                                            {{ __('No inventories yet', 'delainventory') }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .delainventory-stat-card {
+        border-left: 3px solid var(--tblr-primary);
+    }
+
+    .delainventory-primary-icon {
+        color: var(--tblr-primary);
+    }
+</style>
+
+<script>
+    window.addEventListener('load', function () {
+        const inventoriesByDate = {{ inventories_by_date|json_encode|raw }};
+        const chartElement = document.getElementById('inventories-over-time-chart');
+        const chart = echarts.init(chartElement);
+
+        chart.setOption({
+            tooltip: {
+                trigger: 'axis'
+            },
+
+            grid: {
+                left: '3%',
+                right: '3%',
+                top: '8%',
+                bottom: '3%',
+                containLabel: true
+            },
+
+            xAxis: {
+                type: 'category',
+                data: Object.keys(inventoriesByDate)
+            },
+
+            yAxis: {
+                type: 'value',
+                minInterval: 1
+            },
+
+            series: [
+                {
+                    name: '{{ __('Inventories', 'delainventory') }}',
+                    type: 'line',
+                    data: Object.values(inventoriesByDate)
+                }
+            ]
+        });
+    });
+
+    window.addEventListener('load', function () {
+        const inventoriesByAssetType = {{ inventories_by_type|json_encode|raw }};
+        const chartElement = document.getElementById('inventories-by-asset-type-chart');
+        const chart = echarts.init(chartElement);
+
+        const data = Object.entries(inventoriesByAssetType).map(([name, value]) => ({
+            name: name,
+            value: value
+        }));
+
+        chart.setOption({
+            tooltip: {
+                trigger: 'item'
+            },
+
+            legend: {
+                orient: 'horizontal',
+                bottom: '0%',
+                left: '0%'
+            },
+
+            series: [
+                {
+                    name: '{{ __('Inventories', 'delainventory') }}',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    center: ['50%', '45%'],
+                    data: data,
+
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        });
+    });
+</script>
