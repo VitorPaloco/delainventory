@@ -8,7 +8,7 @@ use CommonDBTM;
 class AssetType extends CommonDBTM
 {
 
-    public static function install()
+    public static function install(): void
     {
         global $DB;
 
@@ -49,11 +49,17 @@ class AssetType extends CommonDBTM
         }
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     public static function getAll(): array
     {
         return (new self())->find();
     }
 
+    /**
+     * @param array<int, int> $enabledIds
+     */
     public static function updateAll(array $enabledIds): void
     {
         $item = new self();
