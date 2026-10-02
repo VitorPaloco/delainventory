@@ -1,7 +1,7 @@
 <root>
    <name>DelaInventory</name>
    <key>delainventory</key>
-   <state>beta</state>
+   <state>stable</state>
    <logo>https://raw.githubusercontent.com/VitorPaloco/delainventory/main/docs/logo.png</logo>
 
    <description>
@@ -40,6 +40,11 @@
    </authors>
 
    <versions>
+      <version>
+         <num>1.0.0</num>
+         <compatibility>~11.0.0</compatibility>
+         <download_url>https://github.com/VitorPaloco/delainventory/releases/download/v1.0.0/delainventory-1.0.0.zip</download_url>
+      </version>
       <version>
          <num>0.4.0</num>
          <compatibility>~11.0.0</compatibility>

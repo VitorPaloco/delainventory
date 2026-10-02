@@ -11,6 +11,18 @@ msgstr "Asset Types"
 msgid "Apply configuration for %s"
 msgstr "Apply configuration for %s"
 
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid "Phone"
+msgstr "Phone"
+
 msgid "Connection"
 msgstr "Connection"
 
@@ -22,15 +34,6 @@ msgstr "Port"
 
 msgid "Test connection"
 msgstr "Test connection"
-
-msgid "Testing..."
-msgstr "Testing..."
-
-msgid "Enter the IP address and port."
-msgstr "Enter the IP address and port."
-
-msgid "Connection test failed."
-msgstr "Connection test failed."
 
 msgid "ZPL Template"
 msgstr "ZPL Template"
@@ -56,41 +59,59 @@ msgstr "You can use any of these tags in the ZPL template. The tags are based on
 msgid "Tag"
 msgstr "Tag"
 
-msgid "Close"
-msgstr "Close"
+msgid "Enter the IP address and port."
+msgstr "Enter the IP address and port."
 
-msgid "Save"
-msgstr "Save"
-
-msgid "Connection successful."
-msgstr "Connection successful."
-
-msgid "Connection failed."
-msgstr "Connection failed."
+msgid "Testing..."
+msgstr "Testing..."
 
 msgid "Error testing connection."
 msgstr "Error testing connection."
 
-msgid "Computer"
-msgstr "Computer"
+msgid "Total inventories"
+msgstr "Total inventories"
 
-msgid "Monitor"
-msgstr "Monitor"
+msgid "Inventories today"
+msgstr "Inventories today"
 
-msgid "Printer"
-msgstr "Printer"
+msgid "Inventoried assets"
+msgstr "Inventoried assets"
 
-msgid "Phone"
-msgstr "Phone"
+msgid "Last inventory"
+msgstr "Last inventory"
 
-msgid "Printer IP address or port not configured."
-msgstr "Printer IP address or port not configured."
+msgid "No inventories yet"
+msgstr "No inventories yet"
 
-msgid "Could not connect to printer %s:%s. %s (%s)"
-msgstr "Could not connect to printer %s:%s. %s (%s)"
+msgid "Inventories over time"
+msgstr "Inventories over time"
 
-msgid "Settings saved successfully."
-msgstr "Settings saved successfully."
+msgid "Inventories by asset type"
+msgstr "Inventories by asset type"
+
+msgid "Latest inventories"
+msgstr "Latest inventories"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Asset"
+msgstr "Asset"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "User"
+msgstr "User"
+
+msgid "Inventories"
+msgstr "Inventories"
+
+msgid "View all"
+msgstr "View all"
+
+msgid "Update all"
+msgstr "Update all"
 
 msgid "+ Inventory record"
 msgstr "+ Inventory record"
@@ -104,38 +125,44 @@ msgstr "ID"
 msgid "Action"
 msgstr "Action"
 
-msgid "Date"
-msgstr "Date"
-
-msgid "User"
-msgstr "User"
-
 msgid "Enter the message"
 msgstr "Enter the message"
 
 msgid "Printing error"
 msgstr "Printing error"
 
-msgid "Invalid type"
-msgstr "Invalid type"
-
-msgid "Asset not found"
-msgstr "Asset not found"
-
-msgid "ZPL model not configured."
-msgstr "ZPL model not configured."
-
-msgid "Label sent to print."
-msgstr "Label sent to print."
+msgid "The comment cannot be empty."
+msgstr "The comment cannot be empty."
 
 msgid "Log added successfully!"
 msgstr "Log added successfully!"
 
-msgid "No inventory records found."
-msgstr "No inventory records found."
+msgid "Printer IP address or port not configured."
+msgstr "Printer IP address or port not configured."
 
-msgid "The comment cannot be empty."
-msgstr "The comment cannot be empty."
+msgid "ZPL model not configured."
+msgstr "ZPL model not configured."
+
+msgid "Asset not found"
+msgstr "Asset not found"
+
+msgid "Invalid action"
+msgstr "Invalid action"
+
+msgid "Settings saved successfully."
+msgstr "Settings saved successfully."
+
+msgid "Invalid type"
+msgstr "Invalid type"
 
 msgid "You do not have access to this entity."
 msgstr "You do not have access to this entity."
+
+msgid "Could not connect to printer %s:%s. %s (%s)"
+msgstr "Could not connect to printer %s:%s. %s (%s)"
+
+msgid "Connection successful."
+msgstr "Connection successful."
+
+msgid "Label sent to print."
+msgstr "Label sent to print."

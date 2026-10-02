@@ -2,7 +2,7 @@
     <div class="nav nav-tabs">
         <a href="{{ path('/plugins/delainventory/front/dashboard.php') }}" class="nav-link active">
             <i class="ti ti-dashboard me-1"></i>
-            Dashboard
+            {{ __('Dashboard') }}
         </a>
 
         <a href="{{ path('/plugins/delainventory/front/settings.php') }}" class="nav-link">
@@ -14,7 +14,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title"> Dashboard </h3>
+        <h3 class="card-title"> {{ __('Dashboard') }} </h3>
     </div>
 
     <div class="card-body">
@@ -105,7 +105,7 @@
                                     </div>
 
                                     <small class="text-muted">
-                                        {{ last_inventory.itemtype }}
+                                        {{ __(last_inventory.itemtype) }}
                                         #{{ last_inventory.item_id }}
                                     </small>
                                 {% else %}
@@ -172,7 +172,7 @@
                                     <th>{{ __('Date', 'delainventory') }}</th>
                                     <th>{{ __('Asset', 'delainventory') }}</th>
                                     <th>{{ __('Type', 'delainventory') }}</th>
-                                    <th>{{ __('User ID', 'delainventory') }}</th>
+                                    <th>{{ __('User', 'delainventory') }}</th>
                                 </tr>
                             </thead>
 
@@ -185,15 +185,15 @@
                                             </td>
 
                                             <td>
-                                                #{{ inventory.item_id }}
+                                                {{ inventory.asset_name }}
                                             </td>
 
                                             <td>
-                                                {{ inventory.itemtype }}
+                                                {{ __(inventory.itemtype, 'delainventory') }}
                                             </td>
 
                                             <td>
-                                                {{ inventory.users_id }}
+                                                {{ inventory.users_name }}
                                             </td>
                                         </tr>
                                     {% endfor %}

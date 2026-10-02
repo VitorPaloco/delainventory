@@ -22,7 +22,7 @@ class Setting
             'icon'  => 'fa-solid fa-layer-group',
 
             'options' => [
-                'dashboard' => ['title' => 'Dashboard', 'page'  => $dashboard],
+                'dashboard' => ['title' => __('Dashboard'), 'page'  => $dashboard],
                 'settings' => ['title' => __('Setup'), 'page'  => $settings]
             ]
         ];

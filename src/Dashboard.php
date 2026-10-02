@@ -83,28 +83,19 @@ class Dashboard
         global $DB;
 
         $startTimestamp = strtotime("-" . ($days - 1) . " days");
-
         $start = date('Y-m-d 00:00:00', $startTimestamp);
 
         $iterator = $DB->request([
-            'SELECT' => [
-                'date_creation',
-            ],
+            'SELECT' => ['date_creation'],
             'FROM' => Log::getTable(),
-            'WHERE' => [
-                'date_creation' => ['>=', $start],
-            ],
+            'WHERE' => ['date_creation' => ['>=', $start]],
             'ORDER' => 'date_creation ASC',
         ]);
 
         $data = [];
 
         for ($i = 0; $i < $days; $i++) {
-            $date = date(
-                'Y-m-d',
-                strtotime("+{$i} days", $startTimestamp)
-            );
-
+            $date = date('Y-m-d', strtotime("+{$i} days", $startTimestamp));
             $data[$date] = 0;
         }
 
@@ -124,9 +115,7 @@ class Dashboard
         global $DB;
 
         $iterator = $DB->request([
-            'SELECT' => [
-                'itemtype',
-            ],
+            'SELECT' => ['itemtype'],
             'FROM' => Log::getTable(),
             'COUNT' => 'count',
             'GROUP' => 'itemtype',
@@ -136,7 +125,7 @@ class Dashboard
         $data = [];
 
         foreach ($iterator as $row) {
-            $data[$row['itemtype']] = (int) $row['count'];
+            $data[__($row['itemtype'])] = (int) $row['count'];
         }
 
         return $data;
@@ -155,11 +144,28 @@ class Dashboard
         $data = [];
 
         foreach ($iterator as $row) {
+            $assetName = sprintf('#%d', (int) $row['item_id']);
+            $item = getItemForItemtype($row['itemtype']);
+
+            if ($item && $item->getFromDB((int) $row['item_id'])) {
+                $assetName = $item->getName();
+            }
+
+            $userName = '';
+
+            if ((int) $row['users_id'] > 0) {
+                $user = new \User();
+
+                if ($user->getFromDB((int) $row['users_id'])) {
+                    $userName = $user->getName();
+                }
+            }
+
             $data[] = [
                 'date_creation' => $row['date_creation'],
+                'asset_name'    => $assetName,
                 'itemtype'      => $row['itemtype'],
-                'item_id'       => (int) $row['item_id'],
-                'users_id'      => (int) $row['users_id'],
+                'users_name'    => $userName,
             ];
         }
 
