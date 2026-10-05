@@ -89,6 +89,9 @@ msgstr "Inventories over time"
 msgid "Inventories by asset type"
 msgstr "Inventories by asset type"
 
+msgid "Inventories by user"
+msgstr "Inventories by user"
+
 msgid "Latest inventories"
 msgstr "Latest inventories"
 
@@ -113,8 +116,8 @@ msgstr "View all"
 msgid "Update all"
 msgstr "Update all"
 
-msgid "+ Inventory record"
-msgstr "+ Inventory record"
+msgid "Inventory record"
+msgstr "Inventory record"
 
 msgid "Print label"
 msgstr "Print label"
@@ -166,3 +169,9 @@ msgstr "Connection successful."
 
 msgid "Label sent to print."
 msgstr "Label sent to print."
+
+msgid "Download label as image"
+msgstr "Download label as image"
+
+msgid "More options"
+msgstr "More options"

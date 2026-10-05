@@ -140,18 +140,31 @@
             </div>
         </div>
 
-        {# Inventory by asset type #}
-        <div class="row mt-3">
-            <div class="col-12">
-                <div class="card">
+        {# Inventory charts #}
+        <div class="row mt-3 g-3">
+        
+            {# Inventory by asset type #}
+            <div class="col-md-6">
+                <div class="card h-100">
                     <div class="card-header">
-                        <h3 class="card-title">
-                            {{ __('Inventories by asset type', 'delainventory') }}
-                        </h3>
+                        <h3 class="card-title">{{ __('Inventories by asset type', 'delainventory') }}</h3>
                     </div>
 
                     <div class="card-body">
                         <div id="inventories-by-asset-type-chart" style="height: 350px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            {# Inventory by user #}
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ __('Inventories by user', 'delainventory') }}</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="inventories-by-user-chart" style="height: 350px;"></div>
                     </div>
                 </div>
             </div>
@@ -180,28 +193,15 @@
                                 {% if latest_inventories %}
                                     {% for inventory in latest_inventories %}
                                         <tr>
-                                            <td>
-                                                {{ inventory.date_creation }}
-                                            </td>
-
-                                            <td>
-                                                {{ inventory.asset_name }}
-                                            </td>
-
-                                            <td>
-                                                {{ __(inventory.itemtype, 'delainventory') }}
-                                            </td>
-
-                                            <td>
-                                                {{ inventory.users_name }}
-                                            </td>
+                                            <td>{{ inventory.date_creation }}</td>
+                                            <td>{{ inventory.asset_name }}</td>
+                                            <td>{{ __(inventory.itemtype, 'delainventory') }}</td>
+                                            <td>{{ inventory.users_name }}</td>
                                         </tr>
                                     {% endfor %}
                                 {% else %}
                                     <tr>
-                                        <td colspan="4" class="text-center text-muted py-4">
-                                            {{ __('No inventories yet', 'delainventory') }}
-                                        </td>
+                                        <td colspan="4" class="text-center text-muted py-4">{{ __('No inventories yet', 'delainventory') }}</td>
                                     </tr>
                                 {% endif %}
                             </tbody>
@@ -268,6 +268,47 @@
         const chart = echarts.init(chartElement);
 
         const data = Object.entries(inventoriesByAssetType).map(([name, value]) => ({
+            name: name,
+            value: value
+        }));
+
+        chart.setOption({
+            tooltip: {
+                trigger: 'item'
+            },
+
+            legend: {
+                orient: 'horizontal',
+                bottom: '0%',
+                left: '0%'
+            },
+
+            series: [
+                {
+                    name: '{{ __('Inventories', 'delainventory') }}',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    center: ['50%', '45%'],
+                    data: data,
+
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        });
+    });
+
+    window.addEventListener('load', function () {
+        const inventoriesByUser = {{ inventories_by_user|json_encode|raw }};
+        const chartElement = document.getElementById('inventories-by-user-chart');
+        const chart = echarts.init(chartElement);
+
+        const data = Object.entries(inventoriesByUser).map(([name, value]) => ({
             name: name,
             value: value
         }));

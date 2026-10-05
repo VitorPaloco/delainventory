@@ -89,6 +89,9 @@ msgstr "Inventaires au fil du temps"
 msgid "Inventories by asset type"
 msgstr "Inventaires par type d’actif"
 
+msgid "Inventories by user"
+msgstr "Inventaires par utilisateur"
+
 msgid "Latest inventories"
 msgstr "Derniers inventaires"
 
@@ -113,8 +116,8 @@ msgstr "Tout afficher"
 msgid "Update all"
 msgstr "Tout mettre à jour"
 
-msgid "+ Inventory record"
-msgstr "+ Enregistrement d’inventaire"
+msgid "Inventory record"
+msgstr "Enregistrement d’inventaire"
 
 msgid "Print label"
 msgstr "Imprimer l’étiquette"
@@ -166,3 +169,9 @@ msgstr "Connexion réussie."
 
 msgid "Label sent to print."
 msgstr "Étiquette envoyée à l’impression."
+
+msgid "Download label as image"
+msgstr "Télécharger l’étiquette en tant qu’image"
+
+msgid "More options"
+msgstr "Plus d’options"

@@ -15,6 +15,7 @@ Html::requireJs('charts');
 $lastInventory = Dashboard::getLastInventory();
 $inventoriesByDate = Dashboard::getInventoriesByDate();
 $inventoriesByAssetType = Dashboard::getInventoriesByAssetType();
+$inventoriesByUser = Dashboard::getInventoriesByUser();
 $latestInventories = Dashboard::getLatestInventories();
 
 Html::header(Setting::getMenuName(), $_SERVER['PHP_SELF'], 'config', Setting::class, 'dashboard');
@@ -27,6 +28,7 @@ TemplateRenderer::getInstance()->display('@delainventory/dashboard.html.twig',
         'last_inventory' => $lastInventory,
         'inventories_by_date' => $inventoriesByDate,
         'inventories_by_type' => $inventoriesByAssetType,
+        'inventories_by_user' => $inventoriesByUser,
         'latest_inventories' => $latestInventories
     ]
 );

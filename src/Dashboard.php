@@ -131,6 +131,41 @@ class Dashboard
         return $data;
     }
 
+    public static function getInventoriesByUser(): array
+    {
+        global $DB;
+
+        $iterator = $DB->request([
+            'SELECT' => ['users_id'],
+            'FROM'   => Log::getTable(),
+            'COUNT'  => 'count',
+            'GROUP'  => 'users_id',
+            'ORDER'  => 'count DESC',
+        ]);
+
+        $data = [];
+
+        foreach ($iterator as $row) {
+            $usersId = (int) $row['users_id'];
+
+            if ($usersId > 0) {
+                $user = new \User();
+
+                if ($user->getFromDB($usersId)) {
+                    $name = $user->getName();
+                } else {
+                    $name = sprintf('#%d', $usersId);
+                }
+            } else {
+                $name = __('System');
+            }
+
+            $data[$name] = (int) $row['count'];
+        }
+
+        return $data;
+    }
+
     public static function getLatestInventories(int $limit = 10): array
     {
         global $DB;
