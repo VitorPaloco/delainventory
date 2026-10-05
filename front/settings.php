@@ -18,7 +18,7 @@ $printerConfig = PrinterConfig::get();
 $computer = new Computer();
 $computer->getEmpty();
 
-Html::header(Setting::getMenuName(), $_SERVER['PHP_SELF'], 'config', Setting::class);
+Html::header(Setting::getMenuName(), $_SERVER['PHP_SELF'], 'config', Setting::class, 'settings');
 
 TemplateRenderer::getInstance()->display('@delainventory/settings.html.twig', [
     'assets'    => $assets,

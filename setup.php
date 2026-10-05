@@ -1,5 +1,7 @@
 <?php
 
+use function Safe\define;
+
 define('PLUGIN_DELAINVENTORY_VERSION', '0.4.0');
 define("PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION", "11.0.0");
 define("PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION", "11.0.99");
@@ -12,6 +14,8 @@ use Profile as GLPI_Profile;
 function plugin_init_delainventory(): void 
 {
     global $PLUGIN_HOOKS;
+
+    /** @var array<string, array<string, mixed>> $PLUGIN_HOOKS */
 
     $PLUGIN_HOOKS['csrf_compliant']['delainventory'] = true;
     $PLUGIN_HOOKS['config_page']['delainventory'] = 'front/settings.php';
@@ -32,6 +36,9 @@ function plugin_init_delainventory(): void
     Plugin::registerClass(Profile::class, ['addtabon' => GLPI_Profile::class]);
 }
 
+/**
+ * @return array<string, mixed>
+ */
 function plugin_version_delainventory(): array
 {
     return [
