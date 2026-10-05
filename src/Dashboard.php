@@ -15,6 +15,10 @@ class Dashboard
 
         $row = $iterator->current();
 
+        if (!is_array($row)) {
+            return 0;
+        }
+
         return (int) ($row['count'] ?? 0);
     }
 
@@ -37,6 +41,10 @@ class Dashboard
         ]);
 
         $row = $iterator->current();
+
+        if (!is_array($row)) {
+            return 0;
+        }
 
         return (int) ($row['count'] ?? 0);
     }
@@ -125,7 +133,11 @@ class Dashboard
         $data = [];
 
         foreach ($iterator as $row) {
-            $data[__($row['itemtype'])] = (int) $row['count'];
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $data[__($row['itemtype'], 'delainventory')] = (int) $row['count'];
         }
 
         return $data;
@@ -146,6 +158,10 @@ class Dashboard
         $data = [];
 
         foreach ($iterator as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
             $usersId = (int) $row['users_id'];
 
             if ($usersId > 0) {
@@ -157,7 +173,7 @@ class Dashboard
                     $name = sprintf('#%d', $usersId);
                 }
             } else {
-                $name = __('System');
+                $name = __('System', 'delainventory');
             }
 
             $data[$name] = (int) $row['count'];

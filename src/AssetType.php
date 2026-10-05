@@ -54,7 +54,10 @@ class AssetType extends CommonDBTM
      */
     public static function getAll(): array
     {
-        return (new self())->find();
+        /** @var array<int, array<string, mixed>> $items */
+        $items = (new self())->find();
+
+        return $items;
     }
 
     /**
