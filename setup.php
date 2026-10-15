@@ -34,24 +34,19 @@
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
 define('PLUGIN_DELAINVENTORY_VERSION', '1.0.0');
 
-// Minimal GLPI version, inclusive
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
-define("PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION", "11.0.0");
+define('PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION', '11.0.0');
 
-// Maximum GLPI version, exclusive
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
-define("PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION", "11.0.99");
+define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '11.0.99');
+
+
+function plugin_init_delainventory(): void
+{
+    // Resto do código aqui...
+}
 
 /**
- * Init hooks of the plugin.
- * REQUIRED
- */
-function plugin_init_delainventory(): void {}
-
-/**
- * Get the name and the version of the plugin
- * REQUIRED
- *
  * @return array{
  *      name: string,
  *      version: string,
@@ -71,9 +66,9 @@ function plugin_version_delainventory(): array
     return [
         'name'           => 'DelaInventory',
         'version'        => PLUGIN_DELAINVENTORY_VERSION,
-        'author'         => '<a href="http://www.teclib.com">Teclib\'</a>',
-        'license'        => '',
-        'homepage'       => '',
+        'author'         => 'Vitor Paloco',
+        'license'        => 'MIT',
+        'homepage'       => 'https://github.com/VitorPaloco/delainventory',
         'requirements'   => [
             'glpi' => [
                 'min' => PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION,
@@ -83,29 +78,16 @@ function plugin_version_delainventory(): array
     ];
 }
 
-/**
- * Check pre-requisites before install
- * OPTIONAL
- */
+
 function plugin_delainventory_check_prerequisites(): bool
 {
     return true;
 }
 
 /**
- * Check configuration process
- * OPTIONAL
- *
  * @param bool $verbose Whether to display message on failure. Defaults to false.
  */
 function plugin_delainventory_check_config(bool $verbose = false): bool
 {
-    // Your configuration check
     return true;
-
-    // Example:
-    // if ($verbose) {
-    //    echo __('Installed / not configured', 'delainventory');
-    // }
-    // return false;
 }
