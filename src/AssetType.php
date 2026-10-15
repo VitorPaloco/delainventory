@@ -86,8 +86,11 @@ class AssetType extends CommonDBTM
     public static function getAll(): array
     {
         /** @var array<int, array<string, mixed>> $items */
-        return (new self())->find();
+        $items = (new self())->find();
+
+        return $items;
     }
+
 
     /**
      * @param array<int, int> $enabledIds
