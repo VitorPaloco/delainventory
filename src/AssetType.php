@@ -38,7 +38,6 @@ use CommonDBTM;
 
 class AssetType extends CommonDBTM
 {
-
     public static function install(): void
     {
         global $DB;
