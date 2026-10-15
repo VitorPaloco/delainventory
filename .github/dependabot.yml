@@ -20,14 +20,14 @@ updates:
         dependency-type: "development"
 
   # Strategy for npm dependencies
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    allow:
-      - dependency-type: "direct"
-    open-pull-requests-limit: 100
-    versioning-strategy: "increase"
-    groups:
-      dev-dependencies:
-        dependency-type: "development"
+  # - package-ecosystem: "npm"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "monthly"
+  #   allow:
+  #     - dependency-type: "direct"
+  #   open-pull-requests-limit: 100
+  #   versioning-strategy: "increase"
+  #   groups:
+  #     dev-dependencies:
+  #       dependency-type: "development"
