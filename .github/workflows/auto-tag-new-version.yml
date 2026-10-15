@@ -1,12 +1,12 @@
-# name: "Automatically tag new version"
+name: "Automatically tag new version"
 
-# on:
-#   push:
-#     branches:
-#       - "main"
-#       - "**/bugfixes"
-#     paths:
-#       - "setup.php"
+on:
+  push:
+    branches:
+      - "main"
+      - "**/bugfixes"
+    paths:
+      - "setup.php"
 
 # jobs:
 #   auto-tag-new-version:
