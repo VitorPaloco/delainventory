@@ -38,6 +38,7 @@ use GlpiPlugin\Delainventory\Profile;
 use DBConnection;
 use CommonDBTM;
 use CommonGLPI;
+use DBmysqlIterator;
 use Session;
 use Computer;
 use Monitor;
@@ -114,7 +115,7 @@ class Log extends CommonDBTM
 
     private static function validationError(string $message, int $code): never
     {
-        throw new RuntimeException($message, $code);
+        throw new \RuntimeException($message, $code);
     }
 
     public static function getValidatedItem(string $itemtype, int $item_id): CommonDBTM
@@ -128,7 +129,7 @@ class Log extends CommonDBTM
             Monitor::class  => new Monitor(),
             Printer::class  => new Printer(),
             Phone::class    => new Phone(),
-            default => throw new InvalidArgumentException(__('Invalid type', 'delainventory')),
+            default => throw new \InvalidArgumentException(__('Invalid type', 'delainventory')),
         };
 
         if (!$item->getFromDB($item_id)) {
@@ -144,11 +145,23 @@ class Log extends CommonDBTM
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
-        if (Session::haveRight(Profile::$rightname, READ) && self::isEnabled($item->getType())) {
-            return self::createTabEntry(self::getMenuName(), 0, $item::getType(), 'ti ti-stack-2');
+        if (!Session::haveRight(Profile::$rightname, READ) || !self::isEnabled($item->getType())) {
+            return '';
         }
 
-        return '';
+        $formItemtype = match ($item->getType()) {
+            Computer::class => Computer::class,
+            Monitor::class  => Monitor::class,
+            Printer::class  => Printer::class,
+            Phone::class    => Phone::class,
+            default         => null,
+        };
+
+        if ($formItemtype === null) {
+            return '';
+        }
+
+        return self::createTabEntry(self::getMenuName(), 0, $formItemtype, 'ti ti-stack-2');
     }
 
     public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0): bool
@@ -160,9 +173,9 @@ class Log extends CommonDBTM
 
 
     /**
-     * @return \DBmysqlIterator<int, array<string, mixed>>
+     * @return DBmysqlIterator<int, array<string, mixed>>
      */
-    public static function getLogs(string $itemtype, int $item_id): \DBmysqlIterator
+    public static function getLogs(string $itemtype, int $item_id): DBmysqlIterator
     {
         global $DB;
 
