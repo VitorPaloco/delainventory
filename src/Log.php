@@ -114,7 +114,7 @@ class Log extends CommonDBTM
 
     private static function validationError(string $message, int $code): never
     {
-        throw new \RuntimeException($message, $code);
+        throw new RuntimeException($message, $code);
     }
 
     public static function getValidatedItem(string $itemtype, int $item_id): CommonDBTM
@@ -123,7 +123,13 @@ class Log extends CommonDBTM
             self::validationError(__('Invalid type', 'delainventory'), 400);
         }
 
-        $item = new $itemtype();
+        $item = match ($itemtype) {
+            Computer::class => new Computer(),
+            Monitor::class  => new Monitor(),
+            Printer::class  => new Printer(),
+            Phone::class    => new Phone(),
+            default => throw new InvalidArgumentException(__('Invalid type', 'delainventory')),
+        };
 
         if (!$item->getFromDB($item_id)) {
             self::validationError(__('Asset not found', 'delainventory'), 404);
@@ -145,16 +151,18 @@ class Log extends CommonDBTM
         return '';
     }
 
-    public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
+    public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0): bool
     {
         require GLPI_ROOT . '/plugins/delainventory/front/log.php';
+
+        return true;
     }
 
 
     /**
-     * @return DBmysqlIterator<int, array<string, mixed>>
+     * @return \DBmysqlIterator<int, array<string, mixed>>
      */
-    public static function getLogs(string $itemtype, int $item_id): DBmysqlIterator
+    public static function getLogs(string $itemtype, int $item_id): \DBmysqlIterator
     {
         global $DB;
 

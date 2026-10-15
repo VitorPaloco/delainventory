@@ -42,6 +42,17 @@ class Setting
         return 'DelaInventory';
     }
 
+    /**
+     * @return array{
+     *     title: string,
+     *     page: string,
+     *     icon: string,
+     *     options: array{
+     *         dashboard: array{title: string, page: string},
+     *         settings: array{title: string, page: string}
+     *     }
+     * }
+     */
     public static function getMenuContent(): array
     {
         $dashboard = Plugin::getWebDir('delainventory') . '/front/dashboard.php';

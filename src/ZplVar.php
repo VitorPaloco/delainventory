@@ -138,12 +138,15 @@ class ZplVar
         return $template;
     }
 
+    /**
+     * @return list<string>
+     */
     public static function available(CommonDBTM $item): array
     {
         $vars = [];
 
         foreach ($item->fields as $field => $value) {
-            $vars[] = '{{' . strtoupper($field) . '}}';
+            $vars[] = '{{' . strtoupper((string) $field) . '}}';
         }
 
         $vars[] = '{{GROUP}}';
