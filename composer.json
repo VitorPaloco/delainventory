@@ -1,0 +1,18 @@
+{
+    "require": {
+        "php": ">=8.2"
+    },
+    "config": {
+        "autoloader-suffix": "PluginDelainventory",
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.2.99"
+        },
+        "sort-packages": true
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GlpiPlugin\\DelaInventory\\Tests\\": "tests/"
+        }
+    }
+}
