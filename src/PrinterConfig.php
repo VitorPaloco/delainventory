@@ -38,7 +38,7 @@ use CommonDBTM;
 
 class PrinterConfig extends CommonDBTM
 {
-    public static function install()
+    public static function install(): void
     {
         global $DB;
 
@@ -63,16 +63,28 @@ class PrinterConfig extends CommonDBTM
         }
 
         if (countElementsInTable($table) === 0) {
-            $item->add(['ip' => null, 'port' => null, 'zpl' => null]);
+            $item->add([
+                'ip' => null,
+                'port' => null,
+                'zpl' => null,
+            ]);
         }
     }
 
+    /**
+     * @return array{id: int, ip: string, port: string, zpl: string}
+     */
     public static function get(): array
     {
         global $DB;
 
         foreach ($DB->request(['FROM' => self::getTable(), 'LIMIT' => 1]) as $row) {
-            return $row;
+            return [
+                'id' => (int) ($row['id'] ?? 0),
+                'ip' => (string) ($row['ip'] ?? ''),
+                'port' => (string) ($row['port'] ?? ''),
+                'zpl' => (string) ($row['zpl'] ?? ''),
+            ];
         }
 
         return ['id' => 0, 'ip' => '', 'port' => '', 'zpl' => ''];
@@ -97,6 +109,9 @@ class PrinterConfig extends CommonDBTM
         }
     }
 
+    /**
+     * @return array{success: bool, message: string}
+     */
     public static function testConnection(string $ip, int $port): array
     {
         $connection = @fsockopen($ip, $port, $errno, $errstr, 5);
@@ -116,6 +131,9 @@ class PrinterConfig extends CommonDBTM
         ];
     }
 
+    /**
+     * @return array{success: bool, message: string}
+     */
     public static function printLabel(string $ip, int $port, string $zpl): array
     {
         $connection = @fsockopen($ip, $port, $errno, $errstr, 5);

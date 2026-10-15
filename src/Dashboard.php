@@ -170,7 +170,7 @@ class Dashboard
         $data = [];
 
         for ($i = 0; $i < $days; $i++) {
-            $date = date('Y-m-d', strtotime("+{$i} days", $startTimestamp));
+            $date = date('Y-m-d', strtotime(sprintf('+%d days', $i), $startTimestamp));
             $data[$date] = 0;
         }
 
@@ -264,7 +264,7 @@ class Dashboard
             $usersId = (int) $usersId;
 
             if ($usersId > 0) {
-                $user = new \User();
+                $user = new User();
 
                 if ($user->getFromDB($usersId)) {
                     $name = $user->getName();
@@ -328,7 +328,7 @@ class Dashboard
             $userName = '';
 
             if ($usersId > 0) {
-                $user = new \User();
+                $user = new User();
 
                 if ($user->getFromDB($usersId)) {
                     $userName = $user->getName();

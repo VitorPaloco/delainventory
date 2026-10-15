@@ -46,12 +46,12 @@ use Phone;
 
 class Log extends CommonDBTM
 {
-    public static function getMenuName()
+    public static function getMenuName(): string
     {
         return 'DelaInventory';
     }
 
-    public static function install()
+    public static function install(): void
     {
         global $DB;
 
@@ -112,28 +112,25 @@ class Log extends CommonDBTM
         return Session::haveAccessToEntity($item->getEntityID());
     }
 
+    private static function validationError(string $message, int $code): never
+    {
+        throw new \RuntimeException($message, $code);
+    }
+
     public static function getValidatedItem(string $itemtype, int $item_id): CommonDBTM
     {
-        if (!self::isAllowed($itemtype)) {
-            http_response_code(400);
-            die(htmlspecialchars(__('Invalid type', 'delainventory'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-        }
-
-        if (!self::isEnabled($itemtype)) {
-            http_response_code(400);
-            die(htmlspecialchars(__('Invalid type', 'delainventory'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
+        if (!self::isAllowed($itemtype) || !self::isEnabled($itemtype)) {
+            self::validationError(__('Invalid type', 'delainventory'), 400);
         }
 
         $item = new $itemtype();
 
         if (!$item->getFromDB($item_id)) {
-            http_response_code(404);
-            die(htmlspecialchars(__('Asset not found', 'delainventory'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
+            self::validationError(__('Asset not found', 'delainventory'), 404);
         }
 
         if (!self::canAccessItem($item)) {
-            http_response_code(403);
-            die(htmlspecialchars(__('You do not have access to this entity.', 'delainventory'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
+            self::validationError(__('You do not have access to this entity.', 'delainventory'), 403);
         }
 
         return $item;
@@ -153,7 +150,11 @@ class Log extends CommonDBTM
         require GLPI_ROOT . '/plugins/delainventory/front/log.php';
     }
 
-    public static function getLogs($itemtype, $item_id)
+
+    /**
+     * @return DBmysqlIterator<int, array<string, mixed>>
+     */
+    public static function getLogs(string $itemtype, int $item_id): DBmysqlIterator
     {
         global $DB;
 
@@ -167,7 +168,7 @@ class Log extends CommonDBTM
         ]);
     }
 
-    public static function addLog($itemtype, $item_id, $comment)
+    public static function addLog(string $itemtype, int $item_id, string $comment): bool
     {
         global $DB;
 

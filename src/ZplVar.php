@@ -41,6 +41,9 @@ use Entity;
 
 class ZplVar
 {
+    /**
+     * @return array<string, string>
+     */
     public static function resolve(CommonDBTM $item, string $itemtype, string $assetUrl): array
     {
         global $DB;
@@ -119,6 +122,9 @@ class ZplVar
         return $vars;
     }
 
+    /**
+     * @param array<string, string> $vars
+     */
     public static function replace(string $template, array $vars): string
     {
         foreach ($vars as $key => $value) {

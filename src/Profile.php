@@ -42,12 +42,12 @@ class Profile extends CommonDBTM
 {
     public static $rightname = 'delainventory';
 
-    public static function getMenuName()
+    public static function getMenuName(): string
     {
         return 'DelaInventory';
     }
 
-    public static function install()
+    public static function install(): void
     {
         $exists = countElementsInTable(ProfileRight::getTable(), ['name' => self::$rightname]) > 0;
 
@@ -66,7 +66,7 @@ class Profile extends CommonDBTM
         }
     }
 
-    public static function uninstall()
+    public static function uninstall(): void
     {
         ProfileRight::deleteProfileRights([self::$rightname]);
     }
@@ -80,9 +80,11 @@ class Profile extends CommonDBTM
         return '';
     }
 
-    public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
+    public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0): bool
     {
         require GLPI_ROOT . '/plugins/delainventory/front/profile.php';
+
+        return true;
     }
 
 }
