@@ -138,7 +138,7 @@ class PrinterConfig extends CommonDBTM
                 'success' => true,
                 'message' => __('Connection successful.', 'delainventory'),
             ];
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return [
                 'success' => false,
                 'message' => sprintf(__('Could not connect to printer %s:%s.', 'delainventory'), $ip, $port),
@@ -176,7 +176,7 @@ class PrinterConfig extends CommonDBTM
                 'success' => true,
                 'message' => __('Label sent to print.', 'delainventory'),
             ];
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return [
                 'success' => false,
                 'message' => sprintf(__('Could not send label to printer %s:%s.', 'delainventory'), $ip, $port),
@@ -185,7 +185,7 @@ class PrinterConfig extends CommonDBTM
             if (is_resource($connection)) {
                 try {
                     fclose($connection);
-                } catch (Throwable $e) {
+                } catch (Throwable) {
                     // Ignora falhas ao fechar o socket.
                 }
             }
