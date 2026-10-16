@@ -40,6 +40,10 @@ define('PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION', '11.0.0');
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
 define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '11.0.99');
 
+use GlpiPlugin\Delainventory\Setting;
+use GlpiPlugin\Delainventory\Profile;
+use GlpiPlugin\Delainventory\Log;
+use Profile as GLPI_Profile;
 
 function plugin_init_delainventory(): void
 {

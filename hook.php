@@ -31,6 +31,11 @@
  * -------------------------------------------------------------------------
  */
 
+use GlpiPlugin\Delainventory\Profile;
+use GlpiPlugin\Delainventory\AssetType;
+use GlpiPlugin\Delainventory\PrinterConfig;
+use GlpiPlugin\Delainventory\Log;
+
 function plugin_delainventory_install(): bool
 {
     global $DB;
