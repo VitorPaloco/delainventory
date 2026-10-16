@@ -32,7 +32,7 @@
  */
 
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
-define('PLUGIN_DELAINVENTORY_VERSION', '1.0.0');
+define('PLUGIN_DELAINVENTORY_VERSION', '1.0.1');
 
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
 define('PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION', '11.0.0');
