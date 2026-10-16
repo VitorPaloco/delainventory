@@ -1,4 +1,4 @@
-name: "Automatically tag new version"
+name: "Automatically tag new versions"
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   auto-tag-new-version:
-    name: "Automatically tag new version"
+    name: "Automatically tag new versions"
     uses: "glpi-project/plugin-release-workflows/.github/workflows/auto-tag-new-version.yml@v1"
     secrets:
       github-token: "${{ secrets.AUTOTAG_TOKEN }}"
