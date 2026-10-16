@@ -77,7 +77,7 @@ function plugin_delainventory_uninstall(): bool
     $tables = [AssetType::getTable(), PrinterConfig::getTable(), Log::getTable()];
 
     foreach ($tables as $table) {
-        $DB->doQuery("DROP TABLE IF EXISTS `$table`");
+        $DB->doQuery(sprintf('DROP TABLE IF EXISTS `%s`', $table));
     }
 
     return true;
