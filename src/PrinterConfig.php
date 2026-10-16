@@ -36,6 +36,11 @@ namespace GlpiPlugin\Delainventory;
 use DBConnection;
 use CommonDBTM;
 
+use function Safe\fsockopen;
+use function Safe\fclose;
+use function Safe\fwrite;
+use function Safe\stream_set_timeout;
+
 class PrinterConfig extends CommonDBTM
 {
     public static function install(): void
@@ -79,11 +84,20 @@ class PrinterConfig extends CommonDBTM
         global $DB;
 
         foreach ($DB->request(['FROM' => self::getTable(), 'LIMIT' => 1]) as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $id = $row['id'] ?? null;
+            $ip = $row['ip'] ?? null;
+            $port = $row['port'] ?? null;
+            $zpl = $row['zpl'] ?? null;
+
             return [
-                'id' => (int) ($row['id'] ?? 0),
-                'ip' => (string) ($row['ip'] ?? ''),
-                'port' => (string) ($row['port'] ?? ''),
-                'zpl' => (string) ($row['zpl'] ?? ''),
+                'id' => is_numeric($id) ? (int) $id : 0,
+                'ip' => is_string($ip) ? $ip : '',
+                'port' => is_numeric($port) ? (string) $port : '',
+                'zpl' => is_string($zpl) ? $zpl : '',
             ];
         }
 
@@ -114,21 +128,20 @@ class PrinterConfig extends CommonDBTM
      */
     public static function testConnection(string $ip, int $port): array
     {
-        $connection = @fsockopen($ip, $port, $errno, $errstr, 5);
+        try {
+            $connection = fsockopen($ip, $port, $errno, $errstr, 5);
+            fclose($connection);
 
-        if (!$connection) {
+            return [
+                'success' => true,
+                'message' => __('Connection successful.', 'delainventory'),
+            ];
+        } catch (\Throwable $e) {
             return [
                 'success' => false,
-                'message' => sprintf(__('Could not connect to printer %s:%s. %s (%s)', 'delainventory'), $ip, $port, $errstr, $errno),
+                'message' => sprintf(__('Could not connect to printer %s:%s.', 'delainventory'), $ip, $port),
             ];
         }
-
-        fclose($connection);
-
-        return [
-            'success' => true,
-            'message' => __('Connection successful.', 'delainventory'),
-        ];
     }
 
     /**
@@ -136,22 +149,44 @@ class PrinterConfig extends CommonDBTM
      */
     public static function printLabel(string $ip, int $port, string $zpl): array
     {
-        $connection = @fsockopen($ip, $port, $errno, $errstr, 5);
+        $connection = null;
 
-        if (!$connection) {
+        try {
+            $connection = fsockopen($ip, $port, $errno, $errstr, 5);
+            stream_set_timeout($connection, 5);
+            $length = strlen($zpl);
+            $written = 0;
+
+            while ($written < $length) {
+                $result = fwrite($connection, substr($zpl, $written));
+
+                if ($result === 0) {
+                    throw new \RuntimeException('Failed to write all label data to the printer.');
+                }
+
+                $written += $result;
+            }
+
+            fclose($connection);
+            $connection = null;
+
+            return [
+                'success' => true,
+                'message' => __('Label sent to print.', 'delainventory'),
+            ];
+        } catch (\Throwable $e) {
             return [
                 'success' => false,
-                'message' => sprintf(__('Could not connect to printer %s:%s. %s (%s)', 'delainventory'), $ip, $port, $errstr, $errno),
+                'message' => sprintf(__('Could not send label to printer %s:%s.', 'delainventory'), $ip, $port),
             ];
+        } finally {
+            if (is_resource($connection)) {
+                try {
+                    fclose($connection);
+                } catch (\Throwable $e) {
+                    // Ignora falhas ao fechar o socket.
+                }
+            }
         }
-
-        stream_set_timeout($connection, 5);
-        fwrite($connection, $zpl);
-        fclose($connection);
-
-        return [
-            'success' => true,
-            'message' => __('Label sent to print.', 'delainventory'),
-        ];
     }
 }
