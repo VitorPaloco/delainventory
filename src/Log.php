@@ -38,8 +38,10 @@ use GlpiPlugin\Delainventory\Profile;
 use DBConnection;
 use CommonDBTM;
 use CommonGLPI;
-use DBmysqlIterator;
 use Session;
+use DBmysqlIterator;
+use RuntimeException;
+use InvalidArgumentException;
 use Computer;
 use Monitor;
 use Printer;
@@ -115,7 +117,7 @@ class Log extends CommonDBTM
 
     private static function validationError(string $message, int $code): never
     {
-        throw new \RuntimeException($message, $code);
+        throw new RuntimeException($message, $code);
     }
 
     public static function getValidatedItem(string $itemtype, int $item_id): CommonDBTM
@@ -129,7 +131,7 @@ class Log extends CommonDBTM
             Monitor::class  => new Monitor(),
             Printer::class  => new Printer(),
             Phone::class    => new Phone(),
-            default => throw new \InvalidArgumentException(__('Invalid type', 'delainventory')),
+            default => throw new InvalidArgumentException(__('Invalid type', 'delainventory')),
         };
 
         if (!$item->getFromDB($item_id)) {
