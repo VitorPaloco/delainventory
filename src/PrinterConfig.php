@@ -35,6 +35,8 @@ namespace GlpiPlugin\Delainventory;
 
 use DBConnection;
 use CommonDBTM;
+use Throwable;
+use RuntimeException;
 
 use function Safe\fsockopen;
 use function Safe\fclose;
@@ -136,7 +138,7 @@ class PrinterConfig extends CommonDBTM
                 'success' => true,
                 'message' => __('Connection successful.', 'delainventory'),
             ];
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'success' => false,
                 'message' => sprintf(__('Could not connect to printer %s:%s.', 'delainventory'), $ip, $port),
@@ -161,7 +163,7 @@ class PrinterConfig extends CommonDBTM
                 $result = fwrite($connection, substr($zpl, $written));
 
                 if ($result === 0) {
-                    throw new \RuntimeException('Failed to write all label data to the printer.');
+                    throw new RuntimeException('Failed to write all label data to the printer.');
                 }
 
                 $written += $result;
@@ -174,7 +176,7 @@ class PrinterConfig extends CommonDBTM
                 'success' => true,
                 'message' => __('Label sent to print.', 'delainventory'),
             ];
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return [
                 'success' => false,
                 'message' => sprintf(__('Could not send label to printer %s:%s.', 'delainventory'), $ip, $port),
@@ -183,7 +185,7 @@ class PrinterConfig extends CommonDBTM
             if (is_resource($connection)) {
                 try {
                     fclose($connection);
-                } catch (\Throwable $e) {
+                } catch (Throwable $e) {
                     // Ignora falhas ao fechar o socket.
                 }
             }

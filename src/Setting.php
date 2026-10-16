@@ -33,8 +33,6 @@
 
 namespace GlpiPlugin\Delainventory;
 
-use Plugin;
-
 class Setting
 {
     public static function getMenuName(): string
@@ -55,8 +53,8 @@ class Setting
      */
     public static function getMenuContent(): array
     {
-        $dashboard = Plugin::getWebDir('delainventory') . '/front/dashboard.php';
-        $settings  = Plugin::getWebDir('delainventory') . '/front/settings.php';
+        $dashboard = '/plugins/delainventory/front/dashboard.php';
+        $settings  = '/plugins/delainventory/front/settings.php';
 
         return [
             'title' => self::getMenuName(),

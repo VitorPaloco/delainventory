@@ -41,21 +41,35 @@ use Entity;
 
 class ZplVar
 {
+    private static function toString(mixed $value): string
+    {
+        if (is_string($value)) {
+            return $value;
+        }
+
+        if (is_scalar($value)) {
+            return (string) $value;
+        }
+
+        return '';
+    }
+
     /**
      * @return array<string, string>
      */
     public static function resolve(CommonDBTM $item, string $itemtype, string $assetUrl): array
     {
         global $DB;
+
         $vars = [];
 
         foreach ($item->fields as $field => $value) {
             if (is_scalar($value) || $value === null) {
-                $vars[strtoupper($field)] = (string) $value;
+                $vars[strtoupper((string) $field)] = self::toString($value);
             }
         }
 
-        $vars['ID'] = str_pad($item->fields['id'], 5, '0', STR_PAD_LEFT);
+        $vars['ID'] = str_pad(self::toString($item->fields['id'] ?? ''), 5, '0', STR_PAD_LEFT);
         $vars['URL'] = $assetUrl;
 
         // ==========================
@@ -63,21 +77,17 @@ class ZplVar
         // ==========================
 
         $group_name = '';
+        $group_item = $DB->request(['FROM' => 'glpi_groups_items', 'WHERE' => ['itemtype' => $itemtype, 'items_id' => $item->fields['id']], 'LIMIT' => 1])->current();
 
-        $group_item = $DB->request([
-            'FROM' => 'glpi_groups_items',
-            'WHERE' => [
-                'itemtype' => $itemtype,
-                'items_id' => $item->fields['id'],
-            ],
-            'LIMIT' => 1,
-        ])->current();
+        if (is_array($group_item)) {
+            $group_id = $group_item['groups_id'] ?? null;
 
-        if ($group_item) {
-            $group = new Group();
+            if (is_numeric($group_id)) {
+                $group = new Group();
 
-            if ($group->getFromDB($group_item['groups_id'])) {
-                $group_name = $group->fields['name'];
+                if ($group->getFromDB((int) $group_id)) {
+                    $group_name = self::toString($group->fields['name'] ?? '');
+                }
             }
         }
 
@@ -87,12 +97,14 @@ class ZplVar
         // Location
         // ==========================
 
-        if (!empty($item->fields['locations_id'])) {
+        $vars['LOCATION'] = '';
+        $location_id = $item->fields['locations_id'] ?? null;
 
+        if (is_numeric($location_id) && (int) $location_id > 0) {
             $location = new Location();
 
-            if ($location->getFromDB($item->fields['locations_id'])) {
-                $vars['LOCATION'] = $location->fields['completename'];
+            if ($location->getFromDB((int) $location_id)) {
+                $vars['LOCATION'] = self::toString($location->fields['completename'] ?? '');
             }
         }
 
@@ -100,12 +112,14 @@ class ZplVar
         // Manufacturer
         // ==========================
 
-        if (!empty($item->fields['manufacturers_id'])) {
+        $vars['MANUFACTURER'] = '';
+        $manufacturer_id = $item->fields['manufacturers_id'] ?? null;
 
+        if (is_numeric($manufacturer_id) && (int) $manufacturer_id > 0) {
             $manufacturer = new Manufacturer();
 
-            if ($manufacturer->getFromDB($item->fields['manufacturers_id'])) {
-                $vars['MANUFACTURER'] = $manufacturer->fields['name'];
+            if ($manufacturer->getFromDB((int) $manufacturer_id)) {
+                $vars['MANUFACTURER'] = self::toString($manufacturer->fields['name'] ?? '');
             }
         }
 
@@ -113,10 +127,15 @@ class ZplVar
         // Entity
         // ==========================
 
-        $entity = new Entity();
+        $vars['ENTITY'] = '';
+        $entity_id = $item->fields['entities_id'] ?? null;
 
-        if ($entity->getFromDB($item->fields['entities_id'])) {
-            $vars['ENTITY'] = $entity->fields['name'];
+        if (is_numeric($entity_id)) {
+            $entity = new Entity();
+
+            if ($entity->getFromDB((int) $entity_id)) {
+                $vars['ENTITY'] = self::toString($entity->fields['name'] ?? '');
+            }
         }
 
         return $vars;
@@ -128,11 +147,7 @@ class ZplVar
     public static function replace(string $template, array $vars): string
     {
         foreach ($vars as $key => $value) {
-            $template = str_replace(
-                '{{' . strtoupper($key) . '}}',
-                (string) ($value ?? ''),
-                $template,
-            );
+            $template = str_replace('{{' . strtoupper($key) . '}}', $value, $template);
         }
 
         return $template;
