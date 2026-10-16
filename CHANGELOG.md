@@ -1,0 +1,79 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.0.0] - 2026-10-16
+
+### Added
+
+- Added a dedicated dashboard with inventory statistics, including total inventories, daily activity, inventoried assets, and the latest inventory.
+- Added interactive charts for inventory trends over time, distribution by asset type, and inventory activity by user.
+- Added a latest inventories table displaying asset details, comments, users, and creation dates.
+
+### Changed
+
+- Reviewed and refactored the plugin structure to improve code quality, maintainability, and adherence to GLPI 11 plugin development best practices.
+- Updated code and configuration to comply with automated checks and static analysis enforced by GitHub Actions.
+- Improved type safety and error handling across plugin classes.
+
+### Fixed
+
+- Fixed static analysis issues identified by PHPStan.
+- Fixed code style and formatting issues detected by automated quality checks.
+- Improved handling of database values and printer communication errors.
+
+## [0.4.0] - 2026-09-11
+
+### Added
+
+- Added French translations for France (`fr_FR`), Canada (`fr_CA`), and Belgium (`fr_BE`).
+- Added a dedicated permissions tab to GLPI profiles, allowing administrators to manage DelaInventory access.
+- Added `READ` and `UPDATE` permissions for DelaInventory, with `UPDATE` controlling inventory records and label printing.
+
+### Changed
+
+- Refactored the plugin structure to better follow GLPI plugin development best practices.
+- Renamed and reorganized plugin classes to improve separation of responsibilities and maintainability.
+- Separated frontend rendering files from form request handlers.
+- Reorganized the `src/` classes, moving functionality previously concentrated in `Config.php` into dedicated classes.
+- Added database migration support for upgrading from version 0.3.0, preserving existing configuration and log data.
+
+### Fixed
+
+- Fixed the printer connection test token expiration issue that caused subsequent requests to fail.
+- Fixed unauthorized access to plugin configuration and inventory operations.
+- Fixed unauthorized access to assets belonging to entities the current user cannot access.
+- Fixed the ability to trigger label printing without the required plugin permissions.
+
+## [0.3.0] - 2026-08-31
+
+### Added
+
+- Printer connection test through the plugin configuration interface, allowing users to verify connectivity to the configured Zebra printer.
+- ZPL label preview through Labelary, providing a quick way to preview the generated label before printing.
+- Internationalization (i18n) structure using `.po` and `.mo` translation files.
+- Added Portuguese translations for Brazil (`pt_BR`) and Portugal (`pt_PT`).
+- Added English translations for the United States (`en_US`) and United Kingdom (`en_GB`).
+
+## [0.2.0] - 2026-08-06
+
+### Added
+
+- Zebra printer network configuration through IP address and TCP port inputs.
+- Custom ZPL template configuration through the plugin interface.
+- Dynamic asset variable/tag system for generating customizable labels.
+
+## [0.1.0] - 2026-07-22
+
+### Added
+
+- Initial public beta release.
+- Inventory audit and traceability.
+- Zebra label printing.
+- Plugin configuration interface.
+- Compatibility with GLPI 11.0.x.

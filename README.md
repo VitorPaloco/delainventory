@@ -15,6 +15,7 @@ The plugin adds a dedicated tab to GLPI assets, allowing users to register inven
 - Customizable ZPL labels with dynamic asset variables and QR Codes.
 - Direct ZPL printing to Zebra printers over TCP/IP.
 - Printer connection testing and ZPL preview through Labelary.
+- Interactive dashboards with inventory statistics, trends, and activity history.
 
 > **Supported assets:** Computers, Monitors, Printers, and Phones.
 
@@ -59,6 +60,24 @@ Users can define their own ZPL templates and use the available asset variables t
 6. The label is printed automatically.
 
 ![Log Page](docs/screenshots/preview3.png)
+
+### Dashboards and Reports
+
+DelaInventory provides a dedicated dashboard to help administrators monitor inventory activity and review inventory records.
+
+The dashboard includes:
+
+- Inventory statistics: Total inventories, inventories performed today, inventoried assets, and the latest inventory.
+- Inventory trends: A time-based chart showing inventory activity over time.
+- Asset type distribution: A chart displaying inventories grouped by GLPI asset type.
+- User activity: A chart showing inventory records grouped by user.
+- Latest inventories: A table with the asset, type, comment, user, and date of each recent inventory record.
+
+These visualizations provide a quick overview of inventory activity and help administrators track recent operations and identify inventory patterns.
+
+![Dashboard Page](docs/screenshots/preview4.png)
+
+![Dashboard Page](docs/screenshots/preview5.png)
 
 ## 🚀 Installation
 
