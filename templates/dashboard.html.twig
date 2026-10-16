@@ -212,10 +212,11 @@
                         <table class="table table-vcenter card-table">
                             <thead>
                                 <tr>
-                                    <th>{{ __('Date', 'delainventory') }}</th>
                                     <th>{{ __('Asset', 'delainventory') }}</th>
                                     <th>{{ __('Type', 'delainventory') }}</th>
+                                    <th>{{ __('Action', 'delainventory') }}</th>
                                     <th>{{ __('User', 'delainventory') }}</th>
+                                    <th style="width: 190px;">{{ __('Date', 'delainventory') }}</th>
                                 </tr>
                             </thead>
 
@@ -223,10 +224,11 @@
                                 {% if latest_inventories %}
                                     {% for inventory in latest_inventories %}
                                         <tr>
-                                            <td>{{ inventory.date_creation }}</td>
                                             <td>{{ inventory.asset_name }}</td>
                                             <td>{{ __(inventory.itemtype, 'delainventory') }}</td>
+                                            <td>{{ inventory.comment }}</td>
                                             <td>{{ inventory.users_name }}</td>
+                                            <td>{{ inventory.date_creation }}</td>
                                         </tr>
                                     {% endfor %}
                                 {% else %}

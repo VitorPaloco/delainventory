@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Delainventory\n"
+"Language: pt_PT\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Asset Types"
+msgstr "Tipos de Ativos"
+
+msgid "Apply configuration for %s"
+msgstr "Aplicar configuração para %s"
+
+msgid "Computer"
+msgstr "Computador"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Impressora"
+
+msgid "Phone"
+msgstr "Telefone"
+
+msgid "Connection"
+msgstr "Ligação"
+
+msgid "IP Address"
+msgstr "Endereço IP"
+
+msgid "Port"
+msgstr "Porta"
+
+msgid "Test connection"
+msgstr "Testar ligação"
+
+msgid "ZPL Template"
+msgstr "Modelo ZPL"
+
+msgid "ZPL Code"
+msgstr "Código ZPL"
+
+msgid "Use placeholders to insert asset information."
+msgstr "Utilize marcadores para inserir informações do ativo."
+
+msgid "Preview ZPL"
+msgstr "Pré-visualizar ZPL"
+
+msgid "View available tags"
+msgstr "Ver etiquetas disponíveis"
+
+msgid "Available tags"
+msgstr "Etiquetas disponíveis"
+
+msgid "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
+msgstr "Pode utilizar qualquer uma destas etiquetas no modelo ZPL. As etiquetas baseiam-se nos campos do ativo Computador e seguem os nomes definidos na base de dados. Alguns campos podem variar consoante o tipo de ativo utilizado."
+
+msgid "Tag"
+msgstr "Etiqueta"
+
+msgid "Enter the IP address and port."
+msgstr "Introduza o endereço IP e a porta."
+
+msgid "Testing..."
+msgstr "A testar..."
+
+msgid "Error testing connection."
+msgstr "Erro ao testar a ligação."
+
+msgid "Total inventories"
+msgstr "Total de inventários"
+
+msgid "Inventories today"
+msgstr "Inventários de hoje"
+
+msgid "Inventoried assets"
+msgstr "Ativos inventariados"
+
+msgid "Last inventory"
+msgstr "Último inventário"
+
+msgid "No inventories yet"
+msgstr "Ainda não existem inventários"
+
+msgid "Inventories over time"
+msgstr "Inventários ao longo do tempo"
+
+msgid "Inventories by asset type"
+msgstr "Inventários por tipo de ativo"
+
+msgid "Inventories by user"
+msgstr "Inventários por usuário"
+
+msgid "Latest inventories"
+msgstr "Últimos inventários"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Asset"
+msgstr "Ativo"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "User"
+msgstr "Utilizador"
+
+msgid "Inventories"
+msgstr "Inventários"
+
+msgid "View all"
+msgstr "Ver todos"
+
+msgid "Update all"
+msgstr "Atualizar todos"
+
+msgid "Inventory record"
+msgstr "Registo de inventário"
+
+msgid "Print label"
+msgstr "Imprimir etiqueta"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Action"
+msgstr "Ação"
+
+msgid "Enter the message"
+msgstr "Introduza a mensagem"
+
+msgid "Printing error"
+msgstr "Erro de impressão"
+
+msgid "The comment cannot be empty."
+msgstr "O comentário não pode estar vazio."
+
+msgid "Log added successfully!"
+msgstr "Registo adicionado com sucesso!"
+
+msgid "Printer IP address or port not configured."
+msgstr "O endereço IP ou a porta da impressora não está configurado."
+
+msgid "ZPL model not configured."
+msgstr "O modelo ZPL não está configurado."
+
+msgid "Asset not found"
+msgstr "Ativo não encontrado"
+
+msgid "Invalid action"
+msgstr "Ação inválida"
+
+msgid "Settings saved successfully."
+msgstr "Definições guardadas com sucesso."
+
+msgid "Invalid type"
+msgstr "Tipo inválido"
+
+msgid "You do not have access to this entity."
+msgstr "Não tem acesso a esta entidade."
+
+msgid "Could not connect to printer %s:%s. %s (%s)"
+msgstr "Não foi possível ligar à impressora %s:%s. %s (%s)"
+
+msgid "Connection successful."
+msgstr "Ligação efetuada com sucesso."
+
+msgid "Label sent to print."
+msgstr "Etiqueta enviada para impressão."
+
+msgid "Download label as image"
+msgstr "Descarregar a etiqueta como imagem"
+
+msgid "More options"
+msgstr "Mais opções"

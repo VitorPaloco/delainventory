@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Delainventory\n"
+"Language: en_GB\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Asset Types"
+msgstr "Asset Types"
+
+msgid "Apply configuration for %s"
+msgstr "Apply configuration for %s"
+
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Printer"
+msgstr "Printer"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Connection"
+msgstr "Connection"
+
+msgid "IP Address"
+msgstr "IP Address"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Test connection"
+msgstr "Test connection"
+
+msgid "ZPL Template"
+msgstr "ZPL Template"
+
+msgid "ZPL Code"
+msgstr "ZPL Code"
+
+msgid "Use placeholders to insert asset information."
+msgstr "Use placeholders to insert asset information."
+
+msgid "Preview ZPL"
+msgstr "Preview ZPL"
+
+msgid "View available tags"
+msgstr "View available tags"
+
+msgid "Available tags"
+msgstr "Available tags"
+
+msgid "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
+msgstr "You can use any of these tags in the ZPL template. The tags are based on the Computer asset fields and follow the names defined in the database. Some fields may vary depending on the asset type used."
+
+msgid "Tag"
+msgstr "Tag"
+
+msgid "Enter the IP address and port."
+msgstr "Enter the IP address and port."
+
+msgid "Testing..."
+msgstr "Testing..."
+
+msgid "Error testing connection."
+msgstr "Error testing connection."
+
+msgid "Total inventories"
+msgstr "Total inventories"
+
+msgid "Inventories today"
+msgstr "Inventories today"
+
+msgid "Inventoried assets"
+msgstr "Inventoried assets"
+
+msgid "Last inventory"
+msgstr "Last inventory"
+
+msgid "No inventories yet"
+msgstr "No inventories yet"
+
+msgid "Inventories over time"
+msgstr "Inventories over time"
+
+msgid "Inventories by asset type"
+msgstr "Inventories by asset type"
+
+msgid "Inventories by user"
+msgstr "Inventories by user"
+
+msgid "Latest inventories"
+msgstr "Latest inventories"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Asset"
+msgstr "Asset"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "User"
+msgstr "User"
+
+msgid "Inventories"
+msgstr "Inventories"
+
+msgid "View all"
+msgstr "View all"
+
+msgid "Update all"
+msgstr "Update all"
+
+msgid "Inventory record"
+msgstr "Inventory record"
+
+msgid "Print label"
+msgstr "Print label"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Enter the message"
+msgstr "Enter the message"
+
+msgid "Printing error"
+msgstr "Printing error"
+
+msgid "The comment cannot be empty."
+msgstr "The comment cannot be empty."
+
+msgid "Log added successfully!"
+msgstr "Log added successfully!"
+
+msgid "Printer IP address or port not configured."
+msgstr "Printer IP address or port not configured."
+
+msgid "ZPL model not configured."
+msgstr "ZPL model not configured."
+
+msgid "Asset not found"
+msgstr "Asset not found"
+
+msgid "Invalid action"
+msgstr "Invalid action"
+
+msgid "Settings saved successfully."
+msgstr "Settings saved successfully."
+
+msgid "Invalid type"
+msgstr "Invalid type"
+
+msgid "You do not have access to this entity."
+msgstr "You do not have access to this entity."
+
+msgid "Could not connect to printer %s:%s. %s (%s)"
+msgstr "Could not connect to printer %s:%s. %s (%s)"
+
+msgid "Connection successful."
+msgstr "Connection successful."
+
+msgid "Label sent to print."
+msgstr "Label sent to print."
+
+msgid "Download label as image"
+msgstr "Download label as image"
+
+msgid "More options"
+msgstr "More options"

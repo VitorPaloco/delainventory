@@ -286,7 +286,8 @@ class Dashboard
      *     date_creation: string,
      *     asset_name: string,
      *     itemtype: string,
-     *     users_name: string
+     *     users_name: string,
+     *     comment: string
      * }>
      */
     public static function getLatestInventories(int $limit = 10): array
@@ -310,8 +311,9 @@ class Dashboard
             $itemtype = $row['itemtype'] ?? null;
             $usersId = $row['users_id'] ?? null;
             $dateCreation = $row['date_creation'] ?? null;
+            $comment = $row['comment'] ?? null;
 
-            if (!is_numeric($itemId) || !is_string($itemtype) || !is_numeric($usersId) || !is_string($dateCreation)) {
+            if (!is_numeric($itemId) || !is_string($itemtype) || !is_numeric($usersId) || !is_string($dateCreation) || !is_string($comment)) {
                 continue;
             }
 
@@ -340,6 +342,7 @@ class Dashboard
                 'asset_name'    => $assetName,
                 'itemtype'      => $itemtype,
                 'users_name'    => $userName,
+                'comment'       => $comment,
             ];
         }
 
