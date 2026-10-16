@@ -43,7 +43,27 @@ define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '11.0.99');
 
 function plugin_init_delainventory(): void
 {
-    // Resto do código aqui...
+    global $PLUGIN_HOOKS;
+
+    /** @var array<string, array<string, mixed>> $PLUGIN_HOOKS */
+
+    $PLUGIN_HOOKS['csrf_compliant']['delainventory'] = true;
+    $PLUGIN_HOOKS['config_page']['delainventory'] = 'front/settings.php';
+
+    if (Session::haveRight(Profile::$rightname, READ)) {
+        $PLUGIN_HOOKS['menu_toadd']['delainventory'] = ['config' => Setting::class,];
+    }
+
+    Plugin::registerClass(Log::class, [
+        'addtabon' => [
+            'Computer',
+            'Monitor',
+            'Printer',
+            'Phone',
+        ],
+    ]);
+
+    Plugin::registerClass(Profile::class, ['addtabon' => GLPI_Profile::class]);
 }
 
 /**
