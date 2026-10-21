@@ -141,12 +141,14 @@ class ZplVar
         return $vars;
     }
 
+
     /**
      * @param array<string, string> $vars
      */
     public static function replace(string $template, array $vars): string
     {
         foreach ($vars as $key => $value) {
+            $value = preg_replace('/[\x00-\x1F\x7F^~]/', '', $value) ?? '';
             $template = str_replace('{{' . strtoupper($key) . '}}', $value, $template);
         }
 
