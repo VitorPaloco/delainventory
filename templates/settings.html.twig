@@ -196,18 +196,37 @@
     const button = document.getElementById('testPrinterConnection');
     const result = document.getElementById('connectionResult');
 
+    function showResult(message, success) {
+      result.replaceChildren();
+
+      const span = document.createElement('span');
+      const icon = document.createElement('i');
+      const text = document.createElement('span');
+
+      span.className = success ? 'text-success' : 'text-danger';
+      icon.className = success ? 'ti ti-circle-check' : 'ti ti-circle-x';
+      text.textContent = message;
+
+      span.append(icon, document.createTextNode(' '), text);
+      result.appendChild(span);
+    }
+
     button.addEventListener('click', async function () {
       const ip = document.getElementById('ip').value.trim();
       const port = document.getElementById('port').value;
 
       if (!ip || !port) {
-          result.innerHTML = `<span class="text-danger"> {{ __('Enter the IP address and port.', 'delainventory') }} </span>`;
-          return;
+        showResult("{{ __('Enter the IP address and port.', 'delainventory')|e('js') }}", false);
+        return;
       }
 
       button.disabled = true;
-      button.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> {{ __('Testing...', 'delainventory') }}`;
-      result.innerHTML = '';
+      button.replaceChildren();
+
+      const spinner = document.createElement('span');
+      spinner.className = 'spinner-border spinner-border-sm me-1';
+      button.append(spinner, document.createTextNode("{{ __('Testing...', 'delainventory')|e('js') }}"));
+      result.replaceChildren();
 
       try {
         const formData = new FormData();
@@ -231,17 +250,21 @@
         const data = await response.json();
 
         if (data.success) {
-          result.innerHTML = `<span class="text-success"> <i class="ti ti-circle-check"></i> ${data.message} </span>`;
+          showResult(data.message, true);
         } else {
-          result.innerHTML = `<span class="text-danger"> <i class="ti ti-circle-x"></i> ${data.message} </span>`;
+          showResult(data.message, false);
         }
 
       } catch (error) {
-          result.innerHTML = `<span class="text-danger"> {{ __('Error testing connection.', 'delainventory') }} </span>`;
+          showResult("{{ __('Error testing connection.', 'delainventory')|e('js') }}", false);
           console.error(error);
       } finally {
         button.disabled = false;
-        button.innerHTML = `<i class="ti ti-plug"></i> {{ __('Test connection', 'delainventory') }}`;
+        button.replaceChildren();
+
+        const icon = document.createElement('i');
+        icon.className = 'ti ti-plug';
+        button.append(icon, document.createTextNode(" {{ __('Test connection', 'delainventory')|e('js') }}"));
       }
     });
   });
