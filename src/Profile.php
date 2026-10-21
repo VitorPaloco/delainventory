@@ -58,11 +58,13 @@ class Profile extends CommonDBTM
         ProfileRight::addProfileRights([self::$rightname]);
         $profileRight = new ProfileRight();
 
-        if ($profileRight->getFromDBByCrit(['profiles_id' => 4, 'name' => self::$rightname])) {
-            $profileRight->update([
-                'id'     => $profileRight->getID(),
-                'rights' => READ | UPDATE,
-            ]);
+        foreach (Profile::getSuperAdminProfilesId() as $profileId) {
+            if ($profileRight->getFromDBByCrit(['profiles_id' => $profileId, 'name' => self::$rightname])) {
+                $profileRight->update([
+                    'id'     => $profileRight->getID(),
+                    'rights' => READ | UPDATE,
+                ]);
+            }
         }
     }
 
