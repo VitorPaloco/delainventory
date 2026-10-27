@@ -36,7 +36,7 @@ namespace GlpiPlugin\Delainventory;
 use ProfileRight;
 use CommonGLPI;
 use CommonDBTM;
-use Profile as GLPI_Profile;
+use Profile as PluginProfile;
 
 class Profile extends CommonDBTM
 {
@@ -58,7 +58,7 @@ class Profile extends CommonDBTM
         ProfileRight::addProfileRights([self::$rightname]);
         $profileRight = new ProfileRight();
 
-        foreach (Profile::getSuperAdminProfilesId() as $profileId) {
+        foreach (PluginProfile::getSuperAdminProfilesId() as $profileId) {
             if ($profileRight->getFromDBByCrit(['profiles_id' => $profileId, 'name' => self::$rightname])) {
                 $profileRight->update([
                     'id'     => $profileRight->getID(),
@@ -75,7 +75,7 @@ class Profile extends CommonDBTM
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
-        if ($item instanceof GLPI_Profile && $item->getField('id')) {
+        if ($item instanceof PluginProfile && $item->getField('id')) {
             return self::createTabEntry(self::getMenuName(), 0, null, 'ti ti-stack-2');
         }
 
