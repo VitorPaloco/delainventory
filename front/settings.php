@@ -40,7 +40,6 @@ use GlpiPlugin\Delainventory\PrinterConfig;
 use GlpiPlugin\Delainventory\ZplVar;
 use Glpi\Application\View\TemplateRenderer;
 
-Session::checkLoginUser();
 Session::checkRight(Profile::$rightname, READ);
 
 $assets = AssetType::getAll();

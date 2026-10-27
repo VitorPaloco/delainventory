@@ -38,7 +38,6 @@ use GlpiPlugin\Delainventory\Profile;
 use GlpiPlugin\Delainventory\Setting;
 use GlpiPlugin\Delainventory\Dashboard;
 
-Session::checkLoginUser();
 Session::checkRight(Profile::$rightname, READ);
 
 Html::requireJs('charts');

@@ -37,7 +37,6 @@ use GlpiPlugin\Delainventory\Profile;
 use GlpiPlugin\Delainventory\AssetType;
 use GlpiPlugin\Delainventory\PrinterConfig;
 
-Session::checkLoginUser();
 Session::checkRight(Profile::$rightname, UPDATE);
 
 $enabledIds = array_map('intval', array_keys($_POST['asset'] ?? []));
@@ -64,8 +63,15 @@ if (isset($_POST['test_connection'])) {
     exit;
 }
 
-AssetType::updateAll($enabledIds);
-PrinterConfig::save($printer_ip, $printer_port, $zpl_code);
+if (isset($_POST['update'])) {
+    AssetType::updateAll($enabledIds);
+    PrinterConfig::save($printer_ip, $printer_port, $zpl_code);
 
-Session::addMessageAfterRedirect(__('Settings saved successfully.', 'delainventory'), true, INFO);
-Html::redirect($CFG_GLPI['root_doc'] . '/plugins/delainventory/front/settings.php');
+    Session::addMessageAfterRedirect(__('Settings saved successfully.', 'delainventory'), true, INFO);
+    Html::redirect($CFG_GLPI['root_doc'] . '/plugins/delainventory/front/settings.php');
+
+    exit;
+}
+
+http_response_code(400);
+exit(__('Invalid action', 'delainventory'));

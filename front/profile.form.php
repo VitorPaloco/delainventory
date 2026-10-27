@@ -36,7 +36,6 @@ include('../../../inc/includes.php');
 use GlpiPlugin\Delainventory\Profile;
 use ProfileRight;
 
-Session::checkLoginUser();
 Session::checkRight('profile', UPDATE);
 
 $profile_id = (int) ($_POST['profile_id'] ?? 0);
