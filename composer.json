@@ -1,6 +1,7 @@
 {
     "require": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "thecodingmachine/safe": "^3.4"
     },
     "config": {
         "autoloader-suffix": "PluginDelainventory",
