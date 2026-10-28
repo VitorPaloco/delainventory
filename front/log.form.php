@@ -46,7 +46,7 @@ $item_id  = (int) ($_POST['item_id'] ?? 0);
 $action = $_POST['action'] ?? '';
 
 if ($action === 'add_log') {
-    Log::getValidatedItem($itemtype, $item_id);
+    Log::getValidatedItem($itemtype, $item_id, UPDATE);
 
     $comment = trim($_POST['comment'] ?? '');
 
@@ -64,7 +64,7 @@ if ($action === 'add_log') {
 if ($action === 'print') {
     global $CFG_GLPI;
 
-    $item = Log::getValidatedItem($itemtype, $item_id);
+    $item = Log::getValidatedItem($itemtype, $item_id, READ);
 
     $formPages = [
         Computer::class => 'computer.form.php',
