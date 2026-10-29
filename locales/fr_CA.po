@@ -161,6 +161,9 @@ msgstr "Type non valide"
 msgid "You do not have access to this entity."
 msgstr "Vous n’avez pas accès à cette entité."
 
+msgid "You do not have permission to access this asset."
+msgstr "Vous n’avez pas la permission d’accéder à cet élément."
+
 msgid "Could not connect to printer %s:%s. %s (%s)"
 msgstr "Impossible de se connecter à l’imprimante %s:%s. %s (%s)"
 
