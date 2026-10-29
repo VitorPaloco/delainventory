@@ -39,6 +39,8 @@ use Location;
 use Manufacturer;
 use Entity;
 
+use function Safe\preg_replace;
+
 class ZplVar
 {
     private static function toString(mixed $value): string
@@ -141,13 +143,15 @@ class ZplVar
         return $vars;
     }
 
+
     /**
      * @param array<string, string> $vars
      */
     public static function replace(string $template, array $vars): string
     {
         foreach ($vars as $key => $value) {
-            $template = str_replace('{{' . strtoupper($key) . '}}', $value, $template);
+            $value = preg_replace('/[\x00-\x1F\x7F^~]/', '', (string) $value);
+            $template = str_replace('{{' . strtoupper((string) $key) . '}}', $value, $template);
         }
 
         return $template;

@@ -120,7 +120,7 @@ class Log extends CommonDBTM
         throw new RuntimeException($message, $code);
     }
 
-    public static function getValidatedItem(string $itemtype, int $item_id): CommonDBTM
+    public static function getValidatedItem(string $itemtype, int $item_id, int $right): CommonDBTM
     {
         if (!self::isAllowed($itemtype) || !self::isEnabled($itemtype)) {
             self::validationError(__('Invalid type', 'delainventory'), 400);
@@ -134,12 +134,16 @@ class Log extends CommonDBTM
             default => throw new InvalidArgumentException(__('Invalid type', 'delainventory')),
         };
 
-        if (!$item->getFromDB($item_id)) {
+        if (!$item->getFromDB($item_id) || $item->isDeleted()) {
             self::validationError(__('Asset not found', 'delainventory'), 404);
         }
 
         if (!self::canAccessItem($item)) {
             self::validationError(__('You do not have access to this entity.', 'delainventory'), 403);
+        }
+
+        if (!$item->can($item_id, $right)) {
+            self::validationError(__('You do not have permission to access this asset.', 'delainventory'), 403);
         }
 
         return $item;

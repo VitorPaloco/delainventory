@@ -12,7 +12,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GlpiPlugin\\DelaInventory\\Tests\\": "tests/"
+            "GlpiPlugin\\Delainventory\\Tests\\": "tests/"
         }
     },
     "require-dev": {

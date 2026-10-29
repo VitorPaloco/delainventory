@@ -37,7 +37,6 @@ use Glpi\Application\View\TemplateRenderer;
 use GlpiPlugin\Delainventory\Log;
 use GlpiPlugin\Delainventory\Profile;
 
-Session::checkLoginUser();
 Session::checkRight(Profile::$rightname, READ);
 
 $itemtype = $item->getType();

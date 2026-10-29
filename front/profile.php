@@ -37,8 +37,6 @@ use Glpi\Application\View\TemplateRenderer;
 use GlpiPlugin\Delainventory\Profile;
 use ProfileRight;
 
-Session::checkLoginUser();
-
 $profileRight = new ProfileRight();
 $profile_id = $item->getID();
 $can_read = false;

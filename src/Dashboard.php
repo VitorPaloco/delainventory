@@ -33,28 +33,80 @@
 
 namespace GlpiPlugin\Delainventory;
 
+use Computer;
+use Monitor;
+use Phone;
+use Printer;
 use User;
+use GlpiPlugin\Delainventory\Log;
+use Glpi\DBAL\QuerySubQuery;
 
 use function Safe\strtotime;
 
 class Dashboard
 {
+    /**
+     * @param list<array<mixed>> $additionalConditions
+     *
+     * @return array<string, mixed>
+     */
+    private static function getVisibleLogsQuery(array $additionalConditions = []): array
+    {
+        $logTable = Log::getTable();
+
+        $assetTypes = [
+            Computer::class => Computer::getTable(),
+            Monitor::class  => Monitor::getTable(),
+            Printer::class  => Printer::getTable(),
+            Phone::class    => Phone::getTable(),
+        ];
+
+        $orSubQueries = [];
+
+        foreach ($assetTypes as $itemtype => $table) {
+            $entityCriteria = getEntitiesRestrictCriteria($table, '', '', 'auto');
+            $subWhere = array_merge([$table . '.is_deleted' => 0], $entityCriteria);
+
+            $orSubQueries[] = [
+                'AND' => [
+                    $logTable . '.itemtype' => $itemtype,
+                    $logTable . '.item_id' => new QuerySubQuery([
+                        'SELECT' => 'id',
+                        'FROM'   => $table,
+                        'WHERE'  => $subWhere,
+                    ]),
+                ],
+            ];
+        }
+
+        $visibleLogsCondition = ['OR' => $orSubQueries];
+
+        $where = $additionalConditions === []
+            ? $visibleLogsCondition
+            : [
+                'AND' => [
+                    $visibleLogsCondition,
+                    ...$additionalConditions,
+                ],
+            ];
+
+        return ['FROM'  => $logTable, 'WHERE' => $where];
+    }
+
     public static function getTotalInventories(): int
     {
         global $DB;
 
-        $iterator = $DB->request([
-            'FROM'  => Log::getTable(),
-            'COUNT' => 'count',
-        ]);
-
-        $row = $iterator->current();
+        $query = self::getVisibleLogsQuery();
+        $query['SELECT'] = ['COUNT' => '*'];
+        $result = $DB->request($query);
+        $row = $result->current();
 
         if (!is_array($row)) {
             return 0;
         }
 
-        $count = $row['count'] ?? null;
+        $count = $row['COUNT(*)'] ?? null;
 
         if (!is_numeric($count)) {
             return 0;
@@ -70,17 +122,13 @@ class Dashboard
         $start = date('Y-m-d 00:00:00');
         $end   = date('Y-m-d 23:59:59');
 
-        $iterator = $DB->request([
-            'FROM'  => Log::getTable(),
-            'WHERE' => [
-                'date_creation' => ['>=', $start],
-                'AND' => [
-                    'date_creation' => ['<=', $end],
-                ],
-            ],
-            'COUNT' => 'count',
+        $query = self::getVisibleLogsQuery([
+            ['date_creation' => ['>=', $start]],
+            ['date_creation' => ['<=', $end]],
         ]);
 
+        $query['COUNT'] = 'count';
+        $iterator = $DB->request($query);
         $row = $iterator->current();
 
         if (!is_array($row)) {
@@ -100,11 +148,10 @@ class Dashboard
     {
         global $DB;
 
-        $iterator = $DB->request([
-            'SELECT'   => ['itemtype', 'item_id'],
-            'DISTINCT' => true,
-            'FROM'     => Log::getTable(),
-        ]);
+        $query = self::getVisibleLogsQuery();
+        $query['SELECT'] = ['itemtype', 'item_id'];
+        $query['DISTINCT'] = true;
+        $iterator = $DB->request($query);
 
         return count($iterator);
     }
@@ -121,12 +168,10 @@ class Dashboard
     {
         global $DB;
 
-        $iterator = $DB->request([
-            'FROM'  => Log::getTable(),
-            'ORDER' => 'date_creation DESC',
-            'LIMIT' => 1,
-        ]);
-
+        $query = self::getVisibleLogsQuery();
+        $query['ORDER'] = 'date_creation DESC';
+        $query['LIMIT'] = 1;
+        $iterator = $DB->request($query);
         $row = $iterator->current();
 
         if (!is_array($row)) {
@@ -157,16 +202,17 @@ class Dashboard
     {
         global $DB;
 
+        $days = max(1, $days);
         $startTimestamp = strtotime(sprintf('-%d days', $days - 1));
         $start = date('Y-m-d 00:00:00', $startTimestamp);
 
-        $iterator = $DB->request([
-            'SELECT' => ['date_creation'],
-            'FROM' => Log::getTable(),
-            'WHERE' => ['date_creation' => ['>=', $start]],
-            'ORDER' => 'date_creation ASC',
+        $query = self::getVisibleLogsQuery([
+            ['date_creation' => ['>=', $start]],
         ]);
 
+        $query['SELECT'] = ['date_creation'];
+        $query['ORDER'] = 'date_creation ASC';
+        $iterator = $DB->request($query);
         $data = [];
 
         for ($i = 0; $i < $days; $i++) {
@@ -185,9 +231,7 @@ class Dashboard
                 continue;
             }
 
-            $timestamp = strtotime($dateCreation);
-
-            $date = date('Y-m-d', $timestamp);
+            $date = date('Y-m-d', strtotime($dateCreation));
 
             if (isset($data[$date])) {
                 $data[$date]++;
@@ -204,13 +248,12 @@ class Dashboard
     {
         global $DB;
 
-        $iterator = $DB->request([
-            'SELECT' => ['itemtype'],
-            'FROM' => Log::getTable(),
-            'COUNT' => 'count',
-            'GROUP' => 'itemtype',
-            'ORDER' => 'count DESC',
-        ]);
+        $query = self::getVisibleLogsQuery();
+        $query['SELECT'] = ['itemtype'];
+        $query['COUNT'] = 'count';
+        $query['GROUP'] = 'itemtype';
+        $query['ORDER'] = 'count DESC';
+        $iterator = $DB->request($query);
 
         $data = [];
 
@@ -239,13 +282,12 @@ class Dashboard
     {
         global $DB;
 
-        $iterator = $DB->request([
-            'SELECT' => ['users_id'],
-            'FROM'   => Log::getTable(),
-            'COUNT'  => 'count',
-            'GROUP'  => 'users_id',
-            'ORDER'  => 'count DESC',
-        ]);
+        $query = self::getVisibleLogsQuery();
+        $query['SELECT'] = ['users_id'];
+        $query['COUNT'] = 'count';
+        $query['GROUP'] = 'users_id';
+        $query['ORDER'] = 'count DESC';
+        $iterator = $DB->request($query);
 
         $data = [];
 
@@ -275,7 +317,7 @@ class Dashboard
                 $name = __('System', 'delainventory');
             }
 
-            $data[$name] = (int) $count;
+            $data[$name] = ($data[$name] ?? 0) + (int) $count;
         }
 
         return $data;
@@ -294,12 +336,11 @@ class Dashboard
     {
         global $DB;
 
-        $iterator = $DB->request([
-            'FROM'  => Log::getTable(),
-            'ORDER' => 'date_creation DESC',
-            'LIMIT' => $limit,
-        ]);
-
+        $limit = max(1, $limit);
+        $query = self::getVisibleLogsQuery();
+        $query['ORDER'] = 'date_creation DESC';
+        $query['LIMIT'] = $limit;
+        $iterator = $DB->request($query);
         $data = [];
 
         foreach ($iterator as $row) {
@@ -319,7 +360,6 @@ class Dashboard
 
             $itemId = (int) $itemId;
             $usersId = (int) $usersId;
-
             $assetName = sprintf('#%d', $itemId);
             $item = getItemForItemtype($itemtype);
 

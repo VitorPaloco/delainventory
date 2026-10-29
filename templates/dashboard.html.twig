@@ -286,7 +286,7 @@
 
             series: [
                 {
-                    name: '{{ __('Inventories', 'delainventory') }}',
+                    name: '{{ __('Inventories', 'delainventory')|e('js') }}',
                     type: 'line',
                     data: Object.values(inventoriesByDate)
                 }
@@ -317,7 +317,7 @@
 
             series: [
                 {
-                    name: '{{ __('Inventories', 'delainventory') }}',
+                    name: '{{ __('Inventories', 'delainventory')|e('js') }}',
                     type: 'pie',
                     radius: ['40%', '70%'],
                     center: ['50%', '45%'],
@@ -358,7 +358,7 @@
 
             series: [
                 {
-                    name: '{{ __('Inventories', 'delainventory') }}',
+                    name: '{{ __('Inventories', 'delainventory')|e('js') }}',
                     type: 'pie',
                     radius: ['40%', '70%'],
                     center: ['50%', '45%'],

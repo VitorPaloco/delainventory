@@ -38,7 +38,6 @@ use GlpiPlugin\Delainventory\Profile;
 use GlpiPlugin\Delainventory\PrinterConfig;
 use GlpiPlugin\Delainventory\ZplVar;
 
-Session::checkLoginUser();
 Session::checkRight(Profile::$rightname, UPDATE);
 
 $itemtype = (string) ($_POST['itemtype'] ?? '');
@@ -47,7 +46,7 @@ $item_id  = (int) ($_POST['item_id'] ?? 0);
 $action = $_POST['action'] ?? '';
 
 if ($action === 'add_log') {
-    Log::getValidatedItem($itemtype, $item_id);
+    Log::getValidatedItem($itemtype, $item_id, UPDATE);
 
     $comment = trim($_POST['comment'] ?? '');
 
@@ -65,7 +64,7 @@ if ($action === 'add_log') {
 if ($action === 'print') {
     global $CFG_GLPI;
 
-    $item = Log::getValidatedItem($itemtype, $item_id);
+    $item = Log::getValidatedItem($itemtype, $item_id, READ);
 
     $formPages = [
         Computer::class => 'computer.form.php',
@@ -75,9 +74,8 @@ if ($action === 'print') {
     ];
 
     $id = $item->fields['id'];
-    $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['SERVER_PORT'] ?? null) == 443) ? 'https' : 'http';
-    $base_url = $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim($CFG_GLPI['root_doc'], '/');
-    $asset_url = $base_url . '/front/' . $formPages[$itemtype] . '?id=' . $id;
+    $base_url = rtrim($CFG_GLPI['url_base'], '/');
+    $asset_url = $base_url . rtrim($CFG_GLPI['root_doc'], '/') . '/front/' . $formPages[$itemtype] . '?id=' . $id;
 
     $printerConfig = PrinterConfig::get();
     $ip = $printerConfig['ip'] ?? '';

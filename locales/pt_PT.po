@@ -161,6 +161,9 @@ msgstr "Tipo inválido"
 msgid "You do not have access to this entity."
 msgstr "Não tem acesso a esta entidade."
 
+msgid "You do not have permission to access this asset."
+msgstr "Não tem permissão para aceder a este ativo."
+
 msgid "Could not connect to printer %s:%s. %s (%s)"
 msgstr "Não foi possível ligar à impressora %s:%s. %s (%s)"
 
