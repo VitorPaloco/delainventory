@@ -40,6 +40,7 @@ use Printer;
 use User;
 use GlpiPlugin\Delainventory\Log;
 use QuerySubQuery;
+
 use function Safe\strtotime;
 
 class Dashboard
@@ -49,7 +50,8 @@ class Dashboard
      *
      * @return array<string, mixed>
      */
-    private static function getVisibleLogsQuery(array $additionalConditions = []): array {
+    private static function getVisibleLogsQuery(array $additionalConditions = []): array
+    {
         $logTable = Log::getTable();
 
         $assetTypes = [
