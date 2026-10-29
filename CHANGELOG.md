@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-29
+
+### Fixed
+
+- Fixed ZPL command injection, cross-entity data exposure in the dashboard, and asset-level access control for inventory logging and label printing.
+- Fixed unsafe rendering of printer connection test messages and corrected default plugin permission grants.
+- Fixed unintended settings updates when submitting requests without the expected action.
+- Improved dashboard data accuracy and visibility restrictions across entities.
+- Fixed printer label URL generation to use the configured GLPI base URL.
+- Fixed Composer dependency configuration, development autoloading, and the release download URL.
+- Improved JavaScript escaping for translated strings and removed unused login checks.
+
 ## [1.0.0] - 2026-10-16
 
 ### Added
