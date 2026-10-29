@@ -39,7 +39,7 @@ use Phone;
 use Printer;
 use User;
 use GlpiPlugin\Delainventory\Log;
-use QuerySubQuery;
+use Glpi\DBAL\QuerySubQuery;
 
 use function Safe\strtotime;
 
@@ -106,7 +106,13 @@ class Dashboard
             return 0;
         }
 
-        return (int) ($row['COUNT(*)'] ?? 0);
+        $count = $row['COUNT(*)'] ?? null;
+
+        if (!is_numeric($count)) {
+            return 0;
+        }
+
+        return (int) $count;
     }
 
     public static function getTodayInventories(): int
