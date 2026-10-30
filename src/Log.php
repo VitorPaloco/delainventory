@@ -140,7 +140,7 @@ class Log extends CommonDBTM
             return '';
         }
 
-        $formItemtype = match ($item->getType()) {
+        $formItemtype = match ($item::class) {
             Computer::class => Computer::class,
             Monitor::class  => Monitor::class,
             Printer::class  => Printer::class,
