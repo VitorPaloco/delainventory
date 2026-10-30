@@ -31,8 +31,6 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
-
 use GlpiPlugin\Delainventory\Profile;
 use ProfileRight;
 
