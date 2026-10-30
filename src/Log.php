@@ -136,7 +136,7 @@ class Log extends CommonDBTM
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
-        if (!Session::haveRight(Profile::$rightname, READ) || !self::isEnabled($item->getType())) {
+        if (!Session::haveRight(Profile::$rightname, READ) || !self::isEnabled($item::class)) {
             return '';
         }
 
