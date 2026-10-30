@@ -51,13 +51,14 @@ class PrinterConfig extends CommonDBTM
 
         $default_charset   = DBConnection::getDefaultCharset();
         $default_collation = DBConnection::getDefaultCollation();
+        $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
 
         $table = self::getTable();
         $item  = new self();
 
         if (!$DB->tableExists($table)) {
             $query = "CREATE TABLE `{$table}` (
-                `id` INT UNSIGNED AUTO_INCREMENT,
+                `id` INT {$default_key_sign} NOT NULL AUTO_INCREMENT,
                 `ip` VARCHAR(45) DEFAULT NULL,
                 `port` INT UNSIGNED DEFAULT NULL,
                 `zpl` TEXT DEFAULT NULL,

@@ -59,7 +59,7 @@ class Setting
         return [
             'title' => self::getMenuName(),
             'page'  => $dashboard,
-            'icon'  => 'fa-solid fa-layer-group',
+            'icon' => 'ti ti-stack-2',
 
             'options' => [
                 'dashboard' => ['title' => __('Dashboard'), 'page'  => $dashboard],

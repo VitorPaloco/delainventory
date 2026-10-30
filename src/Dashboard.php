@@ -40,6 +40,7 @@ use Printer;
 use User;
 use GlpiPlugin\Delainventory\Log;
 use Glpi\DBAL\QuerySubQuery;
+use CommonDBTM;
 
 use function Safe\strtotime;
 
@@ -98,7 +99,7 @@ class Dashboard
         global $DB;
 
         $query = self::getVisibleLogsQuery();
-        $query['SELECT'] = ['COUNT' => '*'];
+        $query['COUNT'] = 'count';
         $result = $DB->request($query);
         $row = $result->current();
 
@@ -106,7 +107,7 @@ class Dashboard
             return 0;
         }
 
-        $count = $row['COUNT(*)'] ?? null;
+        $count = $row['count'] ?? null;
 
         if (!is_numeric($count)) {
             return 0;
@@ -363,7 +364,7 @@ class Dashboard
             $assetName = sprintf('#%d', $itemId);
             $item = getItemForItemtype($itemtype);
 
-            if ($item && $item->getFromDB($itemId)) {
+            if ($item instanceof CommonDBTM && $item->getFromDB($itemId)) {
                 $assetName = $item->getName();
             }
 

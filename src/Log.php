@@ -40,8 +40,8 @@ use CommonDBTM;
 use CommonGLPI;
 use Session;
 use DBmysqlIterator;
-use RuntimeException;
-use InvalidArgumentException;
+use Glpi\Exception\Http\BadRequestHttpException;
+use Glpi\Exception\Http\NotFoundHttpException;
 use Computer;
 use Monitor;
 use Printer;
@@ -64,14 +64,15 @@ class Log extends CommonDBTM
 
             $default_charset   = DBConnection::getDefaultCharset();
             $default_collation = DBConnection::getDefaultCollation();
+            $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
 
             $query = "CREATE TABLE `{$table}` (
-                `id` INT UNSIGNED AUTO_INCREMENT,
+                `id` INT {$default_key_sign} NOT NULL AUTO_INCREMENT,
                 `itemtype` VARCHAR(100) NOT NULL,
-                `item_id` INT UNSIGNED NOT NULL,
+                `item_id` INT {$default_key_sign} NOT NULL,
                 `date_creation` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 `comment` VARCHAR(255) NOT NULL,
-                `users_id` INT UNSIGNED NOT NULL,
+                `users_id` INT {$default_key_sign} NOT NULL,
                 PRIMARY KEY (`id`),
                 KEY `idx_item` (`itemtype`, `item_id`)
             ) ENGINE=InnoDB
@@ -110,20 +111,10 @@ class Log extends CommonDBTM
         ], true);
     }
 
-    private static function canAccessItem(CommonDBTM $item): bool
-    {
-        return Session::haveAccessToEntity($item->getEntityID());
-    }
-
-    private static function validationError(string $message, int $code): never
-    {
-        throw new RuntimeException($message, $code);
-    }
-
     public static function getValidatedItem(string $itemtype, int $item_id, int $right): CommonDBTM
     {
         if (!self::isAllowed($itemtype) || !self::isEnabled($itemtype)) {
-            self::validationError(__('Invalid type', 'delainventory'), 400);
+            throw new BadRequestHttpException(__('Invalid type', 'delainventory'));
         }
 
         $item = match ($itemtype) {
@@ -131,20 +122,14 @@ class Log extends CommonDBTM
             Monitor::class  => new Monitor(),
             Printer::class  => new Printer(),
             Phone::class    => new Phone(),
-            default => throw new InvalidArgumentException(__('Invalid type', 'delainventory')),
+            default => throw new BadRequestHttpException(__('Invalid type', 'delainventory')),
         };
 
         if (!$item->getFromDB($item_id) || $item->isDeleted()) {
-            self::validationError(__('Asset not found', 'delainventory'), 404);
+            throw new NotFoundHttpException(__('Asset not found', 'delainventory'));
         }
 
-        if (!self::canAccessItem($item)) {
-            self::validationError(__('You do not have access to this entity.', 'delainventory'), 403);
-        }
-
-        if (!$item->can($item_id, $right)) {
-            self::validationError(__('You do not have permission to access this asset.', 'delainventory'), 403);
-        }
+        $item->check($item_id, $right);
 
         return $item;
     }
