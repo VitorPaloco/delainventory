@@ -33,13 +33,13 @@
 
 
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
-define('PLUGIN_DELAINVENTORY_VERSION', '1.0.1');
+define('PLUGIN_DELAINVENTORY_VERSION', '1.1.0');
 
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
-define('PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION', '11.0.0');
+define('PLUGIN_DELAINVENTORY_MIN_GLPI_VERSION', '12.0.0');
 
 /** @phpstan-ignore theCodingMachineSafe.function (safe to assume this isn't already defined) */
-define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '11.0.99');
+define('PLUGIN_DELAINVENTORY_MAX_GLPI_VERSION', '12.0.99');
 
 use GlpiPlugin\Delainventory\Setting;
 use GlpiPlugin\Delainventory\Profile;
@@ -52,7 +52,6 @@ function plugin_init_delainventory(): void
 
     /** @var array<string, array<string, mixed>> $PLUGIN_HOOKS */
 
-    $PLUGIN_HOOKS['csrf_compliant']['delainventory'] = true;
     $PLUGIN_HOOKS['config_page']['delainventory'] = 'front/settings.php';
 
     if (Session::haveRight(Profile::$rightname, READ)) {

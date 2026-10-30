@@ -31,8 +31,6 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
-
 use Glpi\Application\View\TemplateRenderer;
 use GlpiPlugin\Delainventory\Log;
 use GlpiPlugin\Delainventory\Profile;

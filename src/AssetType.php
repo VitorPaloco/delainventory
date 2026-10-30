@@ -44,6 +44,7 @@ class AssetType extends CommonDBTM
 
         $default_charset = DBConnection::getDefaultCharset();
         $default_collation = DBConnection::getDefaultCollation();
+        $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
 
         $table = self::getTable();
         $item = new self();
@@ -51,7 +52,7 @@ class AssetType extends CommonDBTM
         if (!$DB->tableExists($table)) {
 
             $query = "CREATE TABLE `{$table}` (
-                `id` INT UNSIGNED AUTO_INCREMENT,
+                `id` INT {$default_key_sign} NOT NULL AUTO_INCREMENT,
                 `itemtype` VARCHAR(100) NOT NULL,
                 `label` VARCHAR(255) NOT NULL,
                 `enabled` TINYINT(1) NOT NULL DEFAULT 0,

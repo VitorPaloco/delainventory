@@ -31,8 +31,6 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
-
 use GlpiPlugin\Delainventory\Log;
 use GlpiPlugin\Delainventory\Profile;
 use GlpiPlugin\Delainventory\PrinterConfig;
@@ -103,7 +101,7 @@ if ($action === 'print') {
 
     echo $result['message'];
 
-    exit;
+    return;
 }
 
 http_response_code(400);

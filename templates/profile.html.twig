@@ -31,7 +31,6 @@
 
 <div class="card">
     <form method="post" action="{{ path('/plugins/delainventory/front/profile.form.php') }}">
-        <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
         <input type="hidden" name="profile_id" value="{{ profile.getID() }}">
 
         <div class="table-responsive">

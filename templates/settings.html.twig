@@ -143,8 +143,6 @@
     <i class="ti ti-device-floppy me-1"></i> {{ __('Save') }}
   </button>
 
-  <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
-
   {# ZPL Variables Modal #}
   <div class="modal fade" id="zplVariablesModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -236,12 +234,9 @@
         formData.append('ip', ip);
         formData.append('port', port);
 
-        const csrfToken = document.querySelector('meta[property="glpi:csrf_token"]') ?.getAttribute('content');
-
         const response = await fetch(form.action, {
           method: 'POST',
           headers: {
-            'X-Glpi-Csrf-Token': csrfToken,
             'X-Requested-With': 'XMLHttpRequest'
           },
           body: formData
