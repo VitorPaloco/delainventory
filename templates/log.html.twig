@@ -36,7 +36,6 @@
       <input type="hidden" name="item_id" value="{{ item_id }}">
       <input type="hidden" name="itemtype" value="{{ itemtype }}">
       <input type="hidden" name="comment" id="comment">
-      <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
 
       <button type="button" class="btn btn-outline-secondary btn-sm py-2 px-2" onclick="registrarInventario()">
         <i class="ti ti-plus me-1"></i>
@@ -98,12 +97,9 @@
     formData.append('item_id', id);
     formData.append('itemtype', itemtype);
 
-    const csrfToken = document.querySelector('meta[property="glpi:csrf_token"]')?.getAttribute('content');
-
     fetch('{{ path('/plugins/delainventory/front/log.form.php') }}', {
       method: 'POST',
       headers: {
-        'X-Glpi-Csrf-Token': csrfToken,
         'X-Requested-With': 'XMLHttpRequest'
       },
       body: formData
