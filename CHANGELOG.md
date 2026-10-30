@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-30
+
+### Added
+
+- Added compatibility with GLPI 12.0.x.
+
+### Changed
+
+- Updated plugin compatibility requirements and version declarations for GLPI 12.
+- Removed the deprecated CSRF compliance hook and migrated forms and AJAX requests to GLPI 12's native CSRF protection mechanism.
+- Updated plugin entry points, permission handling, and asset validation to use GLPI 12 APIs and native PHP types.
+- Updated database table creation and queries to align with GLPI 12 core configuration and DBAL APIs.
+- Improved dashboard data handling, chart security, and printer connection error feedback.
+
 ## [1.0.1] - 2026-10-29
 
 ### Fixed
