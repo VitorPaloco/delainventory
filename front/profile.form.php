@@ -49,6 +49,10 @@ if (isset($_POST['delainventory_update'])) {
     $rights |= UPDATE;
 }
 
+if (isset($_POST['delainventory_config'])) {
+    $rights |= Profile::RIGHTS_CONFIG;
+}
+
 $profileRight = new ProfileRight();
 
 if ($profileRight->getFromDBByCrit(['profiles_id' => $profile_id, 'name' => Profile::$rightname])) {

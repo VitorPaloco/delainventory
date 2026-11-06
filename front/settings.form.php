@@ -37,7 +37,7 @@ use GlpiPlugin\Delainventory\Profile;
 use GlpiPlugin\Delainventory\AssetType;
 use GlpiPlugin\Delainventory\PrinterConfig;
 
-Session::checkRight(Profile::$rightname, UPDATE);
+Session::checkRight(Profile::$rightname, Profile::RIGHTS_CONFIG);
 
 $enabledIds = array_map('intval', array_keys($_POST['asset'] ?? []));
 $printer_ip = trim($_POST['ip'] ?? '');

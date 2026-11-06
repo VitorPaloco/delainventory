@@ -42,6 +42,9 @@ class Profile extends CommonDBTM
 {
     public static $rightname = 'delainventory';
 
+    public const RIGHT_CONFIGURE = 256;
+    public const RIGHTS_CONFIG = self::RIGHT_CONFIGURE;
+
     public static function getMenuName(): string
     {
         return 'DelaInventory';
@@ -51,20 +54,12 @@ class Profile extends CommonDBTM
     {
         $exists = countElementsInTable(ProfileRight::getTable(), ['name' => self::$rightname]) > 0;
 
-        if ($exists) {
-            return;
+        if (!$exists) {
+            ProfileRight::addProfileRights([self::$rightname]);
         }
 
-        ProfileRight::addProfileRights([self::$rightname]);
-        $profileRight = new ProfileRight();
-
         foreach (PluginProfile::getSuperAdminProfilesId() as $profileId) {
-            if ($profileRight->getFromDBByCrit(['profiles_id' => $profileId, 'name' => self::$rightname])) {
-                $profileRight->update([
-                    'id'     => $profileRight->getID(),
-                    'rights' => READ | UPDATE,
-                ]);
-            }
+            ProfileRight::updateProfileRights($profileId, [self::$rightname => READ | UPDATE | self::RIGHTS_CONFIG]);
         }
     }
 
@@ -88,5 +83,4 @@ class Profile extends CommonDBTM
 
         return true;
     }
-
 }

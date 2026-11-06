@@ -42,6 +42,8 @@ Session::checkRight(Profile::$rightname, READ);
 
 Html::requireJs('charts');
 
+$can_config = Session::haveRight(Profile::$rightname, Profile::RIGHTS_CONFIG);
+
 $lastInventory = Dashboard::getLastInventory();
 $inventoriesByDate = Dashboard::getInventoriesByDate();
 $inventoriesByAssetType = Dashboard::getInventoriesByAssetType();
@@ -53,6 +55,7 @@ Html::header(Setting::getMenuName(), $_SERVER['PHP_SELF'], 'config', Setting::cl
 TemplateRenderer::getInstance()->display(
     '@delainventory/dashboard.html.twig',
     [
+        'can_config' => $can_config,
         'total_inventories' => Dashboard::getTotalInventories(),
         'today_inventories' => Dashboard::getTodayInventories(),
         'inventoried_assets' => Dashboard::getInventoriedAssets(),
