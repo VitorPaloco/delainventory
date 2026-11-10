@@ -178,3 +178,15 @@ msgstr "Descarregar a etiqueta como imagem"
 
 msgid "More options"
 msgstr "Mais opções"
+
+msgid "Save the settings before testing the printer connection."
+msgstr "Guarde as definições antes de testar a ligação à impressora."
+
+msgid "Invalid printer IP address."
+msgstr "Endereço IP da impressora inválido."
+
+msgid "Invalid printer port."
+msgstr "Porta da impressora inválida."
+
+msgid "Failed to write all label data to the printer."
+msgstr "Não foi possível enviar todos os dados da etiqueta para a impressora."

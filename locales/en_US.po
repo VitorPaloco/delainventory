@@ -178,3 +178,15 @@ msgstr "Download label as image"
 
 msgid "More options"
 msgstr "More options"
+
+msgid "Save the settings before testing the printer connection."
+msgstr "Save the settings before testing the printer connection."
+
+msgid "Invalid printer IP address."
+msgstr "Invalid printer IP address."
+
+msgid "Invalid printer port."
+msgstr "Invalid printer port."
+
+msgid "Failed to write all label data to the printer."
+msgstr "Failed to write all label data to the printer."
