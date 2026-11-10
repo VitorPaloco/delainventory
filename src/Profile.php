@@ -60,7 +60,7 @@ class Profile extends CommonDBTM
         }
 
         foreach (PluginProfile::getSuperAdminProfilesId() as $profileId) {
-            if (!is_int($profileId) && !(is_string($profileId) && ctype_digit($profileId))) {
+            if (!is_int($profileId) && !(is_string($profileId) || ctype_digit($profileId))) {
                 continue;
             }
 
