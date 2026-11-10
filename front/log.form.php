@@ -78,14 +78,7 @@ if ($action === 'print') {
     $asset_url = $base_url . rtrim($CFG_GLPI['root_doc'], '/') . '/front/' . $formPages[$itemtype] . '?id=' . $id;
 
     $printerConfig = PrinterConfig::get();
-    $ip = $printerConfig['ip'] ?? '';
-    $port = (int) ($printerConfig['port'] ?? 0);
     $zpl_template = $printerConfig['zpl'] ?? '';
-
-    if (empty($ip) || empty($port)) {
-        http_response_code(500);
-        die(__('Printer IP address or port not configured.', 'delainventory'));
-    }
 
     if (empty($zpl_template)) {
         http_response_code(500);
