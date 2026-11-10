@@ -43,6 +43,7 @@ class Profile extends CommonDBTM
     public static $rightname = 'delainventory';
 
     public const RIGHT_CONFIGURE = 256;
+
     public const RIGHTS_CONFIG = self::RIGHT_CONFIGURE;
 
     public static function getMenuName(): string
@@ -59,6 +60,10 @@ class Profile extends CommonDBTM
         }
 
         foreach (PluginProfile::getSuperAdminProfilesId() as $profileId) {
+            if (!is_int($profileId) && !(is_string($profileId) && ctype_digit($profileId))) {
+                continue;
+            }
+
             ProfileRight::updateProfileRights((int) $profileId, [self::$rightname => READ | UPDATE | self::RIGHTS_CONFIG]);
         }
     }
