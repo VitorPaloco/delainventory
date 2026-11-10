@@ -59,7 +59,7 @@ class Profile extends CommonDBTM
         }
 
         foreach (PluginProfile::getSuperAdminProfilesId() as $profileId) {
-            ProfileRight::updateProfileRights($profileId, [self::$rightname => READ | UPDATE | self::RIGHTS_CONFIG]);
+            ProfileRight::updateProfileRights((int) $profileId, [self::$rightname => READ | UPDATE | self::RIGHTS_CONFIG]);
         }
     }
 

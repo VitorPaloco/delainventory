@@ -41,7 +41,7 @@ Session::checkRight(Profile::$rightname, Profile::RIGHTS_CONFIG);
 
 if (isset($_POST['test_connection'])) {
     header('Content-Type: application/json; charset=UTF-8');
-    
+
     echo json_encode(PrinterConfig::testConnection());
 
     exit;
@@ -63,7 +63,7 @@ if (isset($_POST['update'])) {
     }
 
     AssetType::updateAll($enabledIds);
-    
+
     Session::addMessageAfterRedirect(__('Settings saved successfully.', 'delainventory'), true, INFO);
     Html::redirect($CFG_GLPI['root_doc'] . '/plugins/delainventory/front/settings.php');
 

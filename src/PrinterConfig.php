@@ -89,7 +89,7 @@ class PrinterConfig extends CommonDBTM
             throw new RuntimeException('Invalid printer IP address.');
         }
 
-        $octets = array_map('intval', explode('.', $ip));
+        $octets = array_map(intval(...), explode('.', $ip));
         $isPrivateIp = $octets[0] === 10 || ($octets[0] === 172 && $octets[1] >= 16 && $octets[1] <= 31) || ($octets[0] === 192 && $octets[1] === 168);
 
         if (!$isPrivateIp) {
@@ -207,7 +207,7 @@ class PrinterConfig extends CommonDBTM
             $config = self::getConnection();
             $connection = fsockopen($config['ip'], $config['port'], $errno, $errstr, 5);
             stream_set_timeout($connection, 5);
-            
+
             $length = strlen($zpl);
             $written = 0;
 
