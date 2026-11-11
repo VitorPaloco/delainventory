@@ -37,6 +37,8 @@ use GlpiPlugin\Delainventory\Profile;
 
 Session::checkRight(Profile::$rightname, READ);
 
+$can_update = Session::haveRight(Profile::$rightname, UPDATE);
+
 $itemtype = $item->getType();
 $item_id  = $item->getID();
 $logs = Log::getLogs($itemtype, $item_id);
@@ -65,4 +67,5 @@ TemplateRenderer::getInstance()->display('@delainventory/log.html.twig', [
     'itemtype' => $itemtype,
     'item_id'  => $item_id,
     'logs'     => $logData,
+    'can_update' => $can_update,
 ]);

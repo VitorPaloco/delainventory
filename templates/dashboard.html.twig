@@ -36,10 +36,12 @@
             {{ __('Dashboard') }}
         </a>
 
-        <a href="{{ path('/plugins/delainventory/front/settings.php') }}" class="nav-link">
-            <i class="ti ti-settings me-1"></i>
-            {{ __('Setup') }}
-        </a>
+        {% if can_config %}
+            <a href="{{ path('/plugins/delainventory/front/settings.php') }}" class="nav-link">
+                <i class="ti ti-settings me-1"></i>
+                {{ __('Setup') }}
+            </a>
+        {% endif %}
     </div>
 </div>
 

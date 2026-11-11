@@ -40,6 +40,7 @@
                         <th> </th>
                         <th class="text-center"> {{ __('View all') }} </th>
                         <th class="text-center"> {{ __('Update all') }} </th>
+                        <th class="text-center"> {{ __('Configure') }} </th>
                     </tr>
                 </thead>
 
@@ -55,6 +56,12 @@
                         <td class="text-center">
                             <input type="checkbox" class="form-check-input" id="delainventory_update" name="delainventory_update" value="1"
                                 {% if can_update %}checked{% endif %}
+                                {% if not can_edit %}disabled{% endif %}
+                            >
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="form-check-input" id="delainventory_config" name="delainventory_config" value="1"
+                                {% if can_config %}checked{% endif %}
                                 {% if not can_edit %}disabled{% endif %}
                             >
                         </td>
