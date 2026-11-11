@@ -38,7 +38,7 @@ use GlpiPlugin\Delainventory\PrinterConfig;
 use GlpiPlugin\Delainventory\ZplVar;
 use Glpi\Application\View\TemplateRenderer;
 
-Session::checkRight(Profile::$rightname, READ);
+Session::checkRight(Profile::$rightname, Profile::RIGHTS_CONFIG);
 
 $assets = AssetType::getAll();
 $printerConfig = PrinterConfig::get();

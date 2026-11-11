@@ -36,11 +36,15 @@ namespace GlpiPlugin\Delainventory;
 use ProfileRight;
 use CommonGLPI;
 use CommonDBTM;
-use Profile as GLPIProfile;
+use Profile as PluginProfile;
 
 class Profile extends CommonDBTM
 {
     public static string $rightname = 'delainventory';
+
+    public const RIGHT_CONFIGURE = 256;
+
+    public const RIGHTS_CONFIG = self::RIGHT_CONFIGURE;
 
     public static function getMenuName(): string
     {
@@ -51,20 +55,20 @@ class Profile extends CommonDBTM
     {
         $exists = countElementsInTable(ProfileRight::getTable(), ['name' => self::$rightname]) > 0;
 
-        if ($exists) {
-            return;
+        if (!$exists) {
+            ProfileRight::addProfileRights([self::$rightname]);
         }
 
-        ProfileRight::addProfileRights([self::$rightname]);
-        $profileRight = new ProfileRight();
-
-        foreach (GLPIProfile::getSuperAdminProfilesId() as $profileId) {
-            if ($profileRight->getFromDBByCrit(['profiles_id' => $profileId, 'name' => self::$rightname])) {
-                $profileRight->update([
-                    'id'     => $profileRight->getID(),
-                    'rights' => READ | UPDATE,
-                ]);
+        foreach (PluginProfile::getSuperAdminProfilesId() as $profileId) {
+            if (is_int($profileId)) {
+                $profilesId = $profileId;
+            } elseif (is_string($profileId) && ctype_digit($profileId)) {
+                $profilesId = (int) $profileId;
+            } else {
+                continue;
             }
+
+            ProfileRight::updateProfileRights((int) $profileId, [self::$rightname => READ | UPDATE | self::RIGHTS_CONFIG]);
         }
     }
 
@@ -75,7 +79,7 @@ class Profile extends CommonDBTM
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
-        if ($item instanceof GLPIProfile && $item->getField('id')) {
+        if ($item instanceof PluginProfile && $item->getField('id')) {
             return self::createTabEntry(self::getMenuName(), 0, null, 'ti ti-stack-2');
         }
 
@@ -88,5 +92,4 @@ class Profile extends CommonDBTM
 
         return true;
     }
-
 }

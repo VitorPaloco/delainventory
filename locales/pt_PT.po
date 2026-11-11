@@ -164,8 +164,8 @@ msgstr "Não tem acesso a esta entidade."
 msgid "You do not have permission to access this asset."
 msgstr "Não tem permissão para aceder a este ativo."
 
-msgid "Could not connect to printer %s:%s. %s (%s)"
-msgstr "Não foi possível ligar à impressora %s:%s. %s (%s)"
+msgid "Could not connect to printer"
+msgstr "Não foi possível ligar à impressora"
 
 msgid "Connection successful."
 msgstr "Ligação efetuada com sucesso."
@@ -178,3 +178,15 @@ msgstr "Descarregar a etiqueta como imagem"
 
 msgid "More options"
 msgstr "Mais opções"
+
+msgid "Save the settings before testing the printer connection."
+msgstr "Guarde as definições antes de testar a ligação à impressora."
+
+msgid "Invalid printer IP address."
+msgstr "Endereço IP da impressora inválido."
+
+msgid "Invalid printer port."
+msgstr "Porta da impressora inválida."
+
+msgid "Failed to write all label data to the printer."
+msgstr "Não foi possível enviar todos os dados da etiqueta para a impressora."

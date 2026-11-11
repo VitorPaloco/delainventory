@@ -37,16 +37,20 @@
       <input type="hidden" name="itemtype" value="{{ itemtype }}">
       <input type="hidden" name="comment" id="comment">
 
-      <button type="button" class="btn btn-outline-secondary btn-sm py-2 px-2" onclick="registrarInventario()">
-        <i class="ti ti-plus me-1"></i>
-        {{ __('Inventory record', 'delainventory') }}
-      </button>
+      {% if can_update %}
+        <button type="button" class="btn btn-outline-secondary btn-sm py-2 px-2" onclick="registrarInventario()">
+          <i class="ti ti-plus me-1"></i>
+          {{ __('Inventory record', 'delainventory') }}
+        </button>
+      {% endif %}
     </form>
 
-    <button type="button" class="btn btn-primary btn-sm px-2 py-2" onclick="imprimirEtiqueta({{ item_id }}, '{{ itemtype|e('js') }}')">
-        <i class="ti ti-printer me-1"></i>
-        {{ __('Print label', 'delainventory') }}
-    </button>
+    {% if can_update %}
+      <button type="button" class="btn btn-primary btn-sm px-2 py-2" onclick="imprimirEtiqueta({{ item_id }}, '{{ itemtype|e('js') }}')">
+          <i class="ti ti-printer me-1"></i>
+          {{ __('Print label', 'delainventory') }}
+      </button>
+    {% endif %}
   </div>
 
   <div class="table-responsive">

@@ -39,11 +39,13 @@ $profileRight = new ProfileRight();
 $profile_id = $item->getID();
 $can_read = false;
 $can_update = false;
+$can_config = false;
 
 if ($profileRight->getFromDBByCrit(['profiles_id' => $profile_id, 'name' => Profile::$rightname])) {
     $rights = (int) $profileRight->fields['rights'];
     $can_read = ($rights & READ) !== 0;
     $can_update = ($rights & UPDATE) !== 0;
+    $can_config = ($rights & Profile::RIGHTS_CONFIG) !== 0;
 }
 
 TemplateRenderer::getInstance()->display(
@@ -54,5 +56,6 @@ TemplateRenderer::getInstance()->display(
         'can_edit'  => Session::haveRight('profile', UPDATE),
         'can_read'  => $can_read,
         'can_update' => $can_update,
+        'can_config' => $can_config,
     ],
 );

@@ -101,6 +101,10 @@
 
             <span id="connectionResult"></span>
           </div>
+
+          <small class="text-muted d-block mt-2">
+            {{ __('Save the settings before testing the printer connection.', 'delainventory') }}
+          </small>
         </div>
       </div>
     </div>
@@ -193,6 +197,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     const button = document.getElementById('testPrinterConnection');
     const result = document.getElementById('connectionResult');
+    const form = document.getElementById('delainventory-settings-form');
 
     function showResult(message, success) {
       result.replaceChildren();
@@ -210,14 +215,6 @@
     }
 
     button.addEventListener('click', async function () {
-      const ip = document.getElementById('ip').value.trim();
-      const port = document.getElementById('port').value;
-
-      if (!ip || !port) {
-        showResult("{{ __('Enter the IP address and port.', 'delainventory')|e('js') }}", false);
-        return;
-      }
-
       button.disabled = true;
       button.replaceChildren();
 
@@ -228,11 +225,7 @@
 
       try {
         const formData = new FormData();
-        const form = document.getElementById('delainventory-settings-form');
-
         formData.append('test_connection', '1');
-        formData.append('ip', ip);
-        formData.append('port', port);
 
         const response = await fetch(form.action, {
           method: 'POST',

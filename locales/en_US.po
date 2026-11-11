@@ -164,8 +164,8 @@ msgstr "You do not have access to this entity."
 msgid "You do not have permission to access this asset."
 msgstr "You do not have permission to access this asset."
 
-msgid "Could not connect to printer %s:%s. %s (%s)"
-msgstr "Could not connect to printer %s:%s. %s (%s)"
+msgid "Could not connect to printer"
+msgstr "Could not connect to printer"
 
 msgid "Connection successful."
 msgstr "Connection successful."
@@ -178,3 +178,15 @@ msgstr "Download label as image"
 
 msgid "More options"
 msgstr "More options"
+
+msgid "Save the settings before testing the printer connection."
+msgstr "Save the settings before testing the printer connection."
+
+msgid "Invalid printer IP address."
+msgstr "Invalid printer IP address."
+
+msgid "Invalid printer port."
+msgstr "Invalid printer port."
+
+msgid "Failed to write all label data to the printer."
+msgstr "Failed to write all label data to the printer."
