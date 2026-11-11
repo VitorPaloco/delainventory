@@ -21,6 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated database table creation and queries to align with GLPI 12 core configuration and DBAL APIs.
 - Improved dashboard data handling, chart security, and printer connection error feedback.
 
+## [1.0.2] - 2026-11-10
+
+### Changed
+
+- Restructured plugin permissions into three levels: Read (dashboard and inventory logs), Print & Inventory (create inventory records and print labels), and Config (manage plugin and printer settings).
+- Improved printer destination validation to reject loopback, link-local, reserved, and other special-purpose IP addresses while allowing valid private network addresses.
+- Refactored printer connection testing and label printing methods to retrieve the IP address and port from the saved printer configuration instead of accepting arbitrary destinations.
+
 ## [1.0.1] - 2026-10-29
 
 ### Fixed
