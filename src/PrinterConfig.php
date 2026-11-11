@@ -87,18 +87,18 @@ class PrinterConfig extends CommonDBTM
         $ip = trim($ip);
 
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === false) {
-            throw new RuntimeException('Invalid printer IP address.');
+            throw new RuntimeException(__('Invalid printer IP address.', 'delainventory'));
         }
 
         $octets = array_map(intval(...), explode('.', $ip));
         $isPrivateIp = $octets[0] === 10 || ($octets[0] === 172 && $octets[1] >= 16 && $octets[1] <= 31) || ($octets[0] === 192 && $octets[1] === 168);
 
         if (!$isPrivateIp) {
-            throw new RuntimeException('Invalid printer IP address.');
+            throw new RuntimeException(__('Invalid printer IP address.', 'delainventory'));
         }
 
         if ($port < 1 || $port > 65535) {
-            throw new RuntimeException('Invalid printer port.');
+            throw new RuntimeException(__('Invalid printer port.', 'delainventory'));
         }
     }
 
