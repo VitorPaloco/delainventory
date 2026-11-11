@@ -80,6 +80,29 @@ class PrinterConfig extends CommonDBTM
     }
 
     /**
+     * @throws RuntimeException
+     */
+    private static function validateDestination(string $ip, int $port): void
+    {
+        $ip = trim($ip);
+
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === false) {
+            throw new RuntimeException('Invalid printer IP address.');
+        }
+
+        $octets = array_map(intval(...), explode('.', $ip));
+        $isPrivateIp = $octets[0] === 10 || ($octets[0] === 172 && $octets[1] >= 16 && $octets[1] <= 31) || ($octets[0] === 192 && $octets[1] === 168);
+
+        if (!$isPrivateIp) {
+            throw new RuntimeException('Invalid printer IP address.');
+        }
+
+        if ($port < 1 || $port > 65535) {
+            throw new RuntimeException('Invalid printer port.');
+        }
+    }
+
+    /**
      * @return array{id: int, ip: string, port: string, zpl: string}
      */
     public static function get(): array
@@ -107,8 +130,34 @@ class PrinterConfig extends CommonDBTM
         return ['id' => 0, 'ip' => '', 'port' => '', 'zpl' => ''];
     }
 
+    /**
+     * @return array{ip: string, port: int}
+     *
+     * @throws RuntimeException
+     */
+    private static function getConnection(): array
+    {
+        $config = self::get();
+
+        $ip = trim($config['ip']);
+        $port = (int) $config['port'];
+
+        self::validateDestination($ip, $port);
+
+        return [
+            'ip' => $ip,
+            'port' => $port,
+        ];
+    }
+
     public static function save(string $ip, int $port, string $zpl): void
     {
+        $ip = trim($ip);
+
+        if ($ip !== '' || $port !== 0) {
+            self::validateDestination($ip, $port);
+        }
+
         $row  = self::get();
         $item = new self();
 
@@ -129,10 +178,11 @@ class PrinterConfig extends CommonDBTM
     /**
      * @return array{success: bool, message: string}
      */
-    public static function testConnection(string $ip, int $port): array
+    public static function testConnection(): array
     {
         try {
-            $connection = fsockopen($ip, $port, $errno, $errstr, 5);
+            $config = self::getConnection();
+            $connection = fsockopen($config['ip'], $config['port'], $errno, $errstr, 5);
             fclose($connection);
 
             return [
@@ -142,7 +192,7 @@ class PrinterConfig extends CommonDBTM
         } catch (Throwable) {
             return [
                 'success' => false,
-                'message' => sprintf(__('Could not connect to printer %s:%s.', 'delainventory'), $ip, $port),
+                'message' => __('Could not connect to printer', 'delainventory'),
             ];
         }
     }
@@ -150,13 +200,15 @@ class PrinterConfig extends CommonDBTM
     /**
      * @return array{success: bool, message: string}
      */
-    public static function printLabel(string $ip, int $port, string $zpl): array
+    public static function printLabel(string $zpl): array
     {
         $connection = null;
 
         try {
-            $connection = fsockopen($ip, $port, $errno, $errstr, 5);
+            $config = self::getConnection();
+            $connection = fsockopen($config['ip'], $config['port'], $errno, $errstr, 5);
             stream_set_timeout($connection, 5);
+
             $length = strlen($zpl);
             $written = 0;
 
@@ -180,7 +232,7 @@ class PrinterConfig extends CommonDBTM
         } catch (Throwable) {
             return [
                 'success' => false,
-                'message' => sprintf(__('Could not send label to printer %s:%s.', 'delainventory'), $ip, $port),
+                'message' => __('Could not connect to printer', 'delainventory'),
             ];
         } finally {
             if (is_resource($connection)) {
