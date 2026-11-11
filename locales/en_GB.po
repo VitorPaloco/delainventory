@@ -164,8 +164,8 @@ msgstr "You do not have access to this entity."
 msgid "You do not have permission to access this asset."
 msgstr "You do not have permission to access this asset."
 
-msgid "Could not connect to printer %s:%s. %s (%s)"
-msgstr "Could not connect to printer %s:%s. %s (%s)"
+msgid "Could not connect to printer"
+msgstr "Could not connect to printer"
 
 msgid "Connection successful."
 msgstr "Connection successful."
